@@ -1,6 +1,6 @@
 # fx68k
 
-This create allows you to use the [fx68k](https://github.com/ijor/fx68k) CPU cor from Rust. The intended purpose of this crate is to used for *verification* meaning if you have an CPU emulator implemented this can be used to verify that it's correct. The C++ code is generated from the SystemVerilog files using [Verilator](https://www.veripool.org/wiki/verilator)
+This create allows you to use the [fx68k](https://github.com/ijor/fx68k) CPU core from Rust. The intended purpose of this crate is to used for *verification* meaning if you have an CPU emulator implemented this can be used to verify that it's correct. The C++ code is generated from the SystemVerilog files using [Verilator](https://www.veripool.org/wiki/verilator)
 
 # Performance
 
