@@ -5,55 +5,10 @@
 #include <stdlib.h>
 #include <stdint.h>
 
+static const char s_phi1_values[] = { 0, 0, 0, 0, 0, 1, 1, 0 };
+static const char s_phi2_values[] = { 0, 1, 1, 0, 0, 0, 0, 0 };
+
 #if 0
-
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-uint8_t* File_loadToMemory(const char* filename, size_t* size) {
-    FILE* f = fopen(filename, "rb");
-    uint8_t* data = 0;
-    size_t s = 0, t = 0;
-
-    *size = 0;
-
-    if (!f)
-        return 0;
-
-    // TODO: Use fstat here?
-
-    fseek(f, 0, SEEK_END);
-    long ts = ftell(f);
-
-    if (ts < 0)
-        goto end;
-
-    s = (size_t)ts;
-
-    data = (uint8_t*)malloc(1024);
-    memset(data, 0xff, 1024);
-
-    if (!data)
-        goto end;
-
-    fseek(f, 0, SEEK_SET);
-
-    t = fread(data, s, 1, f);
-    (void)t;
-
-    *size = s;
-
-    end:
-
-    fclose(f);
-
-    return data;
-}
-
-uint64_t get_time() {
-    struct timespec tv;
-    clock_gettime(CLOCK_REALTIME, &tv);
-    return (uint64_t)(tv.tv_sec * 1000000) + (uint64_t)(tv.tv_nsec * 0.001);
-}
-
 
 int main(int argc, char** argv, char** env) {
     Verilated::commandArgs(argc, argv);
@@ -253,6 +208,131 @@ int main(int argc, char** argv, char** env) {
 
 #endif
 
-void DoStuff() {
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+struct Fx68kState {
+    Vfx68k* top;
+    void* memory_interface;
+    int cycle;
+};
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+extern "C" void* fx68k_ver_new_instance(void* memory_interface) {
+    Fx68kState* state = new Fx68kState;
+    Vfx68k* top = new Vfx68k;
+
+    state->memory_interface = memory_interface;
+    state->top = top;
+    state->cycle = 1;
+
+    // reset the CPU
+	top->pwrUp = 1;
+	top->extReset = 1;
+
+    for (int i = 0; i < 10; ++i) {
+        int clk = state->cycle & 1;
+        int pih1 = s_phi1_values[state->cycle & 7];
+        int pih2 = s_phi2_values[state->cycle & 7];
+
+        top->enPhi1 = pih1;
+        top->enPhi2 = pih2;
+        top->clk = clk;
+        top->eval();
+
+        state->cycle++;
+    }
+
+    // done with power up, assert the pins
+	top->pwrUp = 0;
+	top->extReset = 0;
+
+    top->iEdb = 0x0000;
+	top->VPAn = 1;
+	top->BERRn = 1;
+	top->BRn = 1;
+	top->BGACKn = 1;
+	top->IPL0n = 1;
+	top->IPL1n = 1;
+	top->IPL2n = 1;
+	top->VPAn = 1;
+	top->BGACKn = 1;
+	top->DTACKn = 1;
+
+    return (void*)state;
+}
+
+extern "C" {
+    uint8_t fx68k_mem_read_u8(void* context, uint32_t cycle, uint32_t address);
+    uint16_t fx68k_mem_read_u16(void* context, uint32_t cycle, uint32_t address);
+    void fx68k_mem_write_u8(void* context, uint32_t cycle, uint32_t address, uint8_t value);
+    void fx68k_mem_write_u16(void* context, uint32_t cycle, uint32_t address, uint16_t value);
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+extern "C" void fx68k_ver_step_cycle(void* instance) {
+    Fx68kState* state = (Fx68kState*)instance;
+    Vfx68k* top = state->top;
+
+    int clk = state->cycle & 1;
+    int pih1 = s_phi1_values[state->cycle & 7];
+    int pih2 = s_phi2_values[state->cycle & 7];
+
+    top->clk = clk;
+    top->enPhi1 = pih1;
+    top->enPhi2 = pih2;
+
+    top->eval();
+
+    if (top->ASn == 0 && top->DTACKn == 1 && pih1 == 1) {
+        uint32_t address = top->eab * 2;
+
+        if (top->eRWn) {
+            if (top->LDSn) {
+                uint16_t v0 = fx68k_mem_read_u8(state->memory_interface, state->cycle, address);
+                top->iEdb = (v0 << 8);
+            }
+            else if (top->UDSn) {
+                uint16_t v0 = fx68k_mem_read_u8(state->memory_interface, state->cycle, address + 1);
+                top->iEdb = v0;
+            }
+            else {
+                top->iEdb = fx68k_mem_read_u16(state->memory_interface, state->cycle, address);
+            }
+
+            top->DTACKn = 0;
+        } else if (top->LDSn == 0 || top->UDSn == 0) {
+            if (top->LDSn) {
+                fx68k_mem_write_u8(state->memory_interface, state->cycle, address, top->oEdb >> 8);
+                //memory[address + 0] = top->oEdb >> 8;
+            }
+            else if (top->UDSn) {
+                fx68k_mem_write_u8(state->memory_interface, state->cycle, address + 1, top->oEdb & 0xff);
+                //memory[address + 1] = top->oEdb & 0xff;
+            } else {
+                fx68k_mem_write_u16(state->memory_interface, state->cycle, address, top->oEdb);
+                //memory[address + 0] = top->oEdb >> 8;
+                //memory[address + 1] = top->oEdb & 0xff;
+            }
+            top->DTACKn = 0;
+        }
+    }
+
+    if (top->ASn == 1)
+    {
+        top->DTACKn = 1;
+    }
+
+    /*
+    uint16_t pc_low = top->fx68k__DOT__excUnit__DOT__PcL;
+
+    printf("pc %08x\n", pc_low);
+
+    if (pc_low == 34) {
+        break;
+    }
+    */
+
+    state->cycle++;
 }
