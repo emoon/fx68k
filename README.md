@@ -8,4 +8,4 @@ The performance of this crate is very low. When tested on my machine (AMD TR2 3.
 
 # LICENCE
 
-The original fx68k core code is under GPL v3 so this crate is under the same licence as it's pretty much just a "wrapper" around it.
+The original fx68k core code is under GPL v3 so this crate is under the same licence as it's pretty much just a "wrapper" around it. An option is to only depend on this crate as a dev dependency (running for tests) That way you can still keep the rest of your code in the licence you desire.
