@@ -1,13 +1,13 @@
 #include "Vfx68k.h"
 #include "verilated.h"
 #include <stdio.h>
-#include <verilated_vcd_c.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+#if 0
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 uint8_t* File_loadToMemory(const char* filename, size_t* size) {
     FILE* f = fopen(filename, "rb");
     uint8_t* data = 0;
@@ -249,4 +249,10 @@ int main(int argc, char** argv, char** env) {
     //printf("written data %d\n", memory[515]);
 
     return 0;
+}
+
+#endif
+
+void DoStuff() {
+
 }
