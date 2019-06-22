@@ -109,26 +109,6 @@ void Vfx68k::_settle__TOP__1(Vfx68k__Syms* __restrict vlSymsp) {
     vlTOPp->fx68k__DOT__uaddrDecode__DOT__pla_lined__DOT__arA23[7U] = 0U;
     vlTOPp->fx68k__DOT__uaddrDecode__DOT__pla_lined__DOT__arA23[0xaU] = 0U;
     vlTOPp->fx68k__DOT__uaddrDecode__DOT__pla_lined__DOT__arA23[0xfU] = 0U;
-    vlTOPp->fx68k__DOT__busArbiter__DOT____Vsenitemexpr1 
-	= (1U & ((IData)(vlTOPp->fx68k__DOT__Clks) 
-		 >> 4U));
-    vlTOPp->fx68k__DOT__nDecoder__DOT____Vsenitemexpr1 
-	= (1U & ((IData)(vlTOPp->fx68k__DOT__Clks) 
-		 >> 4U));
-    vlTOPp->fx68k__DOT__sequencer__DOT____Vsenitemexpr1 
-	= (1U & ((IData)(vlTOPp->fx68k__DOT__Clks) 
-		 >> 4U));
-    vlTOPp->fx68k__DOT__excUnit__DOT__dataIo__DOT____Vsenitemexpr1 
-	= (1U & ((IData)(vlTOPp->fx68k__DOT__Clks) 
-		 >> 4U));
-    vlTOPp->fx68k__DOT____Vcellinp__nanoRom__clk = 
-	(1U & ((IData)(vlTOPp->fx68k__DOT__Clks) >> 4U));
-    vlTOPp->fx68k__DOT__busControl__DOT____Vsenitemexpr1 
-	= (1U & ((IData)(vlTOPp->fx68k__DOT__Clks) 
-		 >> 4U));
-    vlTOPp->fx68k__DOT__excUnit__DOT____Vcellinp__alu__clk 
-	= (1U & ((IData)(vlTOPp->fx68k__DOT__Clks) 
-		 >> 4U));
     vlTOPp->oRESETn = (1U & (~ (IData)(vlTOPp->fx68k__DOT__oReset)));
     vlTOPp->oHALTEDn = (1U & (~ (IData)(vlTOPp->fx68k__DOT__oHalted)));
     // ALWAYS at fx68k.sv:1912
@@ -212,11 +192,46 @@ void Vfx68k::_settle__TOP__1(Vfx68k__Syms* __restrict vlSymsp) {
 		| (0xeU == (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__oper))) 
 	       | (0x12U == (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__oper))) 
 	      | (0x14U == (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__oper))));
+    // ALWAYS at fx68kAlu.sv:225
+    vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__isShift = 0U;
+    if ((1U != (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__oper))) {
+	if ((8U != (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__oper))) {
+	    if ((9U != (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__oper))) {
+		if ((5U != (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__oper))) {
+		    if ((((((((((0x15U == (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__oper)) 
+				| (0xdU == (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__oper))) 
+			       | (0xeU == (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__oper))) 
+			      | (0xfU == (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__oper))) 
+			     | (0x10U == (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__oper))) 
+			    | (0x11U == (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__oper))) 
+			   | (0x12U == (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__oper))) 
+			  | (0x13U == (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__oper))) 
+			 | (0x14U == (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__oper)))) {
+			vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__isShift = 1U;
+		    }
+		}
+	    }
+	}
+    }
     vlTOPp->VMAn = vlTOPp->fx68k__DOT__rVma;
-    vlTOPp->eab = (0x7fffffU & (vlTOPp->fx68k__DOT__excUnit__DOT__aob 
-				>> 1U));
-    vlTOPp->fx68k__DOT__busAddrErr = (1U & (vlTOPp->fx68k__DOT__excUnit__DOT__aob 
-					    & (~ (IData)(vlTOPp->fx68k__DOT__busControl__DOT__bciByte))));
+    // ALWAYS at fx68k.sv:1878
+    vlTOPp->__Vtableidx5 = (0xfU & ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__abdIsByte)
+				     ? (7U & (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__Abd))
+				     : (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__Abd)));
+    vlTOPp->fx68k__DOT__excUnit__DOT__dcrCode = vlTOPp->__Vtable5_fx68k__DOT__excUnit__DOT__dcrCode
+	[vlTOPp->__Vtableidx5];
+    // ALWAYS at fx68kAlu.sv:462
+    vlTOPp->__Vfunc_fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__gt9__3__nib 
+	= (0xfU & (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluLatch));
+    vlTOPp->__Vfunc_fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__gt9__3__Vfuncout 
+	= (1U & (((IData)(vlTOPp->__Vfunc_fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__gt9__3__nib) 
+		  >> 3U) & (((IData)(vlTOPp->__Vfunc_fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__gt9__3__nib) 
+			     >> 2U) | ((IData)(vlTOPp->__Vfunc_fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__gt9__3__nib) 
+				       >> 1U))));
+    vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__lowC 
+	= ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__coreH) 
+	   | ((6U != (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__oper)) 
+	      & (IData)(vlTOPp->__Vfunc_fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__gt9__3__Vfuncout)));
     // ALWAYS at fx68kAlu.sv:463
     vlTOPp->__Vfunc_fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__gt9__4__nib 
 	= (0xfU & ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__htemp) 
@@ -276,18 +291,14 @@ void Vfx68k::_settle__TOP__1(Vfx68k__Syms* __restrict vlSymsp) {
     vlTOPp->FC0 = (1U & (IData)(vlTOPp->fx68k__DOT__rFC));
     vlTOPp->fx68k__DOT__iAddrErr = ((IData)(vlTOPp->fx68k__DOT__rAddrErr) 
 				    & (IData)(vlTOPp->fx68k__DOT__addrOe));
-    vlTOPp->fx68k__DOT__enT2 = ((IData)(vlTOPp->fx68k__DOT__Clks) 
-				& (1U == vlTOPp->fx68k__DOT__tState));
+    vlTOPp->eab = (0x7fffffU & (vlTOPp->fx68k__DOT__excUnit__DOT__aob 
+				>> 1U));
+    vlTOPp->fx68k__DOT__busAddrErr = (1U & (vlTOPp->fx68k__DOT__excUnit__DOT__aob 
+					    & (~ (IData)(vlTOPp->fx68k__DOT__busControl__DOT__bciByte))));
     vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__rowDecoder__DOT__size11 
 	= (1U & (((IData)(vlTOPp->fx68k__DOT__Ird) 
 		  >> 7U) & ((IData)(vlTOPp->fx68k__DOT__Ird) 
 			    >> 6U)));
-    vlTOPp->fx68k__DOT__busControl__DOT__bcReset = 
-	(1U & (((IData)(vlTOPp->fx68k__DOT__Clks) >> 3U) 
-	       | (((IData)(vlTOPp->fx68k__DOT__busControl__DOT__addrOeDelay) 
-		   & (~ ((IData)(vlTOPp->fx68k__DOT__BeI) 
-			 | (IData)(vlTOPp->fx68k__DOT__BeiDelay)))) 
-		  & (IData)(vlTOPp->fx68k__DOT__Vpai))));
     vlTOPp->fx68k__DOT__sequencer__DOT__enl = ((2U 
 						& ((IData)(vlTOPp->fx68k__DOT__Ird) 
 						   >> 5U)) 
@@ -295,6 +306,11 @@ void Vfx68k::_settle__TOP__1(Vfx68k__Syms* __restrict vlSymsp) {
 						  & (~ (IData)(
 							       (0U 
 								!= (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__prenLatch))))));
+    vlTOPp->fx68k__DOT__sequencer__DOT__ms0 = ((2U 
+						& ((IData)(vlTOPp->fx68k__DOT__Ird) 
+						   >> 7U)) 
+					       | (1U 
+						  & (IData)(vlTOPp->fx68k__DOT__alue)));
     vlTOPp->fx68k__DOT__psw = (((IData)(vlTOPp->fx68k__DOT__pswT) 
 				<< 0xfU) | (((IData)(vlTOPp->fx68k__DOT__pswS) 
 					     << 0xdU) 
@@ -386,6 +402,18 @@ void Vfx68k::_settle__TOP__1(Vfx68k__Syms* __restrict vlSymsp) {
 					        ? 0x119U
 					        : 0x30bU)
 					    : 0x1d0U));
+    vlTOPp->fx68k__DOT__sequencer__DOT__m01 = ((8U 
+						& ((~ (IData)(
+							      (0U 
+							       != 
+							       (0x3fU 
+								& vlTOPp->fx68k__DOT__excUnit__DOT__auReg)))) 
+						   << 3U)) 
+					       | ((4U 
+						   & ((IData)(vlTOPp->fx68k__DOT__Ird) 
+						      >> 6U)) 
+						  | (3U 
+						     & (IData)(vlTOPp->fx68k__DOT__alue))));
     // ALWAYS at fx68k.sv:1812
     vlTOPp->__Vfunc_fx68k__DOT__uaddrDecode__DOT__eaDecode__1__eaBits 
 	= ((0x38U & ((IData)(vlTOPp->fx68k__DOT__Ir) 
@@ -426,64 +454,8 @@ void Vfx68k::_settle__TOP__1(Vfx68k__Syms* __restrict vlSymsp) {
 	    : (7U & ((IData)(vlTOPp->__Vfunc_fx68k__DOT__uaddrDecode__DOT__eaDecode__0__eaBits) 
 		     >> 3U)));
     vlTOPp->fx68k__DOT__uaddrDecode__DOT__eaCol = vlTOPp->__Vfunc_fx68k__DOT__uaddrDecode__DOT__eaDecode__0__Vfuncout;
-    // ALWAYS at fx68kAlu.sv:225
-    vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__isShift = 0U;
-    if ((1U != (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__oper))) {
-	if ((8U != (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__oper))) {
-	    if ((9U != (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__oper))) {
-		if ((5U != (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__oper))) {
-		    if ((((((((((0x15U == (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__oper)) 
-				| (0xdU == (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__oper))) 
-			       | (0xeU == (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__oper))) 
-			      | (0xfU == (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__oper))) 
-			     | (0x10U == (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__oper))) 
-			    | (0x11U == (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__oper))) 
-			   | (0x12U == (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__oper))) 
-			  | (0x13U == (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__oper))) 
-			 | (0x14U == (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__oper)))) {
-			vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__isShift = 1U;
-		    }
-		}
-	    }
-	}
-    }
-    // ALWAYS at fx68k.sv:1878
-    vlTOPp->__Vtableidx5 = (0xfU & ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__abdIsByte)
-				     ? (7U & (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__Abd))
-				     : (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__Abd)));
-    vlTOPp->fx68k__DOT__excUnit__DOT__dcrCode = vlTOPp->__Vtable5_fx68k__DOT__excUnit__DOT__dcrCode
-	[vlTOPp->__Vtableidx5];
     vlTOPp->fx68k__DOT__iplComp = ((IData)(vlTOPp->fx68k__DOT__iIpl) 
 				   > (IData)(vlTOPp->fx68k__DOT__pswI));
-    // ALWAYS at fx68kAlu.sv:462
-    vlTOPp->__Vfunc_fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__gt9__3__nib 
-	= (0xfU & (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluLatch));
-    vlTOPp->__Vfunc_fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__gt9__3__Vfuncout 
-	= (1U & (((IData)(vlTOPp->__Vfunc_fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__gt9__3__nib) 
-		  >> 3U) & (((IData)(vlTOPp->__Vfunc_fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__gt9__3__nib) 
-			     >> 2U) | ((IData)(vlTOPp->__Vfunc_fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__gt9__3__nib) 
-				       >> 1U))));
-    vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__lowC 
-	= ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__coreH) 
-	   | ((6U != (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__oper)) 
-	      & (IData)(vlTOPp->__Vfunc_fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__gt9__3__Vfuncout)));
-    vlTOPp->fx68k__DOT__sequencer__DOT__ms0 = ((2U 
-						& ((IData)(vlTOPp->fx68k__DOT__Ird) 
-						   >> 7U)) 
-					       | (1U 
-						  & (IData)(vlTOPp->fx68k__DOT__alue)));
-    vlTOPp->fx68k__DOT__sequencer__DOT__m01 = ((8U 
-						& ((~ (IData)(
-							      (0U 
-							       != 
-							       (0x3fU 
-								& vlTOPp->fx68k__DOT__excUnit__DOT__auReg)))) 
-						   << 3U)) 
-					       | ((4U 
-						   & ((IData)(vlTOPp->fx68k__DOT__Ird) 
-						      >> 6U)) 
-						  | (3U 
-						     & (IData)(vlTOPp->fx68k__DOT__alue))));
     vlTOPp->fx68k__DOT__sequencer__DOT__grp1LatchEn 
 	= (1U & (vlTOPp->fx68k__DOT__microLatch & (
 						   (vlTOPp->fx68k__DOT__microLatch 
@@ -497,9 +469,6 @@ void Vfx68k::_settle__TOP__1(Vfx68k__Syms* __restrict vlSymsp) {
 		       >> 1U))));
     vlTOPp->fx68k__DOT__iplStable = ((IData)(vlTOPp->fx68k__DOT__iIpl) 
 				     == (IData)(vlTOPp->fx68k__DOT__rIpl));
-    vlTOPp->fx68k__DOT__enT4 = ((IData)(vlTOPp->fx68k__DOT__Clks) 
-				& ((0U == vlTOPp->fx68k__DOT__tState) 
-				   | (3U == vlTOPp->fx68k__DOT__tState)));
     vlTOPp->fx68k__DOT__Irdecod = ((VL_ULL(0x3ff81ffffff) 
 				    & vlTOPp->fx68k__DOT__Irdecod) 
 				   | ((QData)((IData)(
@@ -735,8 +704,6 @@ void Vfx68k::_settle__TOP__1(Vfx68k__Syms* __restrict vlSymsp) {
 							       (vlTOPp->fx68k__DOT__Nanod2 
 								>> 0x1bU))))) 
 				    << 0x1dU));
-    vlTOPp->fx68k__DOT__enT3 = (((IData)(vlTOPp->fx68k__DOT__Clks) 
-				 >> 1U) & (2U == vlTOPp->fx68k__DOT__tState));
     vlTOPp->fx68k__DOT__Clks = (((IData)(vlTOPp->clk) 
 				 << 4U) | (((IData)(vlTOPp->extReset) 
 					    << 3U) 
@@ -1017,6 +984,34 @@ void Vfx68k::_settle__TOP__1(Vfx68k__Syms* __restrict vlSymsp) {
     vlTOPp->fx68k__DOT__bgBlock = (((2U == vlTOPp->fx68k__DOT__busControl__DOT__busPhase) 
 				    & (IData)(vlTOPp->ASn)) 
 				   | (6U == vlTOPp->fx68k__DOT__busControl__DOT__busPhase));
+    // ALWAYS at fx68kAlu.sv:465
+    if ((6U != (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__oper))) {
+	vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__htemp 
+	    = (0x1ffU & ((0xffU & (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluLatch)) 
+			 + ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__lowC)
+			     ? 6U : 0U)));
+	vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__hNib 
+	    = (0x1fU & (((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__htemp) 
+			 >> 4U) + ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__highC)
+				    ? 6U : 0U)));
+	vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__bcdV 
+	    = (1U & (((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__hNib) 
+		      >> 3U) & (~ ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluLatch) 
+				   >> 7U))));
+    } else {
+	vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__htemp 
+	    = (0x1ffU & ((0xffU & (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluLatch)) 
+			 - ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__lowC)
+			     ? 6U : 0U)));
+	vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__hNib 
+	    = (0x1fU & (((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__htemp) 
+			 >> 4U) - ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__highC)
+				    ? 6U : 0U)));
+	vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__bcdV 
+	    = (1U & ((~ ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__hNib) 
+			 >> 3U)) & ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluLatch) 
+				    >> 7U)));
+    }
     vlTOPp->fx68k__DOT__enErrClk = ((IData)(vlTOPp->fx68k__DOT__iAddrErr) 
 				    | (IData)(vlTOPp->fx68k__DOT__iBusErr));
     vlTOPp->fx68k__DOT__wClk = (1U & (((((IData)(vlTOPp->fx68k__DOT__busControl__DOT__wendReg) 
@@ -12938,39 +12933,29 @@ void Vfx68k::_settle__TOP__1(Vfx68k__Syms* __restrict vlSymsp) {
 					 ((0xbU == (IData)(vlTOPp->fx68k__DOT__uaddrDecode__DOT__eaCol))
 					   ? 0x1c1U
 					   : 0U))))))));
-    // ALWAYS at fx68kAlu.sv:465
-    if ((6U != (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__oper))) {
-	vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__htemp 
-	    = (0x1ffU & ((0xffU & (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluLatch)) 
-			 + ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__lowC)
-			     ? 6U : 0U)));
-	vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__hNib 
-	    = (0x1fU & (((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__htemp) 
-			 >> 4U) + ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__highC)
-				    ? 6U : 0U)));
-	vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__bcdV 
-	    = (1U & (((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__hNib) 
-		      >> 3U) & (~ ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluLatch) 
-				   >> 7U))));
-    } else {
-	vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__htemp 
-	    = (0x1ffU & ((0xffU & (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluLatch)) 
-			 - ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__lowC)
-			     ? 6U : 0U)));
-	vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__hNib 
-	    = (0x1fU & (((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__htemp) 
-			 >> 4U) - ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__highC)
-				    ? 6U : 0U)));
-	vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__bcdV 
-	    = (1U & ((~ ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__hNib) 
-			 >> 3U)) & ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluLatch) 
-				    >> 7U)));
-    }
     vlTOPp->fx68k__DOT__excUnit__DOT__aulow = (0x1ffffU 
 					       & ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__Dbl) 
 						  + 
 						  (0xffffU 
 						   & vlTOPp->fx68k__DOT__excUnit__DOT__auInpMux)));
+    vlTOPp->fx68k__DOT__enT1 = ((((IData)(vlTOPp->fx68k__DOT__Clks) 
+				  >> 1U) & (4U == vlTOPp->fx68k__DOT__tState)) 
+				& (~ (IData)(vlTOPp->fx68k__DOT__wClk)));
+    vlTOPp->fx68k__DOT__enT2 = ((IData)(vlTOPp->fx68k__DOT__Clks) 
+				& (1U == vlTOPp->fx68k__DOT__tState));
+    vlTOPp->fx68k__DOT__enT3 = (((IData)(vlTOPp->fx68k__DOT__Clks) 
+				 >> 1U) & (2U == vlTOPp->fx68k__DOT__tState));
+    vlTOPp->fx68k__DOT__enT4 = ((IData)(vlTOPp->fx68k__DOT__Clks) 
+				& ((0U == vlTOPp->fx68k__DOT__tState) 
+				   | (3U == vlTOPp->fx68k__DOT__tState)));
+    vlTOPp->fx68k__DOT__rstUrom = (((IData)(vlTOPp->fx68k__DOT__Clks) 
+				    >> 1U) & (IData)(vlTOPp->fx68k__DOT__enErrClk));
+    vlTOPp->fx68k__DOT__busControl__DOT__bcReset = 
+	(1U & (((IData)(vlTOPp->fx68k__DOT__Clks) >> 3U) 
+	       | (((IData)(vlTOPp->fx68k__DOT__busControl__DOT__addrOeDelay) 
+		   & (~ ((IData)(vlTOPp->fx68k__DOT__BeI) 
+			 | (IData)(vlTOPp->fx68k__DOT__BeiDelay)))) 
+		  & (IData)(vlTOPp->fx68k__DOT__Vpai))));
     vlTOPp->fx68k__DOT__Nanod = ((VL_ULL(0xdfffffffffffff) 
 				  & vlTOPp->fx68k__DOT__Nanod) 
 				 | ((QData)((IData)(
@@ -13057,11 +13042,6 @@ void Vfx68k::_settle__TOP__1(Vfx68k__Syms* __restrict vlSymsp) {
 							   : 5U))
 							 : 4U)))))))
 						  : 1U);
-    vlTOPp->fx68k__DOT__rstUrom = (((IData)(vlTOPp->fx68k__DOT__Clks) 
-				    >> 1U) & (IData)(vlTOPp->fx68k__DOT__enErrClk));
-    vlTOPp->fx68k__DOT__enT1 = ((((IData)(vlTOPp->fx68k__DOT__Clks) 
-				  >> 1U) & (4U == vlTOPp->fx68k__DOT__tState)) 
-				& (~ (IData)(vlTOPp->fx68k__DOT__wClk)));
     // ALWAYS at fx68k.sv:1994
     if (((((((((0U == (0x1fU & (vlTOPp->fx68k__DOT__microLatch 
 				>> 2U))) | (1U == (0x1fU 
@@ -13369,6 +13349,14 @@ void Vfx68k::_settle__TOP__1(Vfx68k__Syms* __restrict vlSymsp) {
 							      (~ (IData)(vlTOPp->fx68k__DOT__irdDecode__DOT__isRegShift))
 							       : (IData)(vlTOPp->fx68k__DOT__irdDecode__DOT__unnamedblk1__DOT__eaIsAreg))))))) 
 				      << 0x17U));
+    vlTOPp->fx68k__DOT__busControl__DOT__canStart = 
+	((((((IData)(vlTOPp->fx68k__DOT__BRi) & (IData)(vlTOPp->fx68k__DOT__BgackI)) 
+	    & (~ (IData)(vlTOPp->fx68k__DOT__busArbiter__DOT__rGranted))) 
+	   | (((1U == vlTOPp->fx68k__DOT__busControl__DOT__busPhase) 
+	       & (~ (IData)(vlTOPp->ASn))) & (IData)(vlTOPp->fx68k__DOT__busControl__DOT__isRmcReg))) 
+	  & ((IData)(vlTOPp->fx68k__DOT__busControl__DOT__bcPend) 
+	     | (IData)((vlTOPp->fx68k__DOT__Nanod >> 0x37U)))) 
+	 & (~ (IData)(vlTOPp->fx68k__DOT__busControl__DOT__bcReset)));
     vlTOPp->fx68k__DOT__Nanod = ((VL_ULL(0xbfffffffffffff) 
 				  & vlTOPp->fx68k__DOT__Nanod) 
 				 | ((QData)((IData)(
@@ -13869,14 +13857,6 @@ void Vfx68k::_settle__TOP__1(Vfx68k__Syms* __restrict vlSymsp) {
 	    }
 	}
     }
-    vlTOPp->fx68k__DOT__busControl__DOT__canStart = 
-	((((((IData)(vlTOPp->fx68k__DOT__BRi) & (IData)(vlTOPp->fx68k__DOT__BgackI)) 
-	    & (~ (IData)(vlTOPp->fx68k__DOT__busArbiter__DOT__rGranted))) 
-	   | (((1U == vlTOPp->fx68k__DOT__busControl__DOT__busPhase) 
-	       & (~ (IData)(vlTOPp->ASn))) & (IData)(vlTOPp->fx68k__DOT__busControl__DOT__isRmcReg))) 
-	  & ((IData)(vlTOPp->fx68k__DOT__busControl__DOT__bcPend) 
-	     | (IData)((vlTOPp->fx68k__DOT__Nanod >> 0x37U)))) 
-	 & (~ (IData)(vlTOPp->fx68k__DOT__busControl__DOT__bcReset)));
     // ALWAYS at fx68kAlu.sv:143
     vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__dOperand 
 	= ((1U & (IData)((vlTOPp->fx68k__DOT__Nanod 
@@ -14667,297 +14647,52 @@ void Vfx68k::_settle__TOP__1(Vfx68k__Syms* __restrict vlSymsp) {
     }
 }
 
-VL_INLINE_OPT void Vfx68k::_combo__TOP__2(Vfx68k__Syms* __restrict vlSymsp) {
-    VL_DEBUG_IF(VL_DBG_MSGF("+    Vfx68k::_combo__TOP__2\n"); );
-    Vfx68k* __restrict vlTOPp VL_ATTR_UNUSED = vlSymsp->TOPp;
-    // Body
-    vlTOPp->fx68k__DOT__busArbiter__DOT____Vsenitemexpr1 
-	= (1U & ((IData)(vlTOPp->fx68k__DOT__Clks) 
-		 >> 4U));
-    vlTOPp->fx68k__DOT__nDecoder__DOT____Vsenitemexpr1 
-	= (1U & ((IData)(vlTOPp->fx68k__DOT__Clks) 
-		 >> 4U));
-    vlTOPp->fx68k__DOT__sequencer__DOT____Vsenitemexpr1 
-	= (1U & ((IData)(vlTOPp->fx68k__DOT__Clks) 
-		 >> 4U));
-    vlTOPp->fx68k__DOT__excUnit__DOT__dataIo__DOT____Vsenitemexpr1 
-	= (1U & ((IData)(vlTOPp->fx68k__DOT__Clks) 
-		 >> 4U));
-    vlTOPp->fx68k__DOT____Vcellinp__nanoRom__clk = 
-	(1U & ((IData)(vlTOPp->fx68k__DOT__Clks) >> 4U));
-    vlTOPp->fx68k__DOT__busControl__DOT____Vsenitemexpr1 
-	= (1U & ((IData)(vlTOPp->fx68k__DOT__Clks) 
-		 >> 4U));
-    vlTOPp->fx68k__DOT__excUnit__DOT____Vcellinp__alu__clk 
-	= (1U & ((IData)(vlTOPp->fx68k__DOT__Clks) 
-		 >> 4U));
-}
-
-void Vfx68k::_initial__TOP__3(Vfx68k__Syms* __restrict vlSymsp) {
-    VL_DEBUG_IF(VL_DBG_MSGF("+    Vfx68k::_initial__TOP__3\n"); );
-    Vfx68k* __restrict vlTOPp VL_ATTR_UNUSED = vlSymsp->TOPp;
-    // Body
-    // INITIAL at fx68k.sv:1175
-    vlTOPp->fx68k__DOT__excUnit__DOT__regs68L[0U] = 0U;
-    vlTOPp->fx68k__DOT__excUnit__DOT__regs68H[0U] = 0U;
-    vlTOPp->fx68k__DOT__excUnit__DOT__regs68L[1U] = 0U;
-    vlTOPp->fx68k__DOT__excUnit__DOT__regs68H[1U] = 0U;
-    vlTOPp->fx68k__DOT__excUnit__DOT__regs68L[2U] = 0U;
-    vlTOPp->fx68k__DOT__excUnit__DOT__regs68H[2U] = 0U;
-    vlTOPp->fx68k__DOT__excUnit__DOT__regs68L[3U] = 0U;
-    vlTOPp->fx68k__DOT__excUnit__DOT__regs68H[3U] = 0U;
-    vlTOPp->fx68k__DOT__excUnit__DOT__regs68L[4U] = 0U;
-    vlTOPp->fx68k__DOT__excUnit__DOT__regs68H[4U] = 0U;
-    vlTOPp->fx68k__DOT__excUnit__DOT__regs68L[5U] = 0U;
-    vlTOPp->fx68k__DOT__excUnit__DOT__regs68H[5U] = 0U;
-    vlTOPp->fx68k__DOT__excUnit__DOT__regs68L[6U] = 0U;
-    vlTOPp->fx68k__DOT__excUnit__DOT__regs68H[6U] = 0U;
-    vlTOPp->fx68k__DOT__excUnit__DOT__regs68L[7U] = 0U;
-    vlTOPp->fx68k__DOT__excUnit__DOT__regs68H[7U] = 0U;
-    vlTOPp->fx68k__DOT__excUnit__DOT__regs68L[8U] = 0U;
-    vlTOPp->fx68k__DOT__excUnit__DOT__regs68H[8U] = 0U;
-    vlTOPp->fx68k__DOT__excUnit__DOT__regs68L[9U] = 0U;
-    vlTOPp->fx68k__DOT__excUnit__DOT__regs68H[9U] = 0U;
-    vlTOPp->fx68k__DOT__excUnit__DOT__regs68L[0xaU] = 0U;
-    vlTOPp->fx68k__DOT__excUnit__DOT__regs68H[0xaU] = 0U;
-    vlTOPp->fx68k__DOT__excUnit__DOT__regs68L[0xbU] = 0U;
-    vlTOPp->fx68k__DOT__excUnit__DOT__regs68H[0xbU] = 0U;
-    vlTOPp->fx68k__DOT__excUnit__DOT__regs68L[0xcU] = 0U;
-    vlTOPp->fx68k__DOT__excUnit__DOT__regs68H[0xcU] = 0U;
-    vlTOPp->fx68k__DOT__excUnit__DOT__regs68L[0xdU] = 0U;
-    vlTOPp->fx68k__DOT__excUnit__DOT__regs68H[0xdU] = 0U;
-    vlTOPp->fx68k__DOT__excUnit__DOT__regs68L[0xeU] = 0U;
-    vlTOPp->fx68k__DOT__excUnit__DOT__regs68H[0xeU] = 0U;
-    vlTOPp->fx68k__DOT__excUnit__DOT__regs68L[0xfU] = 0U;
-    vlTOPp->fx68k__DOT__excUnit__DOT__regs68H[0xfU] = 0U;
-    vlTOPp->fx68k__DOT__excUnit__DOT__regs68L[0x10U] = 0U;
-    vlTOPp->fx68k__DOT__excUnit__DOT__regs68H[0x10U] = 0U;
-    vlTOPp->fx68k__DOT__excUnit__DOT__regs68L[0x11U] = 0U;
-    vlTOPp->fx68k__DOT__excUnit__DOT__regs68H[0x11U] = 0U;
-}
-
-VL_INLINE_OPT void Vfx68k::_sequent__TOP__4(Vfx68k__Syms* __restrict vlSymsp) {
-    VL_DEBUG_IF(VL_DBG_MSGF("+    Vfx68k::_sequent__TOP__4\n"); );
-    Vfx68k* __restrict vlTOPp VL_ATTR_UNUSED = vlSymsp->TOPp;
-    // Body
-    // ALWAYS at fx68k.sv:2232
-    if ((8U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
-	vlTOPp->fx68k__DOT__busArbiter__DOT__dmaPhase = 0U;
-    } else {
-	if ((1U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
-	    vlTOPp->fx68k__DOT__busArbiter__DOT__dmaPhase 
-		= vlTOPp->fx68k__DOT__busArbiter__DOT__next;
-	}
-    }
-    // ALWAYS at fx68k.sv:2232
-    if ((8U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
-	vlTOPp->BGn = 1U;
-    } else {
-	if ((2U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
-	    vlTOPp->BGn = (1U & (~ (IData)(vlTOPp->fx68k__DOT__busArbiter__DOT__rGranted)));
-	}
-    }
-    // ALWAYS at fx68k.sv:2232
-    if ((8U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
-	vlTOPp->fx68k__DOT__busArbiter__DOT__rGranted = 0U;
-    } else {
-	if ((1U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
-	    vlTOPp->fx68k__DOT__busArbiter__DOT__rGranted 
-		= ((((2U == vlTOPp->fx68k__DOT__busArbiter__DOT__next) 
-		     | (6U == vlTOPp->fx68k__DOT__busArbiter__DOT__next)) 
-		    | (3U == vlTOPp->fx68k__DOT__busArbiter__DOT__next)) 
-		   | (5U == vlTOPp->fx68k__DOT__busArbiter__DOT__next));
-	}
-    }
-}
-
-VL_INLINE_OPT void Vfx68k::_sequent__TOP__5(Vfx68k__Syms* __restrict vlSymsp) {
-    VL_DEBUG_IF(VL_DBG_MSGF("+    Vfx68k::_sequent__TOP__5\n"); );
-    Vfx68k* __restrict vlTOPp VL_ATTR_UNUSED = vlSymsp->TOPp;
-    // Body
-    // ALWAYS at fx68k.sv:724
-    if (vlTOPp->fx68k__DOT__enT4) {
-	vlTOPp->fx68k__DOT__nDecoder__DOT__ftuCtrl 
-	    = ((8U & (vlTOPp->fx68k__DOT__nanoLatch[0U] 
-		      >> 0x16U)) | ((4U & (vlTOPp->fx68k__DOT__nanoLatch[0U] 
-					   >> 0x18U)) 
-				    | ((2U & (vlTOPp->fx68k__DOT__nanoLatch[0U] 
-					      >> 0x1aU)) 
-				       | (1U & (vlTOPp->fx68k__DOT__nanoLatch[0U] 
-						>> 0x1cU)))));
-    }
-}
-
-VL_INLINE_OPT void Vfx68k::_sequent__TOP__6(Vfx68k__Syms* __restrict vlSymsp) {
-    VL_DEBUG_IF(VL_DBG_MSGF("+    Vfx68k::_sequent__TOP__6\n"); );
-    Vfx68k* __restrict vlTOPp VL_ATTR_UNUSED = vlSymsp->TOPp;
-    // Body
-    // ALWAYS at fx68k.sv:2155
-    if ((8U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
-	vlTOPp->fx68k__DOT__sequencer__DOT__a0Rst = 1U;
-    } else {
-	if (vlTOPp->fx68k__DOT__enT3) {
-	    vlTOPp->fx68k__DOT__sequencer__DOT__a0Rst = 0U;
-	}
-    }
-    // ALWAYS at fx68k.sv:2101
-    if (((IData)(vlTOPp->fx68k__DOT__sequencer__DOT__grp1LatchEn) 
-	 & (IData)(vlTOPp->fx68k__DOT__enT3))) {
-	vlTOPp->fx68k__DOT__sequencer__DOT__rLineA 
-	    = (1U & ((IData)(vlTOPp->fx68k__DOT__uaddrDecode__DOT__lineBmap) 
-		     >> 0xaU));
-    }
-    // ALWAYS at fx68k.sv:2101
-    if (((IData)(vlTOPp->fx68k__DOT__sequencer__DOT__grp1LatchEn) 
-	 & (IData)(vlTOPp->fx68k__DOT__enT3))) {
-	vlTOPp->fx68k__DOT__sequencer__DOT__rLineF 
-	    = (1U & ((IData)(vlTOPp->fx68k__DOT__uaddrDecode__DOT__lineBmap) 
-		     >> 0xfU));
-    }
-    // ALWAYS at fx68k.sv:2101
-    if (((IData)(vlTOPp->fx68k__DOT__sequencer__DOT__grp1LatchEn) 
-	 & (IData)(vlTOPp->fx68k__DOT__enT3))) {
-	vlTOPp->fx68k__DOT__sequencer__DOT__rIllegal 
-	    = (((0U != ((IData)(vlTOPp->fx68k__DOT__uaddrDecode__DOT__pla_lined__DOT__arIll) 
-			& (IData)(vlTOPp->fx68k__DOT__uaddrDecode__DOT__lineBmap))) 
-		& (~ ((IData)(vlTOPp->fx68k__DOT__uaddrDecode__DOT__lineBmap) 
-		      >> 0xaU))) & (~ ((IData)(vlTOPp->fx68k__DOT__uaddrDecode__DOT__lineBmap) 
-				       >> 0xfU)));
-    }
-    // ALWAYS at fx68k.sv:2101
-    if (((IData)(vlTOPp->fx68k__DOT__sequencer__DOT__grp0LatchEn) 
-	 & (IData)(vlTOPp->fx68k__DOT__enT3))) {
-	vlTOPp->fx68k__DOT__sequencer__DOT__rExcAdrErr 
-	    = vlTOPp->fx68k__DOT__busAddrErr;
-    }
-    // ALWAYS at fx68k.sv:2101
-    if (((IData)(vlTOPp->fx68k__DOT__sequencer__DOT__grp0LatchEn) 
-	 & (IData)(vlTOPp->fx68k__DOT__enT3))) {
-	vlTOPp->fx68k__DOT__sequencer__DOT__rExcRst 
-	    = vlTOPp->fx68k__DOT__excRst;
-    }
-    // ALWAYS at fx68k.sv:2101
-    if (((IData)(vlTOPp->fx68k__DOT__sequencer__DOT__grp1LatchEn) 
-	 & (IData)(vlTOPp->fx68k__DOT__enT3))) {
-	vlTOPp->fx68k__DOT__sequencer__DOT__rTrace 
-	    = vlTOPp->fx68k__DOT__Tpend;
-    }
-    // ALWAYS at fx68k.sv:2101
-    if (((IData)(vlTOPp->fx68k__DOT__sequencer__DOT__grp0LatchEn) 
-	 & (IData)(vlTOPp->fx68k__DOT__enT3))) {
-	vlTOPp->fx68k__DOT__sequencer__DOT__rAutovec 
-	    = vlTOPp->fx68k__DOT__Avia;
-    }
-    // ALWAYS at fx68k.sv:2101
-    if (((IData)(vlTOPp->fx68k__DOT__sequencer__DOT__grp0LatchEn) 
-	 & (IData)(vlTOPp->fx68k__DOT__enT3))) {
-	vlTOPp->fx68k__DOT__sequencer__DOT__rSpurious 
-	    = vlTOPp->fx68k__DOT__Spuria;
-    }
-    // ALWAYS at fx68k.sv:2101
-    if (((IData)(vlTOPp->fx68k__DOT__sequencer__DOT__grp1LatchEn) 
-	 & (IData)(vlTOPp->fx68k__DOT__enT3))) {
-	vlTOPp->fx68k__DOT__sequencer__DOT__rInterrupt 
-	    = vlTOPp->fx68k__DOT__intPend;
-    }
-    // ALWAYS at fx68k.sv:2101
-    if (((IData)(vlTOPp->fx68k__DOT__sequencer__DOT__grp1LatchEn) 
-	 & (IData)(vlTOPp->fx68k__DOT__enT3))) {
-	vlTOPp->fx68k__DOT__sequencer__DOT__rPriv = 
-	    (((1U == (IData)(vlTOPp->fx68k__DOT__uaddrDecode__DOT__lineBmap))
-	       ? (0x7cU == (0xf5ffU & (IData)(vlTOPp->fx68k__DOT__Ir)))
-	       : ((0x10U == (IData)(vlTOPp->fx68k__DOT__uaddrDecode__DOT__lineBmap)) 
-		  & ((0x46c0U == (0xffc0U & (IData)(vlTOPp->fx68k__DOT__Ir))) 
-		     | ((0x4e60U == (0xfff0U & (IData)(vlTOPp->fx68k__DOT__Ir))) 
-			| (((0x4e70U == (IData)(vlTOPp->fx68k__DOT__Ir)) 
-			    | (0x4e73U == (IData)(vlTOPp->fx68k__DOT__Ir))) 
-			   | (0x4e72U == (IData)(vlTOPp->fx68k__DOT__Ir))))))) 
-	     & (~ ((IData)(vlTOPp->fx68k__DOT__psw) 
-		   >> 0xdU)));
-    }
-    // ALWAYS at fx68k.sv:2101
-    if (((IData)(vlTOPp->fx68k__DOT__sequencer__DOT__grp0LatchEn) 
-	 & (IData)(vlTOPp->fx68k__DOT__enT3))) {
-	vlTOPp->fx68k__DOT__sequencer__DOT__rExcBusErr 
-	    = vlTOPp->fx68k__DOT__BerrA;
-    }
-    // ALWAYS at fx68k.sv:2125
-    vlTOPp->fx68k__DOT__sequencer__DOT__grp1Nma = 0x1c0U;
-    if ((1U & (~ (IData)(vlTOPp->fx68k__DOT__sequencer__DOT__rExcRst)))) {
-	if ((1U & (~ ((IData)(vlTOPp->fx68k__DOT__sequencer__DOT__rExcBusErr) 
-		      | (IData)(vlTOPp->fx68k__DOT__sequencer__DOT__rExcAdrErr))))) {
-	    if ((1U & (~ ((IData)(vlTOPp->fx68k__DOT__sequencer__DOT__rSpurious) 
-			  | (IData)(vlTOPp->fx68k__DOT__sequencer__DOT__rAutovec))))) {
-		if ((1U & (~ (IData)(vlTOPp->fx68k__DOT__sequencer__DOT__rTrace)))) {
-		    if (vlTOPp->fx68k__DOT__sequencer__DOT__rInterrupt) {
-			vlTOPp->fx68k__DOT__sequencer__DOT__grp1Nma = 0x1c4U;
-		    }
-		}
-	    }
-	}
-    }
-}
-
-VL_INLINE_OPT void Vfx68k::_sequent__TOP__7(Vfx68k__Syms* __restrict vlSymsp) {
-    VL_DEBUG_IF(VL_DBG_MSGF("+    Vfx68k::_sequent__TOP__7\n"); );
-    Vfx68k* __restrict vlTOPp VL_ATTR_UNUSED = vlSymsp->TOPp;
-    // Body
-    vlTOPp->__Vdly__fx68k__DOT__excUnit__DOT__dataIo__DOT__byteMux 
-	= vlTOPp->fx68k__DOT__excUnit__DOT__dataIo__DOT__byteMux;
-    // ALWAYS at fx68k.sv:1763
-    if (((IData)(vlTOPp->fx68k__DOT__enT3) & (0U != 
-					      (3U & (IData)(
-							    (vlTOPp->fx68k__DOT__Nanod2 
-							     >> 0x11U)))))) {
-	vlTOPp->fx68k__DOT__excUnit__DOT__dataIo__DOT__dob 
-	    = ((0xff00U & (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__dataIo__DOT__dob)) 
-	       | (0xffU & ((1U & (IData)((vlTOPp->fx68k__DOT__Nanod 
-					  >> 0x33U)))
-			    ? ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__dobInput) 
-			       >> 8U) : (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__dobInput))));
-	vlTOPp->fx68k__DOT__excUnit__DOT__dataIo__DOT__dob 
-	    = ((0xffU & (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__dataIo__DOT__dob)) 
-	       | (0xff00U & (((1U & ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__dataIo__DOT__byteCycle) 
-				     | (IData)((vlTOPp->fx68k__DOT__Nanod 
-						>> 0x32U))))
-			       ? (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__dobInput)
-			       : ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__dobInput) 
-				  >> 8U)) << 8U)));
-    }
-    // ALWAYS at fx68k.sv:1720
-    if (vlTOPp->fx68k__DOT__enT3) {
-	vlTOPp->__Vdly__fx68k__DOT__excUnit__DOT__dataIo__DOT__byteMux 
-	    = (((IData)((vlTOPp->fx68k__DOT__Nanod 
-			 >> 0x34U)) & (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__dataIo__DOT__isByte_T4)) 
-	       & (~ vlTOPp->fx68k__DOT__excUnit__DOT__aob));
-    }
-    vlTOPp->oEdb = vlTOPp->fx68k__DOT__excUnit__DOT__dataIo__DOT__dob;
-    // ALWAYS at fx68k.sv:1763
-    if (vlTOPp->fx68k__DOT__enT4) {
-	vlTOPp->fx68k__DOT__excUnit__DOT__dataIo__DOT__byteCycle 
-	    = (1U & ((IData)((vlTOPp->fx68k__DOT__Nanod 
-			      >> 0x34U)) & (IData)(
-						   (vlTOPp->fx68k__DOT__Irdecod 
-						    >> 0x20U))));
-    }
-    // ALWAYS at fx68k.sv:1720
-    if (vlTOPp->fx68k__DOT__enT4) {
-	vlTOPp->fx68k__DOT__excUnit__DOT__dataIo__DOT__isByte_T4 
-	    = (1U & (IData)((vlTOPp->fx68k__DOT__Irdecod 
-			     >> 0x20U)));
-    }
-}
-
-VL_INLINE_OPT void Vfx68k::_sequent__TOP__8(Vfx68k__Syms* __restrict vlSymsp) {
-    VL_DEBUG_IF(VL_DBG_MSGF("+    Vfx68k::_sequent__TOP__8\n"); );
+VL_INLINE_OPT void Vfx68k::_sequent__TOP__2(Vfx68k__Syms* __restrict vlSymsp) {
+    VL_DEBUG_IF(VL_DBG_MSGF("+    Vfx68k::_sequent__TOP__2\n"); );
     Vfx68k* __restrict vlTOPp VL_ATTR_UNUSED = vlSymsp->TOPp;
     // Variables
     // Begin mtask footprint  all: 
     VL_SIG8(__Vdly__fx68k__DOT__eCntr,3,0);
+    VL_SIG8(__Vdlyvdim0__fx68k__DOT__excUnit__DOT__regs68L__v0,4,0);
+    VL_SIG8(__Vdlyvset__fx68k__DOT__excUnit__DOT__regs68L__v0,0,0);
+    VL_SIG8(__Vdlyvdim0__fx68k__DOT__excUnit__DOT__regs68L__v1,4,0);
+    VL_SIG8(__Vdlyvset__fx68k__DOT__excUnit__DOT__regs68L__v1,0,0);
+    VL_SIG8(__Vdlyvdim0__fx68k__DOT__excUnit__DOT__regs68L__v2,4,0);
+    VL_SIG8(__Vdlyvlsb__fx68k__DOT__excUnit__DOT__regs68L__v2,3,0);
+    VL_SIG8(__Vdlyvval__fx68k__DOT__excUnit__DOT__regs68L__v2,7,0);
+    VL_SIG8(__Vdlyvset__fx68k__DOT__excUnit__DOT__regs68L__v2,0,0);
+    VL_SIG8(__Vdlyvdim0__fx68k__DOT__excUnit__DOT__regs68L__v3,4,0);
+    VL_SIG8(__Vdlyvset__fx68k__DOT__excUnit__DOT__regs68L__v3,0,0);
+    VL_SIG8(__Vdlyvdim0__fx68k__DOT__excUnit__DOT__regs68L__v4,4,0);
+    VL_SIG8(__Vdlyvset__fx68k__DOT__excUnit__DOT__regs68L__v4,0,0);
+    VL_SIG8(__Vdlyvdim0__fx68k__DOT__excUnit__DOT__regs68L__v5,4,0);
+    VL_SIG8(__Vdlyvset__fx68k__DOT__excUnit__DOT__regs68L__v5,0,0);
+    VL_SIG8(__Vdlyvdim0__fx68k__DOT__excUnit__DOT__regs68L__v6,4,0);
+    VL_SIG8(__Vdlyvlsb__fx68k__DOT__excUnit__DOT__regs68L__v6,3,0);
+    VL_SIG8(__Vdlyvval__fx68k__DOT__excUnit__DOT__regs68L__v6,7,0);
+    VL_SIG8(__Vdlyvset__fx68k__DOT__excUnit__DOT__regs68L__v6,0,0);
+    VL_SIG8(__Vdlyvdim0__fx68k__DOT__excUnit__DOT__regs68L__v7,4,0);
+    VL_SIG8(__Vdlyvset__fx68k__DOT__excUnit__DOT__regs68L__v7,0,0);
+    VL_SIG8(__Vdlyvdim0__fx68k__DOT__excUnit__DOT__regs68H__v0,4,0);
+    VL_SIG8(__Vdlyvset__fx68k__DOT__excUnit__DOT__regs68H__v0,0,0);
+    VL_SIG8(__Vdlyvdim0__fx68k__DOT__excUnit__DOT__regs68H__v1,4,0);
+    VL_SIG8(__Vdlyvset__fx68k__DOT__excUnit__DOT__regs68H__v1,0,0);
     VL_SIG16(__Vtableidx2,8,0);
     VL_SIG16(__Vtableidx3,9,0);
+    VL_SIG16(__Vdly__fx68k__DOT__ftu,15,0);
+    VL_SIG16(__Vdly__fx68k__DOT__excUnit__DOT__preDbd,15,0);
+    VL_SIG16(__Vdly__fx68k__DOT__excUnit__DOT__preAbd,15,0);
+    VL_SIG16(__Vdlyvval__fx68k__DOT__excUnit__DOT__regs68L__v0,15,0);
+    VL_SIG16(__Vdlyvval__fx68k__DOT__excUnit__DOT__regs68L__v1,15,0);
+    VL_SIG16(__Vdlyvval__fx68k__DOT__excUnit__DOT__regs68L__v3,15,0);
+    VL_SIG16(__Vdlyvval__fx68k__DOT__excUnit__DOT__regs68L__v4,15,0);
+    VL_SIG16(__Vdlyvval__fx68k__DOT__excUnit__DOT__regs68L__v5,15,0);
+    VL_SIG16(__Vdlyvval__fx68k__DOT__excUnit__DOT__regs68L__v7,15,0);
+    VL_SIG16(__Vdlyvval__fx68k__DOT__excUnit__DOT__regs68H__v0,15,0);
+    VL_SIG16(__Vdlyvval__fx68k__DOT__excUnit__DOT__regs68H__v1,15,0);
     VL_SIG(__Vdly__fx68k__DOT__tState,31,0);
     // Body
+    __Vdly__fx68k__DOT__tState = vlTOPp->fx68k__DOT__tState;
     // ALWAYS at fx68k_MicroRom.v:9
     __Vtableidx3 = vlTOPp->fx68k__DOT__microAddr;
     vlTOPp->fx68k__DOT__microOutput = vlTOPp->__Vtable3_fx68k__DOT__microOutput
@@ -14972,23 +14707,29 @@ VL_INLINE_OPT void Vfx68k::_sequent__TOP__8(Vfx68k__Syms* __restrict vlSymsp) {
 	vlTOPp->fx68k__DOT__nanoOutput[2U] = vlTOPp->__Vtable2_fx68k__DOT__nanoOutput
 	    [__Vtableidx2][2U];
     }
-    __Vdly__fx68k__DOT__tState = vlTOPp->fx68k__DOT__tState;
     __Vdly__fx68k__DOT__eCntr = vlTOPp->fx68k__DOT__eCntr;
-    vlTOPp->__Vdly__fx68k__DOT__ftu = vlTOPp->fx68k__DOT__ftu;
-    // ALWAYS at fx68k.sv:208
-    if ((1U & (~ ((IData)(vlTOPp->fx68k__DOT__Clks) 
-		  >> 2U)))) {
-	if ((1U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
-	    vlTOPp->fx68k__DOT__rDtack = vlTOPp->DTACKn;
-	}
+    __Vdly__fx68k__DOT__excUnit__DOT__preAbd = vlTOPp->fx68k__DOT__excUnit__DOT__preAbd;
+    __Vdly__fx68k__DOT__ftu = vlTOPp->fx68k__DOT__ftu;
+    __Vdlyvset__fx68k__DOT__excUnit__DOT__regs68H__v0 = 0U;
+    __Vdlyvset__fx68k__DOT__excUnit__DOT__regs68H__v1 = 0U;
+    __Vdly__fx68k__DOT__excUnit__DOT__preDbd = vlTOPp->fx68k__DOT__excUnit__DOT__preDbd;
+    __Vdlyvset__fx68k__DOT__excUnit__DOT__regs68L__v0 = 0U;
+    __Vdlyvset__fx68k__DOT__excUnit__DOT__regs68L__v1 = 0U;
+    __Vdlyvset__fx68k__DOT__excUnit__DOT__regs68L__v2 = 0U;
+    __Vdlyvset__fx68k__DOT__excUnit__DOT__regs68L__v3 = 0U;
+    __Vdlyvset__fx68k__DOT__excUnit__DOT__regs68L__v4 = 0U;
+    __Vdlyvset__fx68k__DOT__excUnit__DOT__regs68L__v5 = 0U;
+    __Vdlyvset__fx68k__DOT__excUnit__DOT__regs68L__v6 = 0U;
+    __Vdlyvset__fx68k__DOT__excUnit__DOT__regs68L__v7 = 0U;
+    // ALWAYS at fx68kAlu.sv:123
+    if (vlTOPp->fx68k__DOT__enT4) {
+	vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__ccrMask 
+	    = vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__cMask;
     }
-    // ALWAYS at fx68k.sv:492
-    if ((8U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
-	vlTOPp->fx68k__DOT__Err6591 = 0U;
-    } else {
-	if ((2U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
-	    vlTOPp->fx68k__DOT__Err6591 = vlTOPp->fx68k__DOT__enErrClk;
-	}
+    // ALWAYS at fx68kAlu.sv:178
+    if (vlTOPp->fx68k__DOT__enT1) {
+	vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__bcdOverf 
+	    = vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__bcdV;
     }
     // ALWAYS at fx68k.sv:179
     if ((4U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
@@ -15044,14 +14785,196 @@ VL_INLINE_OPT void Vfx68k::_sequent__TOP__8(Vfx68k__Syms* __restrict vlSymsp) {
 	    }
 	}
     }
+    // ALWAYS at fx68k.sv:2232
+    if ((8U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
+	vlTOPp->fx68k__DOT__busArbiter__DOT__dmaPhase = 0U;
+    } else {
+	if ((1U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
+	    vlTOPp->fx68k__DOT__busArbiter__DOT__dmaPhase 
+		= vlTOPp->fx68k__DOT__busArbiter__DOT__next;
+	}
+    }
     // ALWAYS at fx68k.sv:492
     if ((8U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
-	vlTOPp->fx68k__DOT__excRst = 1U;
+	vlTOPp->fx68k__DOT__Err6591 = 0U;
     } else {
-	if (((IData)(vlTOPp->fx68k__DOT__enT2) & (IData)(
-							 (vlTOPp->fx68k__DOT__Nanod 
-							  >> 0x37U)))) {
-	    vlTOPp->fx68k__DOT__excRst = 0U;
+	if ((2U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
+	    vlTOPp->fx68k__DOT__Err6591 = vlTOPp->fx68k__DOT__enErrClk;
+	}
+    }
+    // ALWAYS at fx68k.sv:208
+    if ((1U & (~ ((IData)(vlTOPp->fx68k__DOT__Clks) 
+		  >> 2U)))) {
+	if ((1U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
+	    vlTOPp->fx68k__DOT__rDtack = vlTOPp->DTACKn;
+	}
+    }
+    // ALWAYS at fx68k.sv:2101
+    if (((IData)(vlTOPp->fx68k__DOT__sequencer__DOT__grp1LatchEn) 
+	 & (IData)(vlTOPp->fx68k__DOT__enT3))) {
+	vlTOPp->fx68k__DOT__sequencer__DOT__rLineA 
+	    = (1U & ((IData)(vlTOPp->fx68k__DOT__uaddrDecode__DOT__lineBmap) 
+		     >> 0xaU));
+    }
+    // ALWAYS at fx68k.sv:2101
+    if (((IData)(vlTOPp->fx68k__DOT__sequencer__DOT__grp1LatchEn) 
+	 & (IData)(vlTOPp->fx68k__DOT__enT3))) {
+	vlTOPp->fx68k__DOT__sequencer__DOT__rLineF 
+	    = (1U & ((IData)(vlTOPp->fx68k__DOT__uaddrDecode__DOT__lineBmap) 
+		     >> 0xfU));
+    }
+    // ALWAYS at fx68k.sv:2155
+    if ((8U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
+	vlTOPp->fx68k__DOT__sequencer__DOT__a0Rst = 1U;
+    } else {
+	if (vlTOPp->fx68k__DOT__enT3) {
+	    vlTOPp->fx68k__DOT__sequencer__DOT__a0Rst = 0U;
+	}
+    }
+    // ALWAYS at fx68k.sv:2101
+    if (((IData)(vlTOPp->fx68k__DOT__sequencer__DOT__grp1LatchEn) 
+	 & (IData)(vlTOPp->fx68k__DOT__enT3))) {
+	vlTOPp->fx68k__DOT__sequencer__DOT__rIllegal 
+	    = (((0U != ((IData)(vlTOPp->fx68k__DOT__uaddrDecode__DOT__pla_lined__DOT__arIll) 
+			& (IData)(vlTOPp->fx68k__DOT__uaddrDecode__DOT__lineBmap))) 
+		& (~ ((IData)(vlTOPp->fx68k__DOT__uaddrDecode__DOT__lineBmap) 
+		      >> 0xaU))) & (~ ((IData)(vlTOPp->fx68k__DOT__uaddrDecode__DOT__lineBmap) 
+				       >> 0xfU)));
+    }
+    // ALWAYS at fx68k.sv:2101
+    if (((IData)(vlTOPp->fx68k__DOT__sequencer__DOT__grp0LatchEn) 
+	 & (IData)(vlTOPp->fx68k__DOT__enT3))) {
+	vlTOPp->fx68k__DOT__sequencer__DOT__rExcAdrErr 
+	    = vlTOPp->fx68k__DOT__busAddrErr;
+    }
+    // ALWAYS at fx68k.sv:2232
+    if ((8U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
+	vlTOPp->BGn = 1U;
+    } else {
+	if ((2U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
+	    vlTOPp->BGn = (1U & (~ (IData)(vlTOPp->fx68k__DOT__busArbiter__DOT__rGranted)));
+	}
+    }
+    // ALWAYS at fx68kAlu.sv:178
+    if (vlTOPp->fx68k__DOT__enT1) {
+	vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__bcdLatch 
+	    = ((0xf0U & ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__hNib) 
+			 << 4U)) | (0xfU & (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__htemp)));
+    }
+    // ALWAYS at fx68kAlu.sv:123
+    if (vlTOPp->fx68k__DOT__enT4) {
+	vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__oper 
+	    = vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluOp;
+    }
+    // ALWAYS at fx68kAlu.sv:123
+    if (vlTOPp->fx68k__DOT__enT3) {
+	vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__isByte 
+	    = (1U & (IData)((vlTOPp->fx68k__DOT__Irdecod 
+			     >> 0x20U)));
+    }
+    // ALWAYS at fx68kAlu.sv:420
+    if (vlTOPp->fx68k__DOT__enT3) {
+	if ((0U != (7U & (IData)((vlTOPp->fx68k__DOT__Nanod 
+				  >> 0xbU))))) {
+	    vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__coreH 
+		= vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__subHcarry;
+	}
+    }
+    // ALWAYS at fx68k.sv:1543
+    if ((8U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
+	vlTOPp->fx68k__DOT__excUnit__DOT__Pch2Dbh = 0U;
+    } else {
+	if (vlTOPp->fx68k__DOT__enT4) {
+	    vlTOPp->fx68k__DOT__excUnit__DOT__Pch2Dbh 
+		= (1U & ((IData)((vlTOPp->fx68k__DOT__Nanod 
+				  >> 0x15U)) & (IData)(
+						       (vlTOPp->fx68k__DOT__Nanod 
+							>> 0x13U))));
+	}
+    }
+    // ALWAYS at fx68k.sv:1543
+    if ((8U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
+	vlTOPp->fx68k__DOT__excUnit__DOT__Pch2Abh = 0U;
+    } else {
+	if (vlTOPp->fx68k__DOT__enT4) {
+	    vlTOPp->fx68k__DOT__excUnit__DOT__Pch2Abh 
+		= (1U & ((IData)((vlTOPp->fx68k__DOT__Nanod 
+				  >> 0x19U)) & (IData)(
+						       (vlTOPp->fx68k__DOT__Nanod 
+							>> 0x10U))));
+	}
+    }
+    // ALWAYS at fx68k.sv:1543
+    if ((8U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
+	vlTOPp->fx68k__DOT__excUnit__DOT__Pcl2Dbl = 0U;
+    } else {
+	if (vlTOPp->fx68k__DOT__enT4) {
+	    vlTOPp->fx68k__DOT__excUnit__DOT__Pcl2Dbl 
+		= (1U & ((IData)((vlTOPp->fx68k__DOT__Nanod 
+				  >> 0x16U)) & (IData)(
+						       (vlTOPp->fx68k__DOT__Nanod 
+							>> 0x12U))));
+	}
+    }
+    // ALWAYS at fx68k.sv:1543
+    if ((8U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
+	vlTOPp->fx68k__DOT__excUnit__DOT__Pcl2Abl = 0U;
+    } else {
+	if (vlTOPp->fx68k__DOT__enT4) {
+	    vlTOPp->fx68k__DOT__excUnit__DOT__Pcl2Abl 
+		= (1U & ((IData)((vlTOPp->fx68k__DOT__Nanod 
+				  >> 0x1aU)) & (IData)(
+						       (vlTOPp->fx68k__DOT__Nanod 
+							>> 0x11U))));
+	}
+    }
+    // ALWAYS at fx68k.sv:2101
+    if (((IData)(vlTOPp->fx68k__DOT__sequencer__DOT__grp0LatchEn) 
+	 & (IData)(vlTOPp->fx68k__DOT__enT3))) {
+	vlTOPp->fx68k__DOT__sequencer__DOT__rExcRst 
+	    = vlTOPp->fx68k__DOT__excRst;
+    }
+    // ALWAYS at fx68k.sv:2424
+    if ((4U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
+	vlTOPp->fx68k__DOT__busControl__DOT__bcPend = 0U;
+    } else {
+	if (((IData)(vlTOPp->fx68k__DOT__Clks) & ((5U 
+						   == vlTOPp->fx68k__DOT__busControl__DOT__busPhase) 
+						  | (IData)(vlTOPp->fx68k__DOT__busControl__DOT__bcReset)))) {
+	    vlTOPp->fx68k__DOT__busControl__DOT__bcPend = 0U;
+	} else {
+	    if (((IData)(vlTOPp->fx68k__DOT__enT1) 
+		 & (IData)((vlTOPp->fx68k__DOT__Nanod 
+			    >> 0x37U)))) {
+		vlTOPp->fx68k__DOT__busControl__DOT__bcPend = 1U;
+	    }
+	}
+    }
+    // ALWAYS at fx68k.sv:2424
+    if ((4U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
+	vlTOPp->fx68k__DOT__busControl__DOT__wendReg = 0U;
+    } else {
+	if (((IData)(vlTOPp->fx68k__DOT__Clks) & ((5U 
+						   == vlTOPp->fx68k__DOT__busControl__DOT__busPhase) 
+						  | (IData)(vlTOPp->fx68k__DOT__busControl__DOT__bcReset)))) {
+	    vlTOPp->fx68k__DOT__busControl__DOT__wendReg = 0U;
+	} else {
+	    if (vlTOPp->fx68k__DOT__enT1) {
+		vlTOPp->fx68k__DOT__busControl__DOT__wendReg 
+		    = (1U & (IData)((vlTOPp->fx68k__DOT__Nanod 
+				     >> 0x36U)));
+	    }
+	}
+    }
+    // ALWAYS at fx68kAlu.sv:420
+    if (vlTOPp->fx68k__DOT__enT3) {
+	if ((0U != (7U & (IData)((vlTOPp->fx68k__DOT__Nanod 
+				  >> 0xbU))))) {
+	    if ((0U != (7U & (IData)((vlTOPp->fx68k__DOT__Nanod 
+				      >> 0xbU))))) {
+		vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__ccrCore 
+		    = vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__ccrTemp;
+	    }
 	}
     }
     // ALWAYS at fx68k.sv:376
@@ -15080,54 +15003,108 @@ VL_INLINE_OPT void Vfx68k::_sequent__TOP__8(Vfx68k__Syms* __restrict vlSymsp) {
 							>> 0x37U))));
 	}
     }
-    // ALWAYS at fx68k.sv:549
-    if ((4U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
-	vlTOPp->fx68k__DOT__Tpend = 0U;
+    // ALWAYS at fx68k.sv:1285
+    if (vlTOPp->fx68k__DOT__enT4) {
+	vlTOPp->fx68k__DOT__excUnit__DOT__byteNotSpAlign 
+	    = (1U & ((IData)((vlTOPp->fx68k__DOT__Irdecod 
+			      >> 0x20U)) & (~ ((1U 
+						& (IData)(
+							  (vlTOPp->fx68k__DOT__Nanod 
+							   >> 0xeU)))
+					        ? (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__rxIsSp)
+					        : (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__ryIsSp)))));
+    }
+    // ALWAYS at fx68k.sv:1612
+    if ((1U & (~ ((IData)(vlTOPp->fx68k__DOT__enT1) 
+		  & (IData)((vlTOPp->fx68k__DOT__Nanod 
+			     >> 0x2bU)))))) {
+	if (((IData)(vlTOPp->fx68k__DOT__enT3) & (IData)(
+							 (vlTOPp->fx68k__DOT__Nanod 
+							  >> 0x2aU)))) {
+	    vlTOPp->fx68k__DOT__excUnit__DOT__movemRx 
+		= (0xfU & ((1U & (IData)((vlTOPp->fx68k__DOT__Irdecod 
+					  >> 0x21U)))
+			    ? (~ (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__prHbit))
+			    : (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__prHbit)));
+	}
+    }
+    // ALWAYS at fx68k.sv:2344
+    if ((8U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
+	vlTOPp->fx68k__DOT__busControl__DOT__rRWn = 1U;
     } else {
-	if ((1U & (~ (IData)(vlTOPp->fx68k__DOT__enT4)))) {
-	    if (vlTOPp->fx68k__DOT__enT3) {
-		if ((1U & (IData)((vlTOPp->fx68k__DOT__Nanod 
-				   >> 0x31U)))) {
-		    vlTOPp->fx68k__DOT__Tpend = vlTOPp->fx68k__DOT__pswT;
-		} else {
-		    if ((1U & (IData)((vlTOPp->fx68k__DOT__Nanod 
-				       >> 0x30U)))) {
-			vlTOPp->fx68k__DOT__Tpend = 0U;
+	if ((((IData)(vlTOPp->fx68k__DOT__Clks) >> 1U) 
+	     & (IData)(vlTOPp->fx68k__DOT__busControl__DOT__busEnding))) {
+	    vlTOPp->fx68k__DOT__busControl__DOT__rRWn = 1U;
+	} else {
+	    if ((((IData)(vlTOPp->fx68k__DOT__Clks) 
+		  >> 1U) & (IData)(vlTOPp->fx68k__DOT__busControl__DOT__isWriteReg))) {
+		if (((2U == vlTOPp->fx68k__DOT__busControl__DOT__busPhase) 
+		     & (IData)(vlTOPp->fx68k__DOT__busControl__DOT__isWriteReg))) {
+		    vlTOPp->fx68k__DOT__busControl__DOT__rRWn = 0U;
+		}
+	    }
+	}
+    }
+    // ALWAYS at fx68k.sv:2101
+    if (((IData)(vlTOPp->fx68k__DOT__sequencer__DOT__grp1LatchEn) 
+	 & (IData)(vlTOPp->fx68k__DOT__enT3))) {
+	vlTOPp->fx68k__DOT__sequencer__DOT__rTrace 
+	    = vlTOPp->fx68k__DOT__Tpend;
+    }
+    // ALWAYS at fx68k.sv:2101
+    if (((IData)(vlTOPp->fx68k__DOT__sequencer__DOT__grp0LatchEn) 
+	 & (IData)(vlTOPp->fx68k__DOT__enT3))) {
+	vlTOPp->fx68k__DOT__sequencer__DOT__rAutovec 
+	    = vlTOPp->fx68k__DOT__Avia;
+    }
+    // ALWAYS at fx68k.sv:2101
+    if (((IData)(vlTOPp->fx68k__DOT__sequencer__DOT__grp0LatchEn) 
+	 & (IData)(vlTOPp->fx68k__DOT__enT3))) {
+	vlTOPp->fx68k__DOT__sequencer__DOT__rSpurious 
+	    = vlTOPp->fx68k__DOT__Spuria;
+    }
+    // ALWAYS at fx68k.sv:2101
+    if (((IData)(vlTOPp->fx68k__DOT__sequencer__DOT__grp1LatchEn) 
+	 & (IData)(vlTOPp->fx68k__DOT__enT3))) {
+	vlTOPp->fx68k__DOT__sequencer__DOT__rInterrupt 
+	    = vlTOPp->fx68k__DOT__intPend;
+    }
+    // ALWAYS at fx68k.sv:724
+    if (vlTOPp->fx68k__DOT__enT4) {
+	vlTOPp->fx68k__DOT__nDecoder__DOT__ftuCtrl 
+	    = ((8U & (vlTOPp->fx68k__DOT__nanoLatch[0U] 
+		      >> 0x16U)) | ((4U & (vlTOPp->fx68k__DOT__nanoLatch[0U] 
+					   >> 0x18U)) 
+				    | ((2U & (vlTOPp->fx68k__DOT__nanoLatch[0U] 
+					      >> 0x1aU)) 
+				       | (1U & (vlTOPp->fx68k__DOT__nanoLatch[0U] 
+						>> 0x1cU)))));
+    }
+    // ALWAYS at fx68k.sv:2344
+    if ((8U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
+	vlTOPp->fx68k__DOT__busControl__DOT__rAS = 1U;
+    } else {
+	if ((((IData)(vlTOPp->fx68k__DOT__Clks) >> 1U) 
+	     & (2U == vlTOPp->fx68k__DOT__busControl__DOT__busPhase))) {
+	    vlTOPp->fx68k__DOT__busControl__DOT__rAS = 0U;
+	} else {
+	    if (((IData)(vlTOPp->fx68k__DOT__Clks) 
+		 & (6U == vlTOPp->fx68k__DOT__busControl__DOT__busPhase))) {
+		vlTOPp->fx68k__DOT__busControl__DOT__rAS = 1U;
+	    } else {
+		if ((0U != (1U & ((IData)(vlTOPp->fx68k__DOT__Clks) 
+				  & (5U == vlTOPp->fx68k__DOT__busControl__DOT__busPhase))))) {
+		    if ((1U & (~ (IData)(vlTOPp->fx68k__DOT__busControl__DOT__isRmcReg)))) {
+			vlTOPp->fx68k__DOT__busControl__DOT__rAS = 1U;
 		    }
 		}
 	    }
 	}
     }
-    // ALWAYS at fx68k.sv:413
-    if (vlTOPp->fx68k__DOT__enT4) {
-	vlTOPp->fx68k__DOT__Avia = ((~ (IData)(vlTOPp->fx68k__DOT__Vpai)) 
-				    & (7U == (IData)(vlTOPp->fx68k__DOT__rFC)));
-    }
-    // ALWAYS at fx68k.sv:413
-    if (vlTOPp->fx68k__DOT__enT4) {
-	vlTOPp->fx68k__DOT__Spuria = ((~ (IData)(vlTOPp->fx68k__DOT__BeiDelay)) 
-				      & (7U == (IData)(vlTOPp->fx68k__DOT__rFC)));
-    }
-    // ALWAYS at fx68k.sv:413
-    if ((8U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
-	vlTOPp->fx68k__DOT__intPend = 0U;
-    } else {
-	if ((1U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
-	    if (((IData)(vlTOPp->fx68k__DOT__iplStable) 
-		 & (((7U == (IData)(vlTOPp->fx68k__DOT__iIpl)) 
-		     & (~ (IData)(vlTOPp->fx68k__DOT__prevNmi))) 
-		    | (IData)(vlTOPp->fx68k__DOT__iplComp)))) {
-		vlTOPp->fx68k__DOT__intPend = 1U;
-	    } else {
-		if ((((7U == (IData)(vlTOPp->fx68k__DOT__inl)) 
-		      & (7U == (IData)(vlTOPp->fx68k__DOT__rFC))) 
-		     | (((IData)(vlTOPp->fx68k__DOT__iplStable) 
-			 & (7U != (IData)(vlTOPp->fx68k__DOT__iIpl))) 
-			& (~ (IData)(vlTOPp->fx68k__DOT__iplComp))))) {
-		    vlTOPp->fx68k__DOT__intPend = 0U;
-		}
-	    }
-	}
+    // ALWAYS at fx68k.sv:2344
+    if ((2U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
+	vlTOPp->fx68k__DOT__busControl__DOT__addrOeDelay 
+	    = vlTOPp->fx68k__DOT__addrOe;
     }
     // ALWAYS at fx68k.sv:492
     if ((8U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
@@ -15160,6 +15137,85 @@ VL_INLINE_OPT void Vfx68k::_sequent__TOP__8(Vfx68k__Syms* __restrict vlSymsp) {
 	    }
 	}
     }
+    // ALWAYS at fx68k.sv:2101
+    if (((IData)(vlTOPp->fx68k__DOT__sequencer__DOT__grp1LatchEn) 
+	 & (IData)(vlTOPp->fx68k__DOT__enT3))) {
+	vlTOPp->fx68k__DOT__sequencer__DOT__rPriv = 
+	    (((1U == (IData)(vlTOPp->fx68k__DOT__uaddrDecode__DOT__lineBmap))
+	       ? (0x7cU == (0xf5ffU & (IData)(vlTOPp->fx68k__DOT__Ir)))
+	       : ((0x10U == (IData)(vlTOPp->fx68k__DOT__uaddrDecode__DOT__lineBmap)) 
+		  & ((0x46c0U == (0xffc0U & (IData)(vlTOPp->fx68k__DOT__Ir))) 
+		     | ((0x4e60U == (0xfff0U & (IData)(vlTOPp->fx68k__DOT__Ir))) 
+			| (((0x4e70U == (IData)(vlTOPp->fx68k__DOT__Ir)) 
+			    | (0x4e73U == (IData)(vlTOPp->fx68k__DOT__Ir))) 
+			   | (0x4e72U == (IData)(vlTOPp->fx68k__DOT__Ir))))))) 
+	     & (~ ((IData)(vlTOPp->fx68k__DOT__psw) 
+		   >> 0xdU)));
+    }
+    // ALWAYS at fx68k.sv:1763
+    if (((IData)(vlTOPp->fx68k__DOT__enT3) & (0U != 
+					      (3U & (IData)(
+							    (vlTOPp->fx68k__DOT__Nanod2 
+							     >> 0x11U)))))) {
+	vlTOPp->fx68k__DOT__excUnit__DOT__dataIo__DOT__dob 
+	    = ((0xff00U & (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__dataIo__DOT__dob)) 
+	       | (0xffU & ((1U & (IData)((vlTOPp->fx68k__DOT__Nanod 
+					  >> 0x33U)))
+			    ? ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__dobInput) 
+			       >> 8U) : (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__dobInput))));
+	vlTOPp->fx68k__DOT__excUnit__DOT__dataIo__DOT__dob 
+	    = ((0xffU & (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__dataIo__DOT__dob)) 
+	       | (0xff00U & (((1U & ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__dataIo__DOT__byteCycle) 
+				     | (IData)((vlTOPp->fx68k__DOT__Nanod 
+						>> 0x32U))))
+			       ? (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__dobInput)
+			       : ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__dobInput) 
+				  >> 8U)) << 8U)));
+    }
+    // ALWAYS at fx68kAlu.sv:123
+    if (vlTOPp->fx68k__DOT__enT3) {
+	vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__isArX 
+	    = ((((4U == (0xfU & ((IData)(vlTOPp->fx68k__DOT__Ird) 
+				 >> 0xcU))) | (9U == 
+					       (0xfU 
+						& ((IData)(vlTOPp->fx68k__DOT__Ird) 
+						   >> 0xcU)))) 
+		| (0xdU == (0xfU & ((IData)(vlTOPp->fx68k__DOT__Ird) 
+				    >> 0xcU)))) & (
+						   ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__cRow) 
+						    >> 0xaU) 
+						   | ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__cRow) 
+						      >> 0xcU)));
+    }
+    // ALWAYS at fx68kAlu.sv:123
+    if (vlTOPp->fx68k__DOT__enT3) {
+	vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__rIrd8 
+	    = (1U & ((IData)(vlTOPp->fx68k__DOT__Ird) 
+		     >> 8U));
+    }
+    // ALWAYS at fx68kAlu.sv:123
+    if (vlTOPp->fx68k__DOT__enT4) {
+	vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__isLong 
+	    = (1U & (((((IData)(vlTOPp->fx68k__DOT__Ird) 
+			>> 7U) & (~ ((IData)(vlTOPp->fx68k__DOT__Ird) 
+				     >> 6U))) | ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__row) 
+						 >> 7U)) 
+		     | ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__row) 
+			>> 1U)));
+    }
+    // ALWAYS at fx68k.sv:2101
+    if (((IData)(vlTOPp->fx68k__DOT__sequencer__DOT__grp0LatchEn) 
+	 & (IData)(vlTOPp->fx68k__DOT__enT3))) {
+	vlTOPp->fx68k__DOT__sequencer__DOT__rExcBusErr 
+	    = vlTOPp->fx68k__DOT__BerrA;
+    }
+    // ALWAYS at fx68kAlu.sv:178
+    if (vlTOPp->fx68k__DOT__enT1) {
+	vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__bcdCarry 
+	    = (1U & (((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__hNib) 
+		      | (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__pswCcr)) 
+		     >> 4U));
+    }
     // ALWAYS at fx68k.sv:492
     if ((8U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
 	vlTOPp->fx68k__DOT__iBusErr = 0U;
@@ -15184,423 +15240,16 @@ VL_INLINE_OPT void Vfx68k::_sequent__TOP__8(Vfx68k__Syms* __restrict vlSymsp) {
 	    }
 	}
     }
-    // ALWAYS at fx68k.sv:593
+    // ALWAYS at fx68k.sv:1629
     if ((4U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
-	vlTOPp->__Vdly__fx68k__DOT__ftu = 0U;
+	vlTOPp->fx68k__DOT__dcr4 = 0U;
     } else {
-	if (vlTOPp->fx68k__DOT__enT3) {
-	    if ((1U & (IData)((vlTOPp->fx68k__DOT__Nanod 
-			       >> 0x2fU)))) {
-		vlTOPp->__Vdly__fx68k__DOT__ftu = ((IData)(vlTOPp->fx68k__DOT__inExcept01)
-						    ? 
-						   ((0xcU 
-						     == (IData)(vlTOPp->fx68k__DOT__tvnLatch))
-						     ? 0x60U
-						     : 
-						    ((0xdU 
-						      == (IData)(vlTOPp->fx68k__DOT__tvnLatch))
-						      ? 
-						     (0x60U 
-						      | ((IData)(vlTOPp->fx68k__DOT__pswI) 
-							 << 2U))
-						      : 
-						     ((0xfU 
-						       == (IData)(vlTOPp->fx68k__DOT__tvnLatch))
-						       ? 
-						      (0x3fcU 
-						       & ((IData)(vlTOPp->fx68k__DOT__Ird) 
-							  << 2U))
-						       : 
-						      ((IData)(vlTOPp->fx68k__DOT__tvnLatch) 
-						       << 2U))))
-						    : 
-						   (0xfcU 
-						    & ((IData)(
-							       (vlTOPp->fx68k__DOT__Irdecod 
-								>> 1U)) 
-						       << 2U)));
-	    } else {
-		if ((1U & (IData)((vlTOPp->fx68k__DOT__Nanod 
-				   >> 0x27U)))) {
-		    vlTOPp->__Vdly__fx68k__DOT__ftu 
-			= (((IData)(vlTOPp->fx68k__DOT__pswT) 
-			    << 0xfU) | (((IData)(vlTOPp->fx68k__DOT__pswS) 
-					 << 0xdU) | 
-					(((IData)(vlTOPp->fx68k__DOT__pswI) 
-					  << 8U) | (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__pswCcr))));
-		} else {
-		    if ((1U & (IData)((vlTOPp->fx68k__DOT__Nanod 
-				       >> 0x24U)))) {
-			vlTOPp->__Vdly__fx68k__DOT__ftu 
-			    = vlTOPp->fx68k__DOT__Ird;
-		    } else {
-			if ((1U & (IData)((vlTOPp->fx68k__DOT__Nanod 
-					   >> 0x23U)))) {
-			    vlTOPp->__Vdly__fx68k__DOT__ftu 
-				= ((0xffe0U & (IData)(vlTOPp->__Vdly__fx68k__DOT__ftu)) 
-				   | (IData)(vlTOPp->fx68k__DOT__ssw));
-			} else {
-			    vlTOPp->__Vdly__fx68k__DOT__ftu 
-				= (0xffffU & ((1U & (IData)(
-							    (vlTOPp->fx68k__DOT__Nanod 
-							     >> 0x25U)))
-					       ? (0xfff0U 
-						  | ((IData)(vlTOPp->fx68k__DOT__pswI) 
-						     << 1U))
-					       : ((1U 
-						   & (IData)(
-							     (vlTOPp->fx68k__DOT__Nanod 
-							      >> 0x2eU)))
-						   ? (IData)(
-							     (vlTOPp->fx68k__DOT__Irdecod 
-							      >> 7U))
-						   : 
-						  ((1U 
-						    & (IData)(
-							      (vlTOPp->fx68k__DOT__Nanod 
-							       >> 0x2bU)))
-						    ? (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__Abl)
-						    : (IData)(vlTOPp->fx68k__DOT__ftu)))));
-			}
-		    }
-		}
-	    }
+	if (((IData)(vlTOPp->fx68k__DOT__enT3) & (IData)(
+							 (vlTOPp->fx68k__DOT__Nanod2 
+							  >> 0x18U)))) {
+	    vlTOPp->fx68k__DOT__dcr4 = (1U & ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__Abd) 
+					      >> 4U));
 	}
-    }
-    // ALWAYS at fx68k.sv:250
-    if ((4U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
-	vlTOPp->fx68k__DOT__microAddr = 2U;
-    } else {
-	if (vlTOPp->fx68k__DOT__enT1) {
-	    vlTOPp->fx68k__DOT__microAddr = vlTOPp->fx68k__DOT__nma;
-	}
-    }
-    // ALWAYS at fx68k.sv:250
-    if ((4U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
-	vlTOPp->fx68k__DOT__nanoAddr = 2U;
-    } else {
-	if (vlTOPp->fx68k__DOT__enT1) {
-	    vlTOPp->fx68k__DOT__nanoAddr = (((IData)(vlTOPp->fx68k__DOT__microToNanoAddr__DOT__orgBase) 
-					     << 2U) 
-					    | (3U & (IData)(vlTOPp->fx68k__DOT__nma)));
-	}
-    }
-    vlTOPp->fx68k__DOT__tState = __Vdly__fx68k__DOT__tState;
-    vlTOPp->oHALTEDn = (1U & (~ (IData)(vlTOPp->fx68k__DOT__oHalted)));
-    vlTOPp->oRESETn = (1U & (~ (IData)(vlTOPp->fx68k__DOT__oReset)));
-    // ALWAYS at fx68k.sv:208
-    if ((1U & (~ ((IData)(vlTOPp->fx68k__DOT__Clks) 
-		  >> 2U)))) {
-	if ((1U & (~ (IData)(vlTOPp->fx68k__DOT__Clks)))) {
-	    if ((2U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
-		vlTOPp->fx68k__DOT__BeiDelay = vlTOPp->fx68k__DOT__BeI;
-	    }
-	}
-    }
-    // ALWAYS at fx68k.sv:413
-    if ((8U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
-	vlTOPp->fx68k__DOT__prevNmi = 0U;
-    } else {
-	if ((1U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
-	    vlTOPp->fx68k__DOT__prevNmi = (7U == (IData)(vlTOPp->fx68k__DOT__iIpl));
-	}
-    }
-    // ALWAYS at fx68k.sv:468
-    if ((4U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
-	vlTOPp->E = 0U;
-	__Vdly__fx68k__DOT__eCntr = 0U;
-	vlTOPp->fx68k__DOT__rVma = 1U;
-    }
-    if ((1U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
-	if ((9U == (IData)(vlTOPp->fx68k__DOT__eCntr))) {
-	    vlTOPp->E = 0U;
-	} else {
-	    if ((5U == (IData)(vlTOPp->fx68k__DOT__eCntr))) {
-		vlTOPp->E = 1U;
-	    }
-	}
-	__Vdly__fx68k__DOT__eCntr = (0xfU & ((9U == (IData)(vlTOPp->fx68k__DOT__eCntr))
-					      ? 0U : 
-					     ((IData)(1U) 
-					      + (IData)(vlTOPp->fx68k__DOT__eCntr))));
-    }
-    if (((((IData)(vlTOPp->fx68k__DOT__Clks) & (IData)(vlTOPp->fx68k__DOT__addrOe)) 
-	  & (~ (IData)(vlTOPp->fx68k__DOT__Vpai))) 
-	 & (3U == (IData)(vlTOPp->fx68k__DOT__eCntr)))) {
-	vlTOPp->fx68k__DOT__rVma = 0U;
-    } else {
-	if ((((IData)(vlTOPp->fx68k__DOT__Clks) >> 1U) 
-	     & (0U == (IData)(vlTOPp->fx68k__DOT__eCntr)))) {
-	    vlTOPp->fx68k__DOT__rVma = 1U;
-	}
-    }
-    // ALWAYS at fx68k.sv:492
-    if ((8U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
-	vlTOPp->fx68k__DOT__BerrA = 0U;
-    } else {
-	if ((1U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
-	    if ((((~ (IData)(vlTOPp->fx68k__DOT__BeI)) 
-		  & (7U != (IData)(vlTOPp->fx68k__DOT__rFC))) 
-		 & (IData)(vlTOPp->fx68k__DOT__addrOe))) {
-		vlTOPp->fx68k__DOT__BerrA = 1U;
-	    } else {
-		if (((IData)(vlTOPp->fx68k__DOT__BeI) 
-		     & (2U == vlTOPp->fx68k__DOT__busControl__DOT__busPhase))) {
-		    vlTOPp->fx68k__DOT__BerrA = 0U;
-		}
-	    }
-	}
-    }
-    // ALWAYS at fx68k.sv:593
-    if (((IData)(vlTOPp->fx68k__DOT__enT1) & (IData)(
-						     (vlTOPp->fx68k__DOT__Nanod 
-						      >> 0x21U)))) {
-	vlTOPp->fx68k__DOT__tvnLatch = vlTOPp->fx68k__DOT__tvn;
-    }
-    // ALWAYS at fx68k.sv:593
-    if (((IData)((vlTOPp->fx68k__DOT__Nanod >> 0x1dU)) 
-	 & (IData)(vlTOPp->fx68k__DOT__enT3))) {
-	vlTOPp->fx68k__DOT__ssw = ((0x10U & ((~ (IData)(vlTOPp->fx68k__DOT__busControl__DOT__isWriteReg)) 
-					     << 4U)) 
-				   | (((IData)(vlTOPp->fx68k__DOT__inExcept01) 
-				       << 3U) | (IData)(vlTOPp->fx68k__DOT__rFC)));
-    }
-    vlTOPp->fx68k__DOT__eCntr = __Vdly__fx68k__DOT__eCntr;
-    vlTOPp->VMAn = vlTOPp->fx68k__DOT__rVma;
-    // ALWAYS at fx68k.sv:208
-    if ((1U & (~ ((IData)(vlTOPp->fx68k__DOT__Clks) 
-		  >> 2U)))) {
-	if ((1U & (~ (IData)(vlTOPp->fx68k__DOT__Clks)))) {
-	    if ((2U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
-		vlTOPp->fx68k__DOT__Vpai = vlTOPp->VPAn;
-	    }
-	}
-    }
-    // ALWAYS at fx68k.sv:208
-    if ((4U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
-	vlTOPp->fx68k__DOT__BeI = 0U;
-    } else {
-	if ((1U & (~ (IData)(vlTOPp->fx68k__DOT__Clks)))) {
-	    if ((2U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
-		vlTOPp->fx68k__DOT__BeI = vlTOPp->fx68k__DOT__rBerr;
-	    }
-	}
-    }
-    // ALWAYS at fx68k.sv:593
-    if (((IData)(vlTOPp->fx68k__DOT__enT1) & (IData)(
-						     (vlTOPp->fx68k__DOT__Nanod 
-						      >> 0x21U)))) {
-	vlTOPp->fx68k__DOT__inExcept01 = (1U != (IData)(vlTOPp->fx68k__DOT__tvn));
-    }
-    // ALWAYS at fx68k.sv:391
-    if ((8U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
-	vlTOPp->fx68k__DOT__rFC = 0U;
-    } else {
-	if (((IData)(vlTOPp->fx68k__DOT__enT1) & (IData)(
-							 (vlTOPp->fx68k__DOT__Nanod 
-							  >> 0x37U)))) {
-	    vlTOPp->fx68k__DOT__rFC = ((3U & (IData)(vlTOPp->fx68k__DOT__rFC)) 
-				       | ((IData)(vlTOPp->fx68k__DOT__pswS) 
-					  << 2U));
-	    vlTOPp->fx68k__DOT__rFC = ((5U & (IData)(vlTOPp->fx68k__DOT__rFC)) 
-				       | (2U & ((0x1fffeU 
-						 & (vlTOPp->fx68k__DOT__microLatch 
-						    >> 0xfU)) 
-						| (((~ 
-						     (vlTOPp->fx68k__DOT__microLatch 
-						      >> 0xfU)) 
-						    & (~ (IData)(
-								 (vlTOPp->fx68k__DOT__Irdecod 
-								  >> 0x29U)))) 
-						   << 1U))));
-	    vlTOPp->fx68k__DOT__rFC = ((6U & (IData)(vlTOPp->fx68k__DOT__rFC)) 
-				       | (1U & ((vlTOPp->fx68k__DOT__microLatch 
-						 >> 0xfU) 
-						| ((~ 
-						    (vlTOPp->fx68k__DOT__microLatch 
-						     >> 0x10U)) 
-						   & (IData)(
-							     (vlTOPp->fx68k__DOT__Irdecod 
-							      >> 0x29U))))));
-	}
-    }
-    // ALWAYS at fx68k.sv:208
-    if ((4U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
-	vlTOPp->fx68k__DOT__rBerr = 0U;
-    } else {
-	if ((1U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
-	    vlTOPp->fx68k__DOT__rBerr = vlTOPp->BERRn;
-	}
-    }
-    vlTOPp->FC2 = (1U & ((IData)(vlTOPp->fx68k__DOT__rFC) 
-			 >> 2U));
-    vlTOPp->FC1 = (1U & ((IData)(vlTOPp->fx68k__DOT__rFC) 
-			 >> 1U));
-    vlTOPp->FC0 = (1U & (IData)(vlTOPp->fx68k__DOT__rFC));
-    // ALWAYS at fx68k.sv:549
-    if ((4U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
-	vlTOPp->fx68k__DOT__pswT = 0U;
-	vlTOPp->fx68k__DOT__pswS = 0U;
-	vlTOPp->fx68k__DOT__pswI = 0U;
-    } else {
-	if ((1U & (~ (IData)(vlTOPp->fx68k__DOT__enT4)))) {
-	    if (vlTOPp->fx68k__DOT__enT3) {
-		if ((1U & ((IData)((vlTOPp->fx68k__DOT__Nanod 
-				    >> 0x28U)) & (~ (IData)(vlTOPp->fx68k__DOT__irdToCcr_t4))))) {
-		    vlTOPp->fx68k__DOT__pswT = (1U 
-						& ((IData)(vlTOPp->fx68k__DOT__ftu) 
-						   >> 0xfU));
-		    vlTOPp->fx68k__DOT__pswS = (1U 
-						& ((IData)(vlTOPp->fx68k__DOT__ftu) 
-						   >> 0xdU));
-		    vlTOPp->fx68k__DOT__pswI = (7U 
-						& ((IData)(vlTOPp->fx68k__DOT__ftu) 
-						   >> 8U));
-		} else {
-		    if ((1U & (IData)((vlTOPp->fx68k__DOT__Nanod 
-				       >> 0x22U)))) {
-			vlTOPp->fx68k__DOT__pswS = 1U;
-			vlTOPp->fx68k__DOT__pswT = 0U;
-		    }
-		    if ((1U & (IData)((vlTOPp->fx68k__DOT__Nanod 
-				       >> 0x29U)))) {
-			vlTOPp->fx68k__DOT__pswI = vlTOPp->fx68k__DOT__inl;
-		    }
-		}
-	    }
-	}
-    }
-    // ALWAYS at fx68k.sv:413
-    if ((8U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
-	vlTOPp->fx68k__DOT__inl = 7U;
-    } else {
-	if ((1U & (~ (IData)(vlTOPp->fx68k__DOT__enT4)))) {
-	    if (((IData)(vlTOPp->fx68k__DOT__enT1) 
-		 & (IData)(vlTOPp->fx68k__DOT__updIll))) {
-		vlTOPp->fx68k__DOT__inl = vlTOPp->fx68k__DOT__iIpl;
-	    }
-	}
-    }
-    // ALWAYS at fx68k.sv:549
-    if ((4U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
-	vlTOPp->fx68k__DOT__irdToCcr_t4 = 0U;
-    } else {
-	if (vlTOPp->fx68k__DOT__enT4) {
-	    vlTOPp->fx68k__DOT__irdToCcr_t4 = (1U & (IData)(
-							    (vlTOPp->fx68k__DOT__Irdecod 
-							     >> 0x26U)));
-	}
-    }
-    // ALWAYS at fx68k.sv:208
-    if ((1U & (~ ((IData)(vlTOPp->fx68k__DOT__Clks) 
-		  >> 2U)))) {
-	if ((1U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
-	    vlTOPp->fx68k__DOT__iIpl = vlTOPp->fx68k__DOT__rIpl;
-	}
-    }
-    // ALWAYS at fx68k.sv:413
-    if ((8U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
-	vlTOPp->fx68k__DOT__updIll = 0U;
-    } else {
-	if (vlTOPp->fx68k__DOT__enT4) {
-	    vlTOPp->fx68k__DOT__updIll = (1U & vlTOPp->fx68k__DOT__microLatch);
-	}
-    }
-    vlTOPp->fx68k__DOT__iplComp = ((IData)(vlTOPp->fx68k__DOT__iIpl) 
-				   > (IData)(vlTOPp->fx68k__DOT__pswI));
-    // ALWAYS at fx68k.sv:208
-    if ((1U & (~ ((IData)(vlTOPp->fx68k__DOT__Clks) 
-		  >> 2U)))) {
-	if ((1U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
-	    vlTOPp->fx68k__DOT__rIpl = (7U & (~ (((IData)(vlTOPp->IPL2n) 
-						  << 2U) 
-						 | (((IData)(vlTOPp->IPL1n) 
-						     << 1U) 
-						    | (IData)(vlTOPp->IPL0n)))));
-	}
-    }
-    vlTOPp->fx68k__DOT__iplStable = ((IData)(vlTOPp->fx68k__DOT__iIpl) 
-				     == (IData)(vlTOPp->fx68k__DOT__rIpl));
-}
-
-VL_INLINE_OPT void Vfx68k::_sequent__TOP__9(Vfx68k__Syms* __restrict vlSymsp) {
-    VL_DEBUG_IF(VL_DBG_MSGF("+    Vfx68k::_sequent__TOP__9\n"); );
-    Vfx68k* __restrict vlTOPp VL_ATTR_UNUSED = vlSymsp->TOPp;
-    // Body
-    // ALWAYS at fx68k.sv:2424
-    if ((4U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
-	vlTOPp->fx68k__DOT__busControl__DOT__wendReg = 0U;
-    } else {
-	if (((IData)(vlTOPp->fx68k__DOT__Clks) & ((5U 
-						   == vlTOPp->fx68k__DOT__busControl__DOT__busPhase) 
-						  | (IData)(vlTOPp->fx68k__DOT__busControl__DOT__bcReset)))) {
-	    vlTOPp->fx68k__DOT__busControl__DOT__wendReg = 0U;
-	} else {
-	    if (vlTOPp->fx68k__DOT__enT1) {
-		vlTOPp->fx68k__DOT__busControl__DOT__wendReg 
-		    = (1U & (IData)((vlTOPp->fx68k__DOT__Nanod 
-				     >> 0x36U)));
-	    }
-	}
-    }
-    // ALWAYS at fx68k.sv:2424
-    if ((4U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
-	vlTOPp->fx68k__DOT__busControl__DOT__bcPend = 0U;
-    } else {
-	if (((IData)(vlTOPp->fx68k__DOT__Clks) & ((5U 
-						   == vlTOPp->fx68k__DOT__busControl__DOT__busPhase) 
-						  | (IData)(vlTOPp->fx68k__DOT__busControl__DOT__bcReset)))) {
-	    vlTOPp->fx68k__DOT__busControl__DOT__bcPend = 0U;
-	} else {
-	    if (((IData)(vlTOPp->fx68k__DOT__enT1) 
-		 & (IData)((vlTOPp->fx68k__DOT__Nanod 
-			    >> 0x37U)))) {
-		vlTOPp->fx68k__DOT__busControl__DOT__bcPend = 1U;
-	    }
-	}
-    }
-    // ALWAYS at fx68k.sv:2344
-    if ((8U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
-	vlTOPp->fx68k__DOT__busControl__DOT__rRWn = 1U;
-    } else {
-	if ((((IData)(vlTOPp->fx68k__DOT__Clks) >> 1U) 
-	     & (IData)(vlTOPp->fx68k__DOT__busControl__DOT__busEnding))) {
-	    vlTOPp->fx68k__DOT__busControl__DOT__rRWn = 1U;
-	} else {
-	    if ((((IData)(vlTOPp->fx68k__DOT__Clks) 
-		  >> 1U) & (IData)(vlTOPp->fx68k__DOT__busControl__DOT__isWriteReg))) {
-		if (((2U == vlTOPp->fx68k__DOT__busControl__DOT__busPhase) 
-		     & (IData)(vlTOPp->fx68k__DOT__busControl__DOT__isWriteReg))) {
-		    vlTOPp->fx68k__DOT__busControl__DOT__rRWn = 0U;
-		}
-	    }
-	}
-    }
-    // ALWAYS at fx68k.sv:2344
-    if ((8U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
-	vlTOPp->fx68k__DOT__busControl__DOT__rAS = 1U;
-    } else {
-	if ((((IData)(vlTOPp->fx68k__DOT__Clks) >> 1U) 
-	     & (2U == vlTOPp->fx68k__DOT__busControl__DOT__busPhase))) {
-	    vlTOPp->fx68k__DOT__busControl__DOT__rAS = 0U;
-	} else {
-	    if (((IData)(vlTOPp->fx68k__DOT__Clks) 
-		 & (6U == vlTOPp->fx68k__DOT__busControl__DOT__busPhase))) {
-		vlTOPp->fx68k__DOT__busControl__DOT__rAS = 1U;
-	    } else {
-		if ((0U != (1U & ((IData)(vlTOPp->fx68k__DOT__Clks) 
-				  & (5U == vlTOPp->fx68k__DOT__busControl__DOT__busPhase))))) {
-		    if ((1U & (~ (IData)(vlTOPp->fx68k__DOT__busControl__DOT__isRmcReg)))) {
-			vlTOPp->fx68k__DOT__busControl__DOT__rAS = 1U;
-		    }
-		}
-	    }
-	}
-    }
-    // ALWAYS at fx68k.sv:2344
-    if ((2U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
-	vlTOPp->fx68k__DOT__busControl__DOT__addrOeDelay 
-	    = vlTOPp->fx68k__DOT__addrOe;
     }
     // ALWAYS at fx68k.sv:2344
     if ((8U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
@@ -15658,350 +15307,6 @@ VL_INLINE_OPT void Vfx68k::_sequent__TOP__9(Vfx68k__Syms* __restrict vlSymsp) {
 	    }
 	}
     }
-    vlTOPp->eRWn = vlTOPp->fx68k__DOT__busControl__DOT__rRWn;
-    vlTOPp->ASn = vlTOPp->fx68k__DOT__busControl__DOT__rAS;
-    // ALWAYS at fx68k.sv:2344
-    if ((8U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
-	vlTOPp->fx68k__DOT__addrOe = 0U;
-    } else {
-	if (((IData)(vlTOPp->fx68k__DOT__Clks) & (2U 
-						  == vlTOPp->fx68k__DOT__busControl__DOT__busPhase))) {
-	    vlTOPp->fx68k__DOT__addrOe = 1U;
-	} else {
-	    if ((((IData)(vlTOPp->fx68k__DOT__Clks) 
-		  >> 1U) & (6U == vlTOPp->fx68k__DOT__busControl__DOT__busPhase))) {
-		vlTOPp->fx68k__DOT__addrOe = 0U;
-	    } else {
-		if (((((IData)(vlTOPp->fx68k__DOT__Clks) 
-		       >> 1U) & (~ (IData)(vlTOPp->fx68k__DOT__busControl__DOT__isRmcReg))) 
-		     & (IData)(vlTOPp->fx68k__DOT__busControl__DOT__busEnding))) {
-		    vlTOPp->fx68k__DOT__addrOe = 0U;
-		}
-	    }
-	}
-    }
-    vlTOPp->UDSn = vlTOPp->fx68k__DOT__busControl__DOT__rUDS;
-    vlTOPp->LDSn = vlTOPp->fx68k__DOT__busControl__DOT__rLDS;
-    // ALWAYS at fx68k.sv:2424
-    if ((4U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
-	vlTOPp->fx68k__DOT__busControl__DOT__bciByte = 0U;
-    } else {
-	if ((1U & (~ ((IData)(vlTOPp->fx68k__DOT__Clks) 
-		      & ((5U == vlTOPp->fx68k__DOT__busControl__DOT__busPhase) 
-			 | (IData)(vlTOPp->fx68k__DOT__busControl__DOT__bcReset)))))) {
-	    if (((IData)(vlTOPp->fx68k__DOT__enT1) 
-		 & (IData)((vlTOPp->fx68k__DOT__Nanod 
-			    >> 0x37U)))) {
-		vlTOPp->fx68k__DOT__busControl__DOT__bciByte 
-		    = vlTOPp->fx68k__DOT__busControl__DOT__isByteT4;
-	    }
-	}
-    }
-    // ALWAYS at fx68k.sv:2424
-    if ((4U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
-	vlTOPp->fx68k__DOT__busControl__DOT__isWriteReg = 0U;
-    } else {
-	if ((1U & (~ ((IData)(vlTOPp->fx68k__DOT__Clks) 
-		      & ((5U == vlTOPp->fx68k__DOT__busControl__DOT__busPhase) 
-			 | (IData)(vlTOPp->fx68k__DOT__busControl__DOT__bcReset)))))) {
-	    if (((IData)(vlTOPp->fx68k__DOT__enT1) 
-		 & (IData)((vlTOPp->fx68k__DOT__Nanod 
-			    >> 0x37U)))) {
-		vlTOPp->fx68k__DOT__busControl__DOT__isWriteReg 
-		    = (1U & (IData)((vlTOPp->fx68k__DOT__Nanod 
-				     >> 0x35U)));
-	    }
-	}
-    }
-    // ALWAYS at fx68k.sv:2424
-    if ((4U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
-	vlTOPp->fx68k__DOT__busControl__DOT__isRmcReg = 0U;
-    } else {
-	if ((1U & (~ ((IData)(vlTOPp->fx68k__DOT__Clks) 
-		      & ((5U == vlTOPp->fx68k__DOT__busControl__DOT__busPhase) 
-			 | (IData)(vlTOPp->fx68k__DOT__busControl__DOT__bcReset)))))) {
-	    if (((IData)(vlTOPp->fx68k__DOT__enT1) 
-		 & (IData)((vlTOPp->fx68k__DOT__Nanod 
-			    >> 0x37U)))) {
-		vlTOPp->fx68k__DOT__busControl__DOT__isRmcReg 
-		    = (1U & ((IData)(vlTOPp->fx68k__DOT__Nanod2) 
-			     & (~ (IData)((vlTOPp->fx68k__DOT__Nanod 
-					   >> 0x35U)))));
-	    }
-	}
-    }
-    // ALWAYS at fx68k.sv:2417
-    if (vlTOPp->fx68k__DOT__enT4) {
-	vlTOPp->fx68k__DOT__busControl__DOT__isByteT4 
-	    = (1U & ((IData)((vlTOPp->fx68k__DOT__Nanod 
-			      >> 0x34U)) & ((IData)(
-						    (vlTOPp->fx68k__DOT__Irdecod 
-						     >> 0x20U)) 
-					    | (IData)(
-						      (vlTOPp->fx68k__DOT__Irdecod 
-						       >> 0x1fU)))));
-    }
-    // ALWAYS at fx68k.sv:2295
-    if ((8U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
-	vlTOPp->fx68k__DOT__busControl__DOT__busPhase = 0U;
-    } else {
-	if ((2U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
-	    vlTOPp->fx68k__DOT__busControl__DOT__busPhase 
-		= vlTOPp->fx68k__DOT__busControl__DOT__next;
-	}
-    }
-    vlTOPp->fx68k__DOT__bgBlock = (((2U == vlTOPp->fx68k__DOT__busControl__DOT__busPhase) 
-				    & (IData)(vlTOPp->ASn)) 
-				   | (6U == vlTOPp->fx68k__DOT__busControl__DOT__busPhase));
-}
-
-VL_INLINE_OPT void Vfx68k::_sequent__TOP__10(Vfx68k__Syms* __restrict vlSymsp) {
-    VL_DEBUG_IF(VL_DBG_MSGF("+    Vfx68k::_sequent__TOP__10\n"); );
-    Vfx68k* __restrict vlTOPp VL_ATTR_UNUSED = vlSymsp->TOPp;
-    // Variables
-    // Begin mtask footprint  all: 
-    VL_SIG8(__Vdlyvdim0__fx68k__DOT__excUnit__DOT__regs68L__v0,4,0);
-    VL_SIG8(__Vdlyvset__fx68k__DOT__excUnit__DOT__regs68L__v0,0,0);
-    VL_SIG8(__Vdlyvdim0__fx68k__DOT__excUnit__DOT__regs68L__v1,4,0);
-    VL_SIG8(__Vdlyvset__fx68k__DOT__excUnit__DOT__regs68L__v1,0,0);
-    VL_SIG8(__Vdlyvdim0__fx68k__DOT__excUnit__DOT__regs68L__v2,4,0);
-    VL_SIG8(__Vdlyvlsb__fx68k__DOT__excUnit__DOT__regs68L__v2,3,0);
-    VL_SIG8(__Vdlyvval__fx68k__DOT__excUnit__DOT__regs68L__v2,7,0);
-    VL_SIG8(__Vdlyvset__fx68k__DOT__excUnit__DOT__regs68L__v2,0,0);
-    VL_SIG8(__Vdlyvdim0__fx68k__DOT__excUnit__DOT__regs68L__v3,4,0);
-    VL_SIG8(__Vdlyvset__fx68k__DOT__excUnit__DOT__regs68L__v3,0,0);
-    VL_SIG8(__Vdlyvdim0__fx68k__DOT__excUnit__DOT__regs68L__v4,4,0);
-    VL_SIG8(__Vdlyvset__fx68k__DOT__excUnit__DOT__regs68L__v4,0,0);
-    VL_SIG8(__Vdlyvdim0__fx68k__DOT__excUnit__DOT__regs68L__v5,4,0);
-    VL_SIG8(__Vdlyvset__fx68k__DOT__excUnit__DOT__regs68L__v5,0,0);
-    VL_SIG8(__Vdlyvdim0__fx68k__DOT__excUnit__DOT__regs68L__v6,4,0);
-    VL_SIG8(__Vdlyvlsb__fx68k__DOT__excUnit__DOT__regs68L__v6,3,0);
-    VL_SIG8(__Vdlyvval__fx68k__DOT__excUnit__DOT__regs68L__v6,7,0);
-    VL_SIG8(__Vdlyvset__fx68k__DOT__excUnit__DOT__regs68L__v6,0,0);
-    VL_SIG8(__Vdlyvdim0__fx68k__DOT__excUnit__DOT__regs68L__v7,4,0);
-    VL_SIG8(__Vdlyvset__fx68k__DOT__excUnit__DOT__regs68L__v7,0,0);
-    VL_SIG8(__Vdlyvdim0__fx68k__DOT__excUnit__DOT__regs68H__v0,4,0);
-    VL_SIG8(__Vdlyvset__fx68k__DOT__excUnit__DOT__regs68H__v0,0,0);
-    VL_SIG8(__Vdlyvdim0__fx68k__DOT__excUnit__DOT__regs68H__v1,4,0);
-    VL_SIG8(__Vdlyvset__fx68k__DOT__excUnit__DOT__regs68H__v1,0,0);
-    VL_SIG16(__Vdly__fx68k__DOT__excUnit__DOT__Dbd,15,0);
-    VL_SIG16(__Vdlyvval__fx68k__DOT__excUnit__DOT__regs68L__v0,15,0);
-    VL_SIG16(__Vdlyvval__fx68k__DOT__excUnit__DOT__regs68L__v1,15,0);
-    VL_SIG16(__Vdlyvval__fx68k__DOT__excUnit__DOT__regs68L__v3,15,0);
-    VL_SIG16(__Vdlyvval__fx68k__DOT__excUnit__DOT__regs68L__v4,15,0);
-    VL_SIG16(__Vdlyvval__fx68k__DOT__excUnit__DOT__regs68L__v5,15,0);
-    VL_SIG16(__Vdlyvval__fx68k__DOT__excUnit__DOT__regs68L__v7,15,0);
-    VL_SIG16(__Vdlyvval__fx68k__DOT__excUnit__DOT__regs68H__v0,15,0);
-    VL_SIG16(__Vdlyvval__fx68k__DOT__excUnit__DOT__regs68H__v1,15,0);
-    // Body
-    __Vdly__fx68k__DOT__excUnit__DOT__Dbd = vlTOPp->fx68k__DOT__excUnit__DOT__Dbd;
-    __Vdlyvset__fx68k__DOT__excUnit__DOT__regs68H__v0 = 0U;
-    __Vdlyvset__fx68k__DOT__excUnit__DOT__regs68H__v1 = 0U;
-    __Vdlyvset__fx68k__DOT__excUnit__DOT__regs68L__v0 = 0U;
-    __Vdlyvset__fx68k__DOT__excUnit__DOT__regs68L__v1 = 0U;
-    __Vdlyvset__fx68k__DOT__excUnit__DOT__regs68L__v2 = 0U;
-    __Vdlyvset__fx68k__DOT__excUnit__DOT__regs68L__v3 = 0U;
-    __Vdlyvset__fx68k__DOT__excUnit__DOT__regs68L__v4 = 0U;
-    __Vdlyvset__fx68k__DOT__excUnit__DOT__regs68L__v5 = 0U;
-    __Vdlyvset__fx68k__DOT__excUnit__DOT__regs68L__v6 = 0U;
-    __Vdlyvset__fx68k__DOT__excUnit__DOT__regs68L__v7 = 0U;
-    // ALWAYS at fx68kAlu.sv:123
-    if (vlTOPp->fx68k__DOT__enT4) {
-	vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__ccrMask 
-	    = vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__cMask;
-    }
-    // ALWAYS at fx68kAlu.sv:178
-    if (vlTOPp->fx68k__DOT__enT1) {
-	vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__bcdOverf 
-	    = vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__bcdV;
-    }
-    // ALWAYS at fx68kAlu.sv:178
-    if (vlTOPp->fx68k__DOT__enT1) {
-	vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__bcdLatch 
-	    = ((0xf0U & ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__hNib) 
-			 << 4U)) | (0xfU & (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__htemp)));
-    }
-    // ALWAYS at fx68kAlu.sv:123
-    if (vlTOPp->fx68k__DOT__enT4) {
-	vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__oper 
-	    = vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluOp;
-    }
-    // ALWAYS at fx68kAlu.sv:123
-    if (vlTOPp->fx68k__DOT__enT3) {
-	vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__isByte 
-	    = (1U & (IData)((vlTOPp->fx68k__DOT__Irdecod 
-			     >> 0x20U)));
-    }
-    // ALWAYS at fx68k.sv:1543
-    if ((8U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
-	vlTOPp->fx68k__DOT__excUnit__DOT__Pch2Dbh = 0U;
-    } else {
-	if (vlTOPp->fx68k__DOT__enT4) {
-	    vlTOPp->fx68k__DOT__excUnit__DOT__Pch2Dbh 
-		= (1U & ((IData)((vlTOPp->fx68k__DOT__Nanod 
-				  >> 0x15U)) & (IData)(
-						       (vlTOPp->fx68k__DOT__Nanod 
-							>> 0x13U))));
-	}
-    }
-    // ALWAYS at fx68k.sv:1543
-    if ((8U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
-	vlTOPp->fx68k__DOT__excUnit__DOT__Pch2Abh = 0U;
-    } else {
-	if (vlTOPp->fx68k__DOT__enT4) {
-	    vlTOPp->fx68k__DOT__excUnit__DOT__Pch2Abh 
-		= (1U & ((IData)((vlTOPp->fx68k__DOT__Nanod 
-				  >> 0x19U)) & (IData)(
-						       (vlTOPp->fx68k__DOT__Nanod 
-							>> 0x10U))));
-	}
-    }
-    // ALWAYS at fx68k.sv:1543
-    if ((8U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
-	vlTOPp->fx68k__DOT__excUnit__DOT__Pcl2Dbl = 0U;
-    } else {
-	if (vlTOPp->fx68k__DOT__enT4) {
-	    vlTOPp->fx68k__DOT__excUnit__DOT__Pcl2Dbl 
-		= (1U & ((IData)((vlTOPp->fx68k__DOT__Nanod 
-				  >> 0x16U)) & (IData)(
-						       (vlTOPp->fx68k__DOT__Nanod 
-							>> 0x12U))));
-	}
-    }
-    // ALWAYS at fx68k.sv:1543
-    if ((8U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
-	vlTOPp->fx68k__DOT__excUnit__DOT__Pcl2Abl = 0U;
-    } else {
-	if (vlTOPp->fx68k__DOT__enT4) {
-	    vlTOPp->fx68k__DOT__excUnit__DOT__Pcl2Abl 
-		= (1U & ((IData)((vlTOPp->fx68k__DOT__Nanod 
-				  >> 0x1aU)) & (IData)(
-						       (vlTOPp->fx68k__DOT__Nanod 
-							>> 0x11U))));
-	}
-    }
-    // ALWAYS at fx68kAlu.sv:420
-    if (vlTOPp->fx68k__DOT__enT3) {
-	if ((0U != (7U & (IData)((vlTOPp->fx68k__DOT__Nanod 
-				  >> 0xbU))))) {
-	    vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__coreH 
-		= vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__subHcarry;
-	}
-    }
-    // ALWAYS at fx68kAlu.sv:420
-    if (vlTOPp->fx68k__DOT__enT3) {
-	if ((0U != (7U & (IData)((vlTOPp->fx68k__DOT__Nanod 
-				  >> 0xbU))))) {
-	    if ((0U != (7U & (IData)((vlTOPp->fx68k__DOT__Nanod 
-				      >> 0xbU))))) {
-		vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__ccrCore 
-		    = vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__ccrTemp;
-	    }
-	}
-    }
-    // ALWAYS at fx68k.sv:1285
-    if (vlTOPp->fx68k__DOT__enT4) {
-	vlTOPp->fx68k__DOT__excUnit__DOT__byteNotSpAlign 
-	    = (1U & ((IData)((vlTOPp->fx68k__DOT__Irdecod 
-			      >> 0x20U)) & (~ ((1U 
-						& (IData)(
-							  (vlTOPp->fx68k__DOT__Nanod 
-							   >> 0xeU)))
-					        ? (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__rxIsSp)
-					        : (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__ryIsSp)))));
-    }
-    // ALWAYS at fx68k.sv:1612
-    if ((1U & (~ ((IData)(vlTOPp->fx68k__DOT__enT1) 
-		  & (IData)((vlTOPp->fx68k__DOT__Nanod 
-			     >> 0x2bU)))))) {
-	if (((IData)(vlTOPp->fx68k__DOT__enT3) & (IData)(
-							 (vlTOPp->fx68k__DOT__Nanod 
-							  >> 0x2aU)))) {
-	    vlTOPp->fx68k__DOT__excUnit__DOT__movemRx 
-		= (0xfU & ((1U & (IData)((vlTOPp->fx68k__DOT__Irdecod 
-					  >> 0x21U)))
-			    ? (~ (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__prHbit))
-			    : (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__prHbit)));
-	}
-    }
-    // ALWAYS at fx68kAlu.sv:123
-    if (vlTOPp->fx68k__DOT__enT3) {
-	vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__isArX 
-	    = ((((4U == (0xfU & ((IData)(vlTOPp->fx68k__DOT__Ird) 
-				 >> 0xcU))) | (9U == 
-					       (0xfU 
-						& ((IData)(vlTOPp->fx68k__DOT__Ird) 
-						   >> 0xcU)))) 
-		| (0xdU == (0xfU & ((IData)(vlTOPp->fx68k__DOT__Ird) 
-				    >> 0xcU)))) & (
-						   ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__cRow) 
-						    >> 0xaU) 
-						   | ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__cRow) 
-						      >> 0xcU)));
-    }
-    // ALWAYS at fx68kAlu.sv:123
-    if (vlTOPp->fx68k__DOT__enT3) {
-	vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__rIrd8 
-	    = (1U & ((IData)(vlTOPp->fx68k__DOT__Ird) 
-		     >> 8U));
-    }
-    // ALWAYS at fx68kAlu.sv:123
-    if (vlTOPp->fx68k__DOT__enT4) {
-	vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__isLong 
-	    = (1U & (((((IData)(vlTOPp->fx68k__DOT__Ird) 
-			>> 7U) & (~ ((IData)(vlTOPp->fx68k__DOT__Ird) 
-				     >> 6U))) | ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__row) 
-						 >> 7U)) 
-		     | ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__row) 
-			>> 1U)));
-    }
-    // ALWAYS at fx68k.sv:1612
-    if (((IData)(vlTOPp->fx68k__DOT__enT1) & (IData)(
-						     (vlTOPp->fx68k__DOT__Nanod 
-						      >> 0x2bU)))) {
-	vlTOPp->fx68k__DOT__excUnit__DOT__prenLatch 
-	    = vlTOPp->fx68k__DOT__excUnit__DOT__dbin;
-    } else {
-	if (((IData)(vlTOPp->fx68k__DOT__enT3) & (IData)(
-							 (vlTOPp->fx68k__DOT__Nanod 
-							  >> 0x2aU)))) {
-	    vlTOPp->fx68k__DOT__excUnit__DOT__prenLatch 
-		= ((~ ((IData)(1U) << (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__prHbit))) 
-		   & (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__prenLatch));
-	}
-    }
-    // ALWAYS at fx68kAlu.sv:178
-    if (vlTOPp->fx68k__DOT__enT1) {
-	vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__bcdCarry 
-	    = (1U & (((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__hNib) 
-		      | (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__pswCcr)) 
-		     >> 4U));
-    }
-    // ALWAYS at fx68k.sv:1629
-    if ((4U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
-	vlTOPp->fx68k__DOT__dcr4 = 0U;
-    } else {
-	if (((IData)(vlTOPp->fx68k__DOT__enT3) & (IData)(
-							 (vlTOPp->fx68k__DOT__Nanod2 
-							  >> 0x18U)))) {
-	    vlTOPp->fx68k__DOT__dcr4 = (1U & ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__Abd) 
-					      >> 4U));
-	}
-    }
-    // ALWAYS at fx68k.sv:1641
-    if (vlTOPp->fx68k__DOT__enT3) {
-	if ((1U & (IData)((vlTOPp->fx68k__DOT__Nanod2 
-			   >> 0x14U)))) {
-	    vlTOPp->fx68k__DOT__excUnit__DOT__alub 
-		= vlTOPp->fx68k__DOT__excUnit__DOT__Dbd;
-	} else {
-	    if ((1U & (IData)((vlTOPp->fx68k__DOT__Nanod2 
-			       >> 0x13U)))) {
-		vlTOPp->fx68k__DOT__excUnit__DOT__alub 
-		    = vlTOPp->fx68k__DOT__excUnit__DOT__Abd;
-	    }
-	}
-    }
     // ALWAYS at fx68k.sv:1543
     if (vlTOPp->fx68k__DOT__enT3) {
 	if ((1U & (IData)((vlTOPp->fx68k__DOT__Nanod2 
@@ -16028,36 +15333,33 @@ VL_INLINE_OPT void Vfx68k::_sequent__TOP__10(Vfx68k__Syms* __restrict vlSymsp) {
 	    }
 	}
     }
-    // ALWAYS at fx68k.sv:1448
-    if (((IData)(vlTOPp->fx68k__DOT__enT1) & ((IData)(
-						      (vlTOPp->fx68k__DOT__Nanod 
-						       >> 0x1eU)) 
-					      | ((IData)(
-							 (vlTOPp->fx68k__DOT__Nanod 
-							  >> 5U)) 
-						 & (IData)(
-							   (vlTOPp->fx68k__DOT__Nanod 
-							    >> 0x20U)))))) {
-	vlTOPp->fx68k__DOT__excUnit__DOT__aob = vlTOPp->fx68k__DOT__excUnit__DOT__auReg;
-    } else {
-	if (vlTOPp->fx68k__DOT__enT2) {
-	    if ((1U & (IData)((vlTOPp->fx68k__DOT__Nanod 
-			       >> 0x20U)))) {
-		vlTOPp->fx68k__DOT__excUnit__DOT__aob 
-		    = (((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__preDbh) 
-			<< 0x10U) | ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__dblIdle)
-				      ? (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__preDbd)
-				      : (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__preDbl)));
-	    } else {
-		if ((1U & (IData)((vlTOPp->fx68k__DOT__Nanod 
-				   >> 0x1fU)))) {
-		    vlTOPp->fx68k__DOT__excUnit__DOT__aob 
-			= (((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__preAbh) 
-			    << 0x10U) | ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__ablIdle)
-					  ? (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__preAbd)
-					  : (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__preAbl)));
-		}
+    // ALWAYS at fx68k.sv:1641
+    if (vlTOPp->fx68k__DOT__enT3) {
+	if ((1U & (IData)((vlTOPp->fx68k__DOT__Nanod2 
+			   >> 0x14U)))) {
+	    vlTOPp->fx68k__DOT__excUnit__DOT__alub 
+		= vlTOPp->fx68k__DOT__excUnit__DOT__Dbd;
+	} else {
+	    if ((1U & (IData)((vlTOPp->fx68k__DOT__Nanod2 
+			       >> 0x13U)))) {
+		vlTOPp->fx68k__DOT__excUnit__DOT__alub 
+		    = vlTOPp->fx68k__DOT__excUnit__DOT__Abd;
 	    }
+	}
+    }
+    // ALWAYS at fx68k.sv:1612
+    if (((IData)(vlTOPp->fx68k__DOT__enT1) & (IData)(
+						     (vlTOPp->fx68k__DOT__Nanod 
+						      >> 0x2bU)))) {
+	vlTOPp->fx68k__DOT__excUnit__DOT__prenLatch 
+	    = vlTOPp->fx68k__DOT__excUnit__DOT__dbin;
+    } else {
+	if (((IData)(vlTOPp->fx68k__DOT__enT3) & (IData)(
+							 (vlTOPp->fx68k__DOT__Nanod 
+							  >> 0x2aU)))) {
+	    vlTOPp->fx68k__DOT__excUnit__DOT__prenLatch 
+		= ((~ ((IData)(1U) << (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__prHbit))) 
+		   & (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__prenLatch));
 	}
     }
     // ALWAYS at fx68k.sv:1543
@@ -16099,6 +15401,108 @@ VL_INLINE_OPT void Vfx68k::_sequent__TOP__10(Vfx68k__Syms* __restrict vlSymsp) {
 	    }
 	}
     }
+    // ALWAYS at fx68k.sv:1388
+    if (vlTOPp->fx68k__DOT__enT1) {
+	__Vdly__fx68k__DOT__excUnit__DOT__preAbd = 
+	    ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__ryl2Abd)
+	      ? ((0x11U >= (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__actualRy))
+		  ? vlTOPp->fx68k__DOT__excUnit__DOT__regs68L
+		 [vlTOPp->fx68k__DOT__excUnit__DOT__actualRy]
+		  : 0U) : ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__rxl2Abd)
+			    ? ((0x11U >= (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__actualRx))
+			        ? vlTOPp->fx68k__DOT__excUnit__DOT__regs68L
+			       [vlTOPp->fx68k__DOT__excUnit__DOT__actualRx]
+			        : 0U) : ((1U & (IData)(
+						       (vlTOPp->fx68k__DOT__Nanod 
+							>> 2U)))
+					  ? (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__dbin)
+					  : ((1U & (IData)(
+							   (vlTOPp->fx68k__DOT__Nanod2 
+							    >> 0x19U)))
+					      ? (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluLatch)
+					      : 0U))));
+    }
+    // ALWAYS at fx68k.sv:593
+    if ((4U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
+	__Vdly__fx68k__DOT__ftu = 0U;
+    } else {
+	if (vlTOPp->fx68k__DOT__enT3) {
+	    if ((1U & (IData)((vlTOPp->fx68k__DOT__Nanod 
+			       >> 0x2fU)))) {
+		__Vdly__fx68k__DOT__ftu = ((IData)(vlTOPp->fx68k__DOT__inExcept01)
+					    ? ((0xcU 
+						== (IData)(vlTOPp->fx68k__DOT__tvnLatch))
+					        ? 0x60U
+					        : (
+						   (0xdU 
+						    == (IData)(vlTOPp->fx68k__DOT__tvnLatch))
+						    ? 
+						   (0x60U 
+						    | ((IData)(vlTOPp->fx68k__DOT__pswI) 
+						       << 2U))
+						    : 
+						   ((0xfU 
+						     == (IData)(vlTOPp->fx68k__DOT__tvnLatch))
+						     ? 
+						    (0x3fcU 
+						     & ((IData)(vlTOPp->fx68k__DOT__Ird) 
+							<< 2U))
+						     : 
+						    ((IData)(vlTOPp->fx68k__DOT__tvnLatch) 
+						     << 2U))))
+					    : (0xfcU 
+					       & ((IData)(
+							  (vlTOPp->fx68k__DOT__Irdecod 
+							   >> 1U)) 
+						  << 2U)));
+	    } else {
+		if ((1U & (IData)((vlTOPp->fx68k__DOT__Nanod 
+				   >> 0x27U)))) {
+		    __Vdly__fx68k__DOT__ftu = (((IData)(vlTOPp->fx68k__DOT__pswT) 
+						<< 0xfU) 
+					       | (((IData)(vlTOPp->fx68k__DOT__pswS) 
+						   << 0xdU) 
+						  | (((IData)(vlTOPp->fx68k__DOT__pswI) 
+						      << 8U) 
+						     | (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__pswCcr))));
+		} else {
+		    if ((1U & (IData)((vlTOPp->fx68k__DOT__Nanod 
+				       >> 0x24U)))) {
+			__Vdly__fx68k__DOT__ftu = vlTOPp->fx68k__DOT__Ird;
+		    } else {
+			if ((1U & (IData)((vlTOPp->fx68k__DOT__Nanod 
+					   >> 0x23U)))) {
+			    __Vdly__fx68k__DOT__ftu 
+				= ((0xffe0U & (IData)(__Vdly__fx68k__DOT__ftu)) 
+				   | (IData)(vlTOPp->fx68k__DOT__ssw));
+			} else {
+			    __Vdly__fx68k__DOT__ftu 
+				= (0xffffU & ((1U & (IData)(
+							    (vlTOPp->fx68k__DOT__Nanod 
+							     >> 0x25U)))
+					       ? (0xfff0U 
+						  | ((IData)(vlTOPp->fx68k__DOT__pswI) 
+						     << 1U))
+					       : ((1U 
+						   & (IData)(
+							     (vlTOPp->fx68k__DOT__Nanod 
+							      >> 0x2eU)))
+						   ? (IData)(
+							     (vlTOPp->fx68k__DOT__Irdecod 
+							      >> 7U))
+						   : 
+						  ((1U 
+						    & (IData)(
+							      (vlTOPp->fx68k__DOT__Nanod 
+							       >> 0x2bU)))
+						    ? (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__Abl)
+						    : (IData)(vlTOPp->fx68k__DOT__ftu)))));
+			}
+		    }
+		}
+	    }
+	}
+    }
     // ALWAYS at fx68k.sv:1509
     if (vlTOPp->fx68k__DOT__enT3) {
 	if ((1U & ((IData)((vlTOPp->fx68k__DOT__Nanod2 
@@ -16131,6 +15535,38 @@ VL_INLINE_OPT void Vfx68k::_sequent__TOP__10(Vfx68k__Syms* __restrict vlSymsp) {
 		    = vlTOPp->fx68k__DOT__excUnit__DOT__actualRy;
 	    }
 	}
+    }
+    // ALWAYS at fx68k.sv:1388
+    if (vlTOPp->fx68k__DOT__enT1) {
+	__Vdly__fx68k__DOT__excUnit__DOT__preDbd = 
+	    ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__ryl2Dbd)
+	      ? ((0x11U >= (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__actualRy))
+		  ? vlTOPp->fx68k__DOT__excUnit__DOT__regs68L
+		 [vlTOPp->fx68k__DOT__excUnit__DOT__actualRy]
+		  : 0U) : ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__rxl2Dbd)
+			    ? ((0x11U >= (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__actualRx))
+			        ? vlTOPp->fx68k__DOT__excUnit__DOT__regs68L
+			       [vlTOPp->fx68k__DOT__excUnit__DOT__actualRx]
+			        : 0U) : ((1U & (IData)(
+						       (vlTOPp->fx68k__DOT__Nanod2 
+							>> 0x15U)))
+					  ? (IData)(vlTOPp->fx68k__DOT__alue)
+					  : ((1U & (IData)(
+							   (vlTOPp->fx68k__DOT__Nanod 
+							    >> 1U)))
+					      ? (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__dbin)
+					      : ((1U 
+						  & (IData)(
+							    (vlTOPp->fx68k__DOT__Nanod2 
+							     >> 0x1aU)))
+						  ? (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluLatch)
+						  : 
+						 ((1U 
+						   & (IData)(
+							     (vlTOPp->fx68k__DOT__Nanod2 
+							      >> 0x17U)))
+						   ? (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__dcrOutput)
+						   : 0U))))));
     }
     // ALWAYS at fx68k.sv:1509
     if (vlTOPp->fx68k__DOT__enT3) {
@@ -16241,6 +15677,25 @@ VL_INLINE_OPT void Vfx68k::_sequent__TOP__10(Vfx68k__Syms* __restrict vlSymsp) {
 	    }
 	}
     }
+    vlTOPp->fx68k__DOT__tState = __Vdly__fx68k__DOT__tState;
+    // ALWAYS at fx68k.sv:250
+    if ((4U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
+	vlTOPp->fx68k__DOT__microAddr = 2U;
+    } else {
+	if (vlTOPp->fx68k__DOT__enT1) {
+	    vlTOPp->fx68k__DOT__microAddr = vlTOPp->fx68k__DOT__nma;
+	}
+    }
+    // ALWAYS at fx68k.sv:250
+    if ((4U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
+	vlTOPp->fx68k__DOT__nanoAddr = 2U;
+    } else {
+	if (vlTOPp->fx68k__DOT__enT1) {
+	    vlTOPp->fx68k__DOT__nanoAddr = (((IData)(vlTOPp->fx68k__DOT__microToNanoAddr__DOT__orgBase) 
+					     << 2U) 
+					    | (3U & (IData)(vlTOPp->fx68k__DOT__nma)));
+	}
+    }
     // ALWAYSPOST at fx68k.sv:1533
     if (__Vdlyvset__fx68k__DOT__excUnit__DOT__regs68H__v0) {
 	vlTOPp->fx68k__DOT__excUnit__DOT__regs68H[__Vdlyvdim0__fx68k__DOT__excUnit__DOT__regs68H__v0] 
@@ -16249,6 +15704,59 @@ VL_INLINE_OPT void Vfx68k::_sequent__TOP__10(Vfx68k__Syms* __restrict vlSymsp) {
     if (__Vdlyvset__fx68k__DOT__excUnit__DOT__regs68H__v1) {
 	vlTOPp->fx68k__DOT__excUnit__DOT__regs68H[__Vdlyvdim0__fx68k__DOT__excUnit__DOT__regs68H__v1] 
 	    = __Vdlyvval__fx68k__DOT__excUnit__DOT__regs68H__v1;
+    }
+    // ALWAYSPOST at fx68k.sv:1518
+    if (__Vdlyvset__fx68k__DOT__excUnit__DOT__regs68L__v0) {
+	vlTOPp->fx68k__DOT__excUnit__DOT__regs68L[__Vdlyvdim0__fx68k__DOT__excUnit__DOT__regs68L__v0] 
+	    = __Vdlyvval__fx68k__DOT__excUnit__DOT__regs68L__v0;
+    }
+    if (__Vdlyvset__fx68k__DOT__excUnit__DOT__regs68L__v1) {
+	vlTOPp->fx68k__DOT__excUnit__DOT__regs68L[__Vdlyvdim0__fx68k__DOT__excUnit__DOT__regs68L__v1] 
+	    = __Vdlyvval__fx68k__DOT__excUnit__DOT__regs68L__v1;
+    }
+    if (__Vdlyvset__fx68k__DOT__excUnit__DOT__regs68L__v2) {
+	vlTOPp->fx68k__DOT__excUnit__DOT__regs68L[__Vdlyvdim0__fx68k__DOT__excUnit__DOT__regs68L__v2] 
+	    = (((~ ((IData)(0xffU) << (IData)(__Vdlyvlsb__fx68k__DOT__excUnit__DOT__regs68L__v2))) 
+		& vlTOPp->fx68k__DOT__excUnit__DOT__regs68L
+		[__Vdlyvdim0__fx68k__DOT__excUnit__DOT__regs68L__v2]) 
+	       | ((IData)(__Vdlyvval__fx68k__DOT__excUnit__DOT__regs68L__v2) 
+		  << (IData)(__Vdlyvlsb__fx68k__DOT__excUnit__DOT__regs68L__v2)));
+    }
+    if (__Vdlyvset__fx68k__DOT__excUnit__DOT__regs68L__v3) {
+	vlTOPp->fx68k__DOT__excUnit__DOT__regs68L[__Vdlyvdim0__fx68k__DOT__excUnit__DOT__regs68L__v3] 
+	    = __Vdlyvval__fx68k__DOT__excUnit__DOT__regs68L__v3;
+    }
+    if (__Vdlyvset__fx68k__DOT__excUnit__DOT__regs68L__v4) {
+	vlTOPp->fx68k__DOT__excUnit__DOT__regs68L[__Vdlyvdim0__fx68k__DOT__excUnit__DOT__regs68L__v4] 
+	    = __Vdlyvval__fx68k__DOT__excUnit__DOT__regs68L__v4;
+    }
+    if (__Vdlyvset__fx68k__DOT__excUnit__DOT__regs68L__v5) {
+	vlTOPp->fx68k__DOT__excUnit__DOT__regs68L[__Vdlyvdim0__fx68k__DOT__excUnit__DOT__regs68L__v5] 
+	    = __Vdlyvval__fx68k__DOT__excUnit__DOT__regs68L__v5;
+    }
+    if (__Vdlyvset__fx68k__DOT__excUnit__DOT__regs68L__v6) {
+	vlTOPp->fx68k__DOT__excUnit__DOT__regs68L[__Vdlyvdim0__fx68k__DOT__excUnit__DOT__regs68L__v6] 
+	    = (((~ ((IData)(0xffU) << (IData)(__Vdlyvlsb__fx68k__DOT__excUnit__DOT__regs68L__v6))) 
+		& vlTOPp->fx68k__DOT__excUnit__DOT__regs68L
+		[__Vdlyvdim0__fx68k__DOT__excUnit__DOT__regs68L__v6]) 
+	       | ((IData)(__Vdlyvval__fx68k__DOT__excUnit__DOT__regs68L__v6) 
+		  << (IData)(__Vdlyvlsb__fx68k__DOT__excUnit__DOT__regs68L__v6)));
+    }
+    if (__Vdlyvset__fx68k__DOT__excUnit__DOT__regs68L__v7) {
+	vlTOPp->fx68k__DOT__excUnit__DOT__regs68L[__Vdlyvdim0__fx68k__DOT__excUnit__DOT__regs68L__v7] 
+	    = __Vdlyvval__fx68k__DOT__excUnit__DOT__regs68L__v7;
+    }
+    // ALWAYS at fx68k.sv:2232
+    if ((8U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
+	vlTOPp->fx68k__DOT__busArbiter__DOT__rGranted = 0U;
+    } else {
+	if ((1U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
+	    vlTOPp->fx68k__DOT__busArbiter__DOT__rGranted 
+		= ((((2U == vlTOPp->fx68k__DOT__busArbiter__DOT__next) 
+		     | (6U == vlTOPp->fx68k__DOT__busArbiter__DOT__next)) 
+		    | (3U == vlTOPp->fx68k__DOT__busArbiter__DOT__next)) 
+		   | (5U == vlTOPp->fx68k__DOT__busArbiter__DOT__next));
+	}
     }
     // ALWAYS at fx68kAlu.sv:198
     vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__shftRight 
@@ -16261,10 +15769,160 @@ VL_INLINE_OPT void Vfx68k::_sequent__TOP__10(Vfx68k__Syms* __restrict vlSymsp) {
 		| (0xeU == (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__oper))) 
 	       | (0x12U == (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__oper))) 
 	      | (0x14U == (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__oper))));
+    // ALWAYS at fx68k.sv:492
+    if ((8U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
+	vlTOPp->fx68k__DOT__excRst = 1U;
+    } else {
+	if (((IData)(vlTOPp->fx68k__DOT__enT2) & (IData)(
+							 (vlTOPp->fx68k__DOT__Nanod 
+							  >> 0x37U)))) {
+	    vlTOPp->fx68k__DOT__excRst = 0U;
+	}
+    }
+    vlTOPp->oHALTEDn = (1U & (~ (IData)(vlTOPp->fx68k__DOT__oHalted)));
+    vlTOPp->oRESETn = (1U & (~ (IData)(vlTOPp->fx68k__DOT__oReset)));
+    vlTOPp->eRWn = vlTOPp->fx68k__DOT__busControl__DOT__rRWn;
+    // ALWAYS at fx68k.sv:549
+    if ((4U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
+	vlTOPp->fx68k__DOT__Tpend = 0U;
+    } else {
+	if ((1U & (~ (IData)(vlTOPp->fx68k__DOT__enT4)))) {
+	    if (vlTOPp->fx68k__DOT__enT3) {
+		if ((1U & (IData)((vlTOPp->fx68k__DOT__Nanod 
+				   >> 0x31U)))) {
+		    vlTOPp->fx68k__DOT__Tpend = vlTOPp->fx68k__DOT__pswT;
+		} else {
+		    if ((1U & (IData)((vlTOPp->fx68k__DOT__Nanod 
+				       >> 0x30U)))) {
+			vlTOPp->fx68k__DOT__Tpend = 0U;
+		    }
+		}
+	    }
+	}
+    }
+    // ALWAYS at fx68k.sv:413
+    if (vlTOPp->fx68k__DOT__enT4) {
+	vlTOPp->fx68k__DOT__Avia = ((~ (IData)(vlTOPp->fx68k__DOT__Vpai)) 
+				    & (7U == (IData)(vlTOPp->fx68k__DOT__rFC)));
+    }
+    // ALWAYS at fx68k.sv:413
+    if (vlTOPp->fx68k__DOT__enT4) {
+	vlTOPp->fx68k__DOT__Spuria = ((~ (IData)(vlTOPp->fx68k__DOT__BeiDelay)) 
+				      & (7U == (IData)(vlTOPp->fx68k__DOT__rFC)));
+    }
+    // ALWAYS at fx68k.sv:413
+    if ((8U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
+	vlTOPp->fx68k__DOT__intPend = 0U;
+    } else {
+	if ((1U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
+	    if (((IData)(vlTOPp->fx68k__DOT__iplStable) 
+		 & (((7U == (IData)(vlTOPp->fx68k__DOT__iIpl)) 
+		     & (~ (IData)(vlTOPp->fx68k__DOT__prevNmi))) 
+		    | (IData)(vlTOPp->fx68k__DOT__iplComp)))) {
+		vlTOPp->fx68k__DOT__intPend = 1U;
+	    } else {
+		if ((((7U == (IData)(vlTOPp->fx68k__DOT__inl)) 
+		      & (7U == (IData)(vlTOPp->fx68k__DOT__rFC))) 
+		     | (((IData)(vlTOPp->fx68k__DOT__iplStable) 
+			 & (7U != (IData)(vlTOPp->fx68k__DOT__iIpl))) 
+			& (~ (IData)(vlTOPp->fx68k__DOT__iplComp))))) {
+		    vlTOPp->fx68k__DOT__intPend = 0U;
+		}
+	    }
+	}
+    }
+    vlTOPp->ASn = vlTOPp->fx68k__DOT__busControl__DOT__rAS;
+    // ALWAYS at fx68k.sv:468
+    if ((4U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
+	vlTOPp->E = 0U;
+	__Vdly__fx68k__DOT__eCntr = 0U;
+	vlTOPp->fx68k__DOT__rVma = 1U;
+    }
+    if ((1U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
+	if ((9U == (IData)(vlTOPp->fx68k__DOT__eCntr))) {
+	    vlTOPp->E = 0U;
+	} else {
+	    if ((5U == (IData)(vlTOPp->fx68k__DOT__eCntr))) {
+		vlTOPp->E = 1U;
+	    }
+	}
+	__Vdly__fx68k__DOT__eCntr = (0xfU & ((9U == (IData)(vlTOPp->fx68k__DOT__eCntr))
+					      ? 0U : 
+					     ((IData)(1U) 
+					      + (IData)(vlTOPp->fx68k__DOT__eCntr))));
+    }
+    if (((((IData)(vlTOPp->fx68k__DOT__Clks) & (IData)(vlTOPp->fx68k__DOT__addrOe)) 
+	  & (~ (IData)(vlTOPp->fx68k__DOT__Vpai))) 
+	 & (3U == (IData)(vlTOPp->fx68k__DOT__eCntr)))) {
+	vlTOPp->fx68k__DOT__rVma = 0U;
+    } else {
+	if ((((IData)(vlTOPp->fx68k__DOT__Clks) >> 1U) 
+	     & (0U == (IData)(vlTOPp->fx68k__DOT__eCntr)))) {
+	    vlTOPp->fx68k__DOT__rVma = 1U;
+	}
+    }
+    vlTOPp->oEdb = vlTOPp->fx68k__DOT__excUnit__DOT__dataIo__DOT__dob;
+    // ALWAYS at fx68k.sv:1763
+    if (vlTOPp->fx68k__DOT__enT4) {
+	vlTOPp->fx68k__DOT__excUnit__DOT__dataIo__DOT__byteCycle 
+	    = (1U & ((IData)((vlTOPp->fx68k__DOT__Nanod 
+			      >> 0x34U)) & (IData)(
+						   (vlTOPp->fx68k__DOT__Irdecod 
+						    >> 0x20U))));
+    }
     // ALWAYS at fx68kAlu.sv:123
     if (vlTOPp->fx68k__DOT__enT3) {
 	vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__row 
 	    = vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__cRow;
+    }
+    // ALWAYS at fx68k.sv:2125
+    vlTOPp->fx68k__DOT__sequencer__DOT__grp1Nma = 0x1c0U;
+    if ((1U & (~ (IData)(vlTOPp->fx68k__DOT__sequencer__DOT__rExcRst)))) {
+	if ((1U & (~ ((IData)(vlTOPp->fx68k__DOT__sequencer__DOT__rExcBusErr) 
+		      | (IData)(vlTOPp->fx68k__DOT__sequencer__DOT__rExcAdrErr))))) {
+	    if ((1U & (~ ((IData)(vlTOPp->fx68k__DOT__sequencer__DOT__rSpurious) 
+			  | (IData)(vlTOPp->fx68k__DOT__sequencer__DOT__rAutovec))))) {
+		if ((1U & (~ (IData)(vlTOPp->fx68k__DOT__sequencer__DOT__rTrace)))) {
+		    if (vlTOPp->fx68k__DOT__sequencer__DOT__rInterrupt) {
+			vlTOPp->fx68k__DOT__sequencer__DOT__grp1Nma = 0x1c4U;
+		    }
+		}
+	    }
+	}
+    }
+    // ALWAYS at fx68k.sv:492
+    if ((8U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
+	vlTOPp->fx68k__DOT__BerrA = 0U;
+    } else {
+	if ((1U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
+	    if ((((~ (IData)(vlTOPp->fx68k__DOT__BeI)) 
+		  & (7U != (IData)(vlTOPp->fx68k__DOT__rFC))) 
+		 & (IData)(vlTOPp->fx68k__DOT__addrOe))) {
+		vlTOPp->fx68k__DOT__BerrA = 1U;
+	    } else {
+		if (((IData)(vlTOPp->fx68k__DOT__BeI) 
+		     & (2U == vlTOPp->fx68k__DOT__busControl__DOT__busPhase))) {
+		    vlTOPp->fx68k__DOT__BerrA = 0U;
+		}
+	    }
+	}
+    }
+    vlTOPp->UDSn = vlTOPp->fx68k__DOT__busControl__DOT__rUDS;
+    vlTOPp->LDSn = vlTOPp->fx68k__DOT__busControl__DOT__rLDS;
+    // ALWAYS at fx68k.sv:2424
+    if ((4U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
+	vlTOPp->fx68k__DOT__busControl__DOT__bciByte = 0U;
+    } else {
+	if ((1U & (~ ((IData)(vlTOPp->fx68k__DOT__Clks) 
+		      & ((5U == vlTOPp->fx68k__DOT__busControl__DOT__busPhase) 
+			 | (IData)(vlTOPp->fx68k__DOT__busControl__DOT__bcReset)))))) {
+	    if (((IData)(vlTOPp->fx68k__DOT__enT1) 
+		 & (IData)((vlTOPp->fx68k__DOT__Nanod 
+			    >> 0x37U)))) {
+		vlTOPp->fx68k__DOT__busControl__DOT__bciByte 
+		    = vlTOPp->fx68k__DOT__busControl__DOT__isByteT4;
+	    }
+	}
     }
     // ALWAYS at fx68k.sv:1912
     vlTOPp->fx68k__DOT__excUnit__DOT__prHbit = 0U;
@@ -16316,28 +15974,6 @@ VL_INLINE_OPT void Vfx68k::_sequent__TOP__10(Vfx68k__Syms* __restrict vlSymsp) {
     if ((1U & (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__prenLatch))) {
 	vlTOPp->fx68k__DOT__excUnit__DOT__prHbit = 0U;
     }
-    // ALWAYS at fx68kAlu.sv:420
-    if ((4U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
-	vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__pswCcr = 0U;
-    } else {
-	if (((IData)(vlTOPp->fx68k__DOT__enT3) & (IData)(
-							 (vlTOPp->fx68k__DOT__Nanod 
-							  >> 0x26U)))) {
-	    vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__pswCcr 
-		= (0x1fU & (IData)(vlTOPp->fx68k__DOT__ftu));
-	} else {
-	    if ((((IData)(vlTOPp->fx68k__DOT__enT3) 
-		  & (~ (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__noCcrEn))) 
-		 & ((IData)((vlTOPp->fx68k__DOT__Nanod 
-			     >> 6U)) | (IData)((vlTOPp->fx68k__DOT__Nanod 
-						>> 7U))))) {
-		vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__pswCcr 
-		    = vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__ccrMasked;
-	    }
-	}
-    }
-    vlTOPp->eab = (0x7fffffU & (vlTOPp->fx68k__DOT__excUnit__DOT__aob 
-				>> 1U));
     // ALWAYS at fx68k.sv:1543
     if ((8U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
 	vlTOPp->fx68k__DOT__excUnit__DOT__dbh2Pch = 0U;
@@ -16386,22 +16022,103 @@ VL_INLINE_OPT void Vfx68k::_sequent__TOP__10(Vfx68k__Syms* __restrict vlSymsp) {
 							>> 0x11U))));
 	}
     }
-    // ALWAYS at fx68k.sv:1495
+    // ALWAYS at fx68k.sv:593
+    if (((IData)(vlTOPp->fx68k__DOT__enT1) & (IData)(
+						     (vlTOPp->fx68k__DOT__Nanod 
+						      >> 0x21U)))) {
+	vlTOPp->fx68k__DOT__tvnLatch = vlTOPp->fx68k__DOT__tvn;
+    }
+    // ALWAYS at fx68k.sv:593
+    if (((IData)((vlTOPp->fx68k__DOT__Nanod >> 0x1dU)) 
+	 & (IData)(vlTOPp->fx68k__DOT__enT3))) {
+	vlTOPp->fx68k__DOT__ssw = ((0x10U & ((~ (IData)(vlTOPp->fx68k__DOT__busControl__DOT__isWriteReg)) 
+					     << 4U)) 
+				   | (((IData)(vlTOPp->fx68k__DOT__inExcept01) 
+				       << 3U) | (IData)(vlTOPp->fx68k__DOT__rFC)));
+    }
+    // ALWAYS at fx68kAlu.sv:420
     if ((4U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
-	vlTOPp->fx68k__DOT__excUnit__DOT__auReg = 0U;
+	vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__pswCcr = 0U;
     } else {
 	if (((IData)(vlTOPp->fx68k__DOT__enT3) & (IData)(
-							 (vlTOPp->fx68k__DOT__Nanod2 
-							  >> 0x30U)))) {
-	    vlTOPp->fx68k__DOT__excUnit__DOT__auReg 
-		= ((0xffff0000U & ((((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__Dbh) 
-				     + (vlTOPp->fx68k__DOT__excUnit__DOT__auInpMux 
-					>> 0x10U)) 
-				    + (1U & (vlTOPp->fx68k__DOT__excUnit__DOT__aulow 
-					     >> 0x10U))) 
-				   << 0x10U)) | (0xffffU 
-						 & vlTOPp->fx68k__DOT__excUnit__DOT__aulow));
+							 (vlTOPp->fx68k__DOT__Nanod 
+							  >> 0x26U)))) {
+	    vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__pswCcr 
+		= (0x1fU & (IData)(vlTOPp->fx68k__DOT__ftu));
+	} else {
+	    if ((((IData)(vlTOPp->fx68k__DOT__enT3) 
+		  & (~ (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__noCcrEn))) 
+		 & ((IData)((vlTOPp->fx68k__DOT__Nanod 
+			     >> 6U)) | (IData)((vlTOPp->fx68k__DOT__Nanod 
+						>> 7U))))) {
+		vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__pswCcr 
+		    = vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__ccrMasked;
+	    }
 	}
+    }
+    // ALWAYS at fx68kAlu.sv:420
+    if (vlTOPp->fx68k__DOT__enT3) {
+	if ((0U != (7U & (IData)((vlTOPp->fx68k__DOT__Nanod 
+				  >> 0xbU))))) {
+	    vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluLatch 
+		= vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__result;
+	}
+    }
+    // ALWAYS at fx68k.sv:1629
+    if ((1U & (~ ((IData)(vlTOPp->fx68k__DOT__Clks) 
+		  >> 2U)))) {
+	if (((IData)(vlTOPp->fx68k__DOT__enT3) & (IData)(
+							 (vlTOPp->fx68k__DOT__Nanod2 
+							  >> 0x18U)))) {
+	    vlTOPp->fx68k__DOT__excUnit__DOT__dcrOutput 
+		= vlTOPp->fx68k__DOT__excUnit__DOT__dcrCode;
+	}
+    }
+    // ALWAYS at fx68kAlu.sv:420
+    if (vlTOPp->fx68k__DOT__enT3) {
+	if (((IData)(vlTOPp->fx68k__DOT__enT3) & (IData)(
+							 (vlTOPp->fx68k__DOT__Nanod2 
+							  >> 0x16U)))) {
+	    vlTOPp->fx68k__DOT__alue = vlTOPp->fx68k__DOT__excUnit__DOT__Dbd;
+	} else {
+	    if (((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__isShift) 
+		 & (0U != (7U & (IData)((vlTOPp->fx68k__DOT__Nanod 
+					 >> 0xbU)))))) {
+		vlTOPp->fx68k__DOT__alue = (0xffffU 
+					    & (vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__shftResult 
+					       >> 0x10U));
+	    }
+	}
+    }
+    // ALWAYS at fx68k.sv:1720
+    if (((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__dataIo__DOT__xToDbin) 
+	 & (IData)(vlTOPp->fx68k__DOT__Clks))) {
+	if ((1U & (~ (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__dataIo__DOT__dbinNoLow)))) {
+	    vlTOPp->fx68k__DOT__excUnit__DOT__dbin 
+		= ((0xff00U & (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__dbin)) 
+		   | (0xffU & ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__dataIo__DOT__byteMux)
+			        ? ((IData)(vlTOPp->iEdb) 
+				   >> 8U) : (IData)(vlTOPp->iEdb))));
+	}
+	if ((1U & (~ (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__dataIo__DOT__dbinNoHigh)))) {
+	    vlTOPp->fx68k__DOT__excUnit__DOT__dbin 
+		= ((0xffU & (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__dbin)) 
+		   | (0xff00U & ((((~ (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__dataIo__DOT__byteMux)) 
+				   & (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__dataIo__DOT__dbinNoLow))
+				   ? (IData)(vlTOPp->iEdb)
+				   : ((IData)(vlTOPp->iEdb) 
+				      >> 8U)) << 8U)));
+	}
+    }
+    // ALWAYS at fx68k.sv:1285
+    if (vlTOPp->fx68k__DOT__enT4) {
+	vlTOPp->fx68k__DOT__excUnit__DOT__actualRx 
+	    = vlTOPp->fx68k__DOT__excUnit__DOT__rxMux;
+    }
+    // ALWAYS at fx68k.sv:1285
+    if (vlTOPp->fx68k__DOT__enT4) {
+	vlTOPp->fx68k__DOT__excUnit__DOT__actualRy 
+	    = vlTOPp->fx68k__DOT__excUnit__DOT__ryMux;
     }
     // ALWAYS at fx68k.sv:1285
     if (vlTOPp->fx68k__DOT__enT4) {
@@ -16464,231 +16181,7 @@ VL_INLINE_OPT void Vfx68k::_sequent__TOP__10(Vfx68k__Syms* __restrict vlSymsp) {
 						   : (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__preAbl))
 						  : (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__preAbd));
     }
-    vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT____Vcellinp__shifter__swapWords 
-	= (1U & (((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__row) 
-		  >> 7U) | ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__row) 
-			    >> 1U)));
-    // ALWAYS at fx68kAlu.sv:123
-    if (vlTOPp->fx68k__DOT__enT3) {
-	vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__noCcrEn 
-	    = (((((((IData)(vlTOPp->fx68k__DOT__Ird) 
-		    >> 0xfU) & (~ ((IData)(vlTOPp->fx68k__DOT__Ird) 
-				   >> 0xdU))) & ((IData)(vlTOPp->fx68k__DOT__Ird) 
-						 >> 0xcU)) 
-		 & (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__rowDecoder__DOT__size11)) 
-		| ((5U == (0xfU & ((IData)(vlTOPp->fx68k__DOT__Ird) 
-				   >> 0xcU))) & (1U 
-						 == 
-						 (7U 
-						  & ((IData)(vlTOPp->fx68k__DOT__Ird) 
-						     >> 3U))))) 
-	       | ((((~ ((IData)(vlTOPp->fx68k__DOT__Ird) 
-			>> 0xfU)) & (~ ((IData)(vlTOPp->fx68k__DOT__Ird) 
-					>> 0xeU))) 
-		   & ((IData)(vlTOPp->fx68k__DOT__Ird) 
-		      >> 0xdU)) & (1U == (7U & ((IData)(vlTOPp->fx68k__DOT__Ird) 
-						>> 6U)))));
-    }
-    // ALWAYS at fx68k.sv:1388
-    if (vlTOPp->fx68k__DOT__enT2) {
-	vlTOPp->fx68k__DOT__excUnit__DOT__Dbh = (0xffffU 
-						 & ((1U 
-						     & (IData)(
-							       (vlTOPp->fx68k__DOT__Nanod2 
-								>> 0x2bU)))
-						     ? 
-						    VL_NEGATE_I((IData)(
-									(1U 
-									 & ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__dblIdle)
-									     ? 
-									    ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__preDbd) 
-									     >> 0xfU)
-									     : 
-									    ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__preDbl) 
-									     >> 0xfU)))))
-						     : 
-						    ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__dbhIdle)
-						      ? 
-						     ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__dblIdle)
-						       ? (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__preDbd)
-						       : (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__preDbl))
-						      : (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__preDbh))));
-	vlTOPp->fx68k__DOT__excUnit__DOT__Dbl = ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__dblIdle)
-						  ? 
-						 ((1U 
-						   & (IData)(
-							     (vlTOPp->fx68k__DOT__Nanod2 
-							      >> 0x24U)))
-						   ? (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__preDbh)
-						   : (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__preDbd))
-						  : (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__preDbl));
-	__Vdly__fx68k__DOT__excUnit__DOT__Dbd = ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__dbdIdle)
-						  ? 
-						 ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__dblIdle)
-						   ? (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__preDbh)
-						   : (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__preDbl))
-						  : (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__preDbd));
-    }
-    // ALWAYS at fx68k.sv:1388
-    if (vlTOPp->fx68k__DOT__enT1) {
-	vlTOPp->fx68k__DOT__excUnit__DOT__preAbh = vlTOPp->fx68k__DOT__excUnit__DOT__abhMux;
-    }
-    // ALWAYS at fx68k.sv:1388
-    if (vlTOPp->fx68k__DOT__enT1) {
-	vlTOPp->fx68k__DOT__excUnit__DOT__preAbl = vlTOPp->fx68k__DOT__excUnit__DOT__ablMux;
-    }
-    // ALWAYS at fx68k.sv:1388
-    if (vlTOPp->fx68k__DOT__enT1) {
-	vlTOPp->fx68k__DOT__excUnit__DOT__preAbd = 
-	    ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__ryl2Abd)
-	      ? ((0x11U >= (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__actualRy))
-		  ? vlTOPp->fx68k__DOT__excUnit__DOT__regs68L
-		 [vlTOPp->fx68k__DOT__excUnit__DOT__actualRy]
-		  : 0U) : ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__rxl2Abd)
-			    ? ((0x11U >= (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__actualRx))
-			        ? vlTOPp->fx68k__DOT__excUnit__DOT__regs68L
-			       [vlTOPp->fx68k__DOT__excUnit__DOT__actualRx]
-			        : 0U) : ((1U & (IData)(
-						       (vlTOPp->fx68k__DOT__Nanod 
-							>> 2U)))
-					  ? (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__dbin)
-					  : ((1U & (IData)(
-							   (vlTOPp->fx68k__DOT__Nanod2 
-							    >> 0x19U)))
-					      ? (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluLatch)
-					      : 0U))));
-    }
-    // ALWAYS at fx68k.sv:1388
-    if (vlTOPp->fx68k__DOT__enT1) {
-	vlTOPp->fx68k__DOT__excUnit__DOT__preDbh = vlTOPp->fx68k__DOT__excUnit__DOT__dbhMux;
-    }
-    // ALWAYS at fx68k.sv:1388
-    if (vlTOPp->fx68k__DOT__enT1) {
-	vlTOPp->fx68k__DOT__excUnit__DOT__preDbl = vlTOPp->fx68k__DOT__excUnit__DOT__dblMux;
-    }
-    // ALWAYS at fx68k.sv:1388
-    if (vlTOPp->fx68k__DOT__enT1) {
-	vlTOPp->fx68k__DOT__excUnit__DOT__preDbd = 
-	    ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__ryl2Dbd)
-	      ? ((0x11U >= (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__actualRy))
-		  ? vlTOPp->fx68k__DOT__excUnit__DOT__regs68L
-		 [vlTOPp->fx68k__DOT__excUnit__DOT__actualRy]
-		  : 0U) : ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__rxl2Dbd)
-			    ? ((0x11U >= (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__actualRx))
-			        ? vlTOPp->fx68k__DOT__excUnit__DOT__regs68L
-			       [vlTOPp->fx68k__DOT__excUnit__DOT__actualRx]
-			        : 0U) : ((1U & (IData)(
-						       (vlTOPp->fx68k__DOT__Nanod2 
-							>> 0x15U)))
-					  ? (IData)(vlTOPp->fx68k__DOT__alue)
-					  : ((1U & (IData)(
-							   (vlTOPp->fx68k__DOT__Nanod 
-							    >> 1U)))
-					      ? (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__dbin)
-					      : ((1U 
-						  & (IData)(
-							    (vlTOPp->fx68k__DOT__Nanod2 
-							     >> 0x1aU)))
-						  ? (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluLatch)
-						  : 
-						 ((1U 
-						   & (IData)(
-							     (vlTOPp->fx68k__DOT__Nanod2 
-							      >> 0x17U)))
-						   ? (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__dcrOutput)
-						   : 0U))))));
-    }
-    // ALWAYSPOST at fx68k.sv:1518
-    if (__Vdlyvset__fx68k__DOT__excUnit__DOT__regs68L__v0) {
-	vlTOPp->fx68k__DOT__excUnit__DOT__regs68L[__Vdlyvdim0__fx68k__DOT__excUnit__DOT__regs68L__v0] 
-	    = __Vdlyvval__fx68k__DOT__excUnit__DOT__regs68L__v0;
-    }
-    if (__Vdlyvset__fx68k__DOT__excUnit__DOT__regs68L__v1) {
-	vlTOPp->fx68k__DOT__excUnit__DOT__regs68L[__Vdlyvdim0__fx68k__DOT__excUnit__DOT__regs68L__v1] 
-	    = __Vdlyvval__fx68k__DOT__excUnit__DOT__regs68L__v1;
-    }
-    if (__Vdlyvset__fx68k__DOT__excUnit__DOT__regs68L__v2) {
-	vlTOPp->fx68k__DOT__excUnit__DOT__regs68L[__Vdlyvdim0__fx68k__DOT__excUnit__DOT__regs68L__v2] 
-	    = (((~ ((IData)(0xffU) << (IData)(__Vdlyvlsb__fx68k__DOT__excUnit__DOT__regs68L__v2))) 
-		& vlTOPp->fx68k__DOT__excUnit__DOT__regs68L
-		[__Vdlyvdim0__fx68k__DOT__excUnit__DOT__regs68L__v2]) 
-	       | ((IData)(__Vdlyvval__fx68k__DOT__excUnit__DOT__regs68L__v2) 
-		  << (IData)(__Vdlyvlsb__fx68k__DOT__excUnit__DOT__regs68L__v2)));
-    }
-    if (__Vdlyvset__fx68k__DOT__excUnit__DOT__regs68L__v3) {
-	vlTOPp->fx68k__DOT__excUnit__DOT__regs68L[__Vdlyvdim0__fx68k__DOT__excUnit__DOT__regs68L__v3] 
-	    = __Vdlyvval__fx68k__DOT__excUnit__DOT__regs68L__v3;
-    }
-    if (__Vdlyvset__fx68k__DOT__excUnit__DOT__regs68L__v4) {
-	vlTOPp->fx68k__DOT__excUnit__DOT__regs68L[__Vdlyvdim0__fx68k__DOT__excUnit__DOT__regs68L__v4] 
-	    = __Vdlyvval__fx68k__DOT__excUnit__DOT__regs68L__v4;
-    }
-    if (__Vdlyvset__fx68k__DOT__excUnit__DOT__regs68L__v5) {
-	vlTOPp->fx68k__DOT__excUnit__DOT__regs68L[__Vdlyvdim0__fx68k__DOT__excUnit__DOT__regs68L__v5] 
-	    = __Vdlyvval__fx68k__DOT__excUnit__DOT__regs68L__v5;
-    }
-    if (__Vdlyvset__fx68k__DOT__excUnit__DOT__regs68L__v6) {
-	vlTOPp->fx68k__DOT__excUnit__DOT__regs68L[__Vdlyvdim0__fx68k__DOT__excUnit__DOT__regs68L__v6] 
-	    = (((~ ((IData)(0xffU) << (IData)(__Vdlyvlsb__fx68k__DOT__excUnit__DOT__regs68L__v6))) 
-		& vlTOPp->fx68k__DOT__excUnit__DOT__regs68L
-		[__Vdlyvdim0__fx68k__DOT__excUnit__DOT__regs68L__v6]) 
-	       | ((IData)(__Vdlyvval__fx68k__DOT__excUnit__DOT__regs68L__v6) 
-		  << (IData)(__Vdlyvlsb__fx68k__DOT__excUnit__DOT__regs68L__v6)));
-    }
-    if (__Vdlyvset__fx68k__DOT__excUnit__DOT__regs68L__v7) {
-	vlTOPp->fx68k__DOT__excUnit__DOT__regs68L[__Vdlyvdim0__fx68k__DOT__excUnit__DOT__regs68L__v7] 
-	    = __Vdlyvval__fx68k__DOT__excUnit__DOT__regs68L__v7;
-    }
-    // ALWAYS at fx68k.sv:1285
-    if (vlTOPp->fx68k__DOT__enT4) {
-	vlTOPp->fx68k__DOT__excUnit__DOT__actualRy 
-	    = vlTOPp->fx68k__DOT__excUnit__DOT__ryMux;
-    }
-    // ALWAYS at fx68k.sv:1285
-    if (vlTOPp->fx68k__DOT__enT4) {
-	vlTOPp->fx68k__DOT__excUnit__DOT__actualRx 
-	    = vlTOPp->fx68k__DOT__excUnit__DOT__rxMux;
-    }
-    // ALWAYS at fx68kAlu.sv:420
-    if (vlTOPp->fx68k__DOT__enT3) {
-	if ((0U != (7U & (IData)((vlTOPp->fx68k__DOT__Nanod 
-				  >> 0xbU))))) {
-	    vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluLatch 
-		= vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__result;
-	}
-    }
-    // ALWAYS at fx68k.sv:1629
-    if ((1U & (~ ((IData)(vlTOPp->fx68k__DOT__Clks) 
-		  >> 2U)))) {
-	if (((IData)(vlTOPp->fx68k__DOT__enT3) & (IData)(
-							 (vlTOPp->fx68k__DOT__Nanod2 
-							  >> 0x18U)))) {
-	    vlTOPp->fx68k__DOT__excUnit__DOT__dcrOutput 
-		= vlTOPp->fx68k__DOT__excUnit__DOT__dcrCode;
-	}
-    }
-    // ALWAYS at fx68kAlu.sv:420
-    if (vlTOPp->fx68k__DOT__enT3) {
-	if (((IData)(vlTOPp->fx68k__DOT__enT3) & (IData)(
-							 (vlTOPp->fx68k__DOT__Nanod2 
-							  >> 0x16U)))) {
-	    vlTOPp->fx68k__DOT__alue = vlTOPp->fx68k__DOT__excUnit__DOT__Dbd;
-	} else {
-	    if (((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__isShift) 
-		 & (0U != (7U & (IData)((vlTOPp->fx68k__DOT__Nanod 
-					 >> 0xbU)))))) {
-		vlTOPp->fx68k__DOT__alue = (0xffffU 
-					    & (vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__shftResult 
-					       >> 0x10U));
-	    }
-	}
-    }
-    // ALWAYS at fx68k.sv:1878
-    vlTOPp->__Vtableidx5 = (0xfU & ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__abdIsByte)
-				     ? (7U & (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__Abd))
-				     : (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__Abd)));
-    vlTOPp->fx68k__DOT__excUnit__DOT__dcrCode = vlTOPp->__Vtable5_fx68k__DOT__excUnit__DOT__dcrCode
-	[vlTOPp->__Vtableidx5];
+    vlTOPp->fx68k__DOT__eCntr = __Vdly__fx68k__DOT__eCntr;
     // ALWAYS at fx68kAlu.sv:225
     vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__isShift = 0U;
     if ((1U != (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__oper))) {
@@ -16710,7 +16203,143 @@ VL_INLINE_OPT void Vfx68k::_sequent__TOP__10(Vfx68k__Syms* __restrict vlSymsp) {
 	    }
 	}
     }
-    vlTOPp->fx68k__DOT__excUnit__DOT__Dbd = __Vdly__fx68k__DOT__excUnit__DOT__Dbd;
+    // ALWAYS at fx68k.sv:208
+    if ((1U & (~ ((IData)(vlTOPp->fx68k__DOT__Clks) 
+		  >> 2U)))) {
+	if ((1U & (~ (IData)(vlTOPp->fx68k__DOT__Clks)))) {
+	    if ((2U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
+		vlTOPp->fx68k__DOT__BeiDelay = vlTOPp->fx68k__DOT__BeI;
+	    }
+	}
+    }
+    // ALWAYS at fx68k.sv:413
+    if ((8U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
+	vlTOPp->fx68k__DOT__prevNmi = 0U;
+    } else {
+	if ((1U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
+	    vlTOPp->fx68k__DOT__prevNmi = (7U == (IData)(vlTOPp->fx68k__DOT__iIpl));
+	}
+    }
+    vlTOPp->VMAn = vlTOPp->fx68k__DOT__rVma;
+    // ALWAYS at fx68k.sv:208
+    if ((1U & (~ ((IData)(vlTOPp->fx68k__DOT__Clks) 
+		  >> 2U)))) {
+	if ((1U & (~ (IData)(vlTOPp->fx68k__DOT__Clks)))) {
+	    if ((2U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
+		vlTOPp->fx68k__DOT__Vpai = vlTOPp->VPAn;
+	    }
+	}
+    }
+    vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT____Vcellinp__shifter__swapWords 
+	= (1U & (((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__row) 
+		  >> 7U) | ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__row) 
+			    >> 1U)));
+    // ALWAYS at fx68k.sv:2344
+    if ((8U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
+	vlTOPp->fx68k__DOT__addrOe = 0U;
+    } else {
+	if (((IData)(vlTOPp->fx68k__DOT__Clks) & (2U 
+						  == vlTOPp->fx68k__DOT__busControl__DOT__busPhase))) {
+	    vlTOPp->fx68k__DOT__addrOe = 1U;
+	} else {
+	    if ((((IData)(vlTOPp->fx68k__DOT__Clks) 
+		  >> 1U) & (6U == vlTOPp->fx68k__DOT__busControl__DOT__busPhase))) {
+		vlTOPp->fx68k__DOT__addrOe = 0U;
+	    } else {
+		if (((((IData)(vlTOPp->fx68k__DOT__Clks) 
+		       >> 1U) & (~ (IData)(vlTOPp->fx68k__DOT__busControl__DOT__isRmcReg))) 
+		     & (IData)(vlTOPp->fx68k__DOT__busControl__DOT__busEnding))) {
+		    vlTOPp->fx68k__DOT__addrOe = 0U;
+		}
+	    }
+	}
+    }
+    // ALWAYS at fx68k.sv:2417
+    if (vlTOPp->fx68k__DOT__enT4) {
+	vlTOPp->fx68k__DOT__busControl__DOT__isByteT4 
+	    = (1U & ((IData)((vlTOPp->fx68k__DOT__Nanod 
+			      >> 0x34U)) & ((IData)(
+						    (vlTOPp->fx68k__DOT__Irdecod 
+						     >> 0x20U)) 
+					    | (IData)(
+						      (vlTOPp->fx68k__DOT__Irdecod 
+						       >> 0x1fU)))));
+    }
+    // ALWAYS at fx68k.sv:593
+    if (((IData)(vlTOPp->fx68k__DOT__enT1) & (IData)(
+						     (vlTOPp->fx68k__DOT__Nanod 
+						      >> 0x21U)))) {
+	vlTOPp->fx68k__DOT__inExcept01 = (1U != (IData)(vlTOPp->fx68k__DOT__tvn));
+    }
+    // ALWAYS at fx68k.sv:2424
+    if ((4U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
+	vlTOPp->fx68k__DOT__busControl__DOT__isWriteReg = 0U;
+    } else {
+	if ((1U & (~ ((IData)(vlTOPp->fx68k__DOT__Clks) 
+		      & ((5U == vlTOPp->fx68k__DOT__busControl__DOT__busPhase) 
+			 | (IData)(vlTOPp->fx68k__DOT__busControl__DOT__bcReset)))))) {
+	    if (((IData)(vlTOPp->fx68k__DOT__enT1) 
+		 & (IData)((vlTOPp->fx68k__DOT__Nanod 
+			    >> 0x37U)))) {
+		vlTOPp->fx68k__DOT__busControl__DOT__isWriteReg 
+		    = (1U & (IData)((vlTOPp->fx68k__DOT__Nanod 
+				     >> 0x35U)));
+	    }
+	}
+    }
+    // ALWAYS at fx68k.sv:391
+    if ((8U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
+	vlTOPp->fx68k__DOT__rFC = 0U;
+    } else {
+	if (((IData)(vlTOPp->fx68k__DOT__enT1) & (IData)(
+							 (vlTOPp->fx68k__DOT__Nanod 
+							  >> 0x37U)))) {
+	    vlTOPp->fx68k__DOT__rFC = ((3U & (IData)(vlTOPp->fx68k__DOT__rFC)) 
+				       | ((IData)(vlTOPp->fx68k__DOT__pswS) 
+					  << 2U));
+	    vlTOPp->fx68k__DOT__rFC = ((5U & (IData)(vlTOPp->fx68k__DOT__rFC)) 
+				       | (2U & ((0x1fffeU 
+						 & (vlTOPp->fx68k__DOT__microLatch 
+						    >> 0xfU)) 
+						| (((~ 
+						     (vlTOPp->fx68k__DOT__microLatch 
+						      >> 0xfU)) 
+						    & (~ (IData)(
+								 (vlTOPp->fx68k__DOT__Irdecod 
+								  >> 0x29U)))) 
+						   << 1U))));
+	    vlTOPp->fx68k__DOT__rFC = ((6U & (IData)(vlTOPp->fx68k__DOT__rFC)) 
+				       | (1U & ((vlTOPp->fx68k__DOT__microLatch 
+						 >> 0xfU) 
+						| ((~ 
+						    (vlTOPp->fx68k__DOT__microLatch 
+						     >> 0x10U)) 
+						   & (IData)(
+							     (vlTOPp->fx68k__DOT__Irdecod 
+							      >> 0x29U))))));
+	}
+    }
+    // ALWAYS at fx68kAlu.sv:123
+    if (vlTOPp->fx68k__DOT__enT3) {
+	vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__noCcrEn 
+	    = (((((((IData)(vlTOPp->fx68k__DOT__Ird) 
+		    >> 0xfU) & (~ ((IData)(vlTOPp->fx68k__DOT__Ird) 
+				   >> 0xdU))) & ((IData)(vlTOPp->fx68k__DOT__Ird) 
+						 >> 0xcU)) 
+		 & (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__rowDecoder__DOT__size11)) 
+		| ((5U == (0xfU & ((IData)(vlTOPp->fx68k__DOT__Ird) 
+				   >> 0xcU))) & (1U 
+						 == 
+						 (7U 
+						  & ((IData)(vlTOPp->fx68k__DOT__Ird) 
+						     >> 3U))))) 
+	       | ((((~ ((IData)(vlTOPp->fx68k__DOT__Ird) 
+			>> 0xfU)) & (~ ((IData)(vlTOPp->fx68k__DOT__Ird) 
+					>> 0xeU))) 
+		   & ((IData)(vlTOPp->fx68k__DOT__Ird) 
+		      >> 0xdU)) & (1U == (7U & ((IData)(vlTOPp->fx68k__DOT__Ird) 
+						>> 6U)))));
+    }
     // ALWAYS at fx68kAlu.sv:462
     vlTOPp->__Vfunc_fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__gt9__3__nib 
 	= (0xfU & (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluLatch));
@@ -16723,200 +16352,41 @@ VL_INLINE_OPT void Vfx68k::_sequent__TOP__10(Vfx68k__Syms* __restrict vlSymsp) {
 	= ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__coreH) 
 	   | ((6U != (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__oper)) 
 	      & (IData)(vlTOPp->__Vfunc_fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__gt9__3__Vfuncout)));
-}
-
-void Vfx68k::_settle__TOP__11(Vfx68k__Syms* __restrict vlSymsp) {
-    VL_DEBUG_IF(VL_DBG_MSGF("+    Vfx68k::_settle__TOP__11\n"); );
-    Vfx68k* __restrict vlTOPp VL_ATTR_UNUSED = vlSymsp->TOPp;
-    // Body
-    // ALWAYS at fx68k.sv:1317
-    vlTOPp->fx68k__DOT__excUnit__DOT__dbhMux = (0xffffU 
-						& ((1U 
-						    & (IData)(
-							      (vlTOPp->fx68k__DOT__Nanod2 
-							       >> 0xaU)))
-						    ? 
-						   ((0x11U 
-						     >= (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__actualRx))
-						     ? 
-						    vlTOPp->fx68k__DOT__excUnit__DOT__regs68H
-						    [vlTOPp->fx68k__DOT__excUnit__DOT__actualRx]
-						     : 0U)
-						    : 
-						   ((1U 
-						     & (IData)(
-							       (vlTOPp->fx68k__DOT__Nanod2 
-								>> 2U)))
-						     ? 
-						    ((0x11U 
-						      >= (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__actualRy))
-						      ? 
-						     vlTOPp->fx68k__DOT__excUnit__DOT__regs68H
-						     [vlTOPp->fx68k__DOT__excUnit__DOT__actualRy]
-						      : 0U)
-						     : 
-						    ((1U 
-						      & (IData)(
-								(vlTOPp->fx68k__DOT__Nanod 
-								 >> 5U)))
-						      ? 
-						     (vlTOPp->fx68k__DOT__excUnit__DOT__auReg 
-						      >> 0x10U)
-						      : 
-						     ((1U 
-						       & (IData)(
-								 (vlTOPp->fx68k__DOT__Nanod2 
-								  >> 0x1dU)))
-						       ? (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__Ath)
-						       : 
-						      ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__Pch2Dbh)
-						        ? (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__PcH)
-						        : 0U))))));
-    // ALWAYS at fx68k.sv:1317
-    vlTOPp->fx68k__DOT__excUnit__DOT__abhMux = (0xffffU 
-						& ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__Pch2Abh)
-						    ? (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__PcH)
-						    : 
-						   ((1U 
-						     & (IData)(
-							       (vlTOPp->fx68k__DOT__Nanod2 
-								>> 9U)))
-						     ? 
-						    ((0x11U 
-						      >= (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__actualRx))
-						      ? 
-						     vlTOPp->fx68k__DOT__excUnit__DOT__regs68H
-						     [vlTOPp->fx68k__DOT__excUnit__DOT__actualRx]
-						      : 0U)
-						     : 
-						    ((1U 
-						      & (IData)(
-								(vlTOPp->fx68k__DOT__Nanod2 
-								 >> 1U)))
-						      ? 
-						     ((0x11U 
-						       >= (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__actualRy))
-						       ? 
-						      vlTOPp->fx68k__DOT__excUnit__DOT__regs68H
-						      [vlTOPp->fx68k__DOT__excUnit__DOT__actualRy]
-						       : 0U)
-						      : 
-						     ((1U 
-						       & (IData)(
-								 (vlTOPp->fx68k__DOT__Nanod 
-								  >> 4U)))
-						       ? 
-						      (vlTOPp->fx68k__DOT__excUnit__DOT__auReg 
-						       >> 0x10U)
-						       : 
-						      ((1U 
-							& (IData)(
-								  (vlTOPp->fx68k__DOT__Nanod2 
-								   >> 0x1bU)))
-						        ? 
-						       (vlTOPp->fx68k__DOT__excUnit__DOT__aob 
-							>> 0x10U)
-						        : 
-						       ((1U 
-							 & (IData)(
-								   (vlTOPp->fx68k__DOT__Nanod2 
-								    >> 0x1cU)))
-							 ? (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__Ath)
-							 : 0U)))))));
-    // ALWAYS at fx68k.sv:1317
-    vlTOPp->fx68k__DOT__excUnit__DOT__dblMux = (0xffffU 
-						& ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__rxl2Dbl)
-						    ? 
-						   ((0x11U 
-						     >= (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__actualRx))
-						     ? 
-						    vlTOPp->fx68k__DOT__excUnit__DOT__regs68L
-						    [vlTOPp->fx68k__DOT__excUnit__DOT__actualRx]
-						     : 0U)
-						    : 
-						   ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__ryl2Dbl)
-						     ? 
-						    ((0x11U 
-						      >= (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__actualRy))
-						      ? 
-						     vlTOPp->fx68k__DOT__excUnit__DOT__regs68L
-						     [vlTOPp->fx68k__DOT__excUnit__DOT__actualRy]
-						      : 0U)
-						     : 
-						    ((1U 
-						      & (IData)(
-								(vlTOPp->fx68k__DOT__Nanod 
-								 >> 0x2dU)))
-						      ? (IData)(vlTOPp->fx68k__DOT__ftu)
-						      : 
-						     ((1U 
-						       & (IData)(
-								 (vlTOPp->fx68k__DOT__Nanod 
-								  >> 5U)))
-						       ? vlTOPp->fx68k__DOT__excUnit__DOT__auReg
-						       : 
-						      ((1U 
-							& (IData)(
-								  (vlTOPp->fx68k__DOT__Nanod2 
-								   >> 0x20U)))
-						        ? (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__Atl)
-						        : 
-						       ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__Pcl2Dbl)
-							 ? (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__PcL)
-							 : 0U)))))));
-    // ALWAYS at fx68k.sv:1317
-    vlTOPp->fx68k__DOT__excUnit__DOT__ablMux = (0xffffU 
-						& ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__Pcl2Abl)
-						    ? (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__PcL)
-						    : 
-						   ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__rxl2Abl)
-						     ? 
-						    ((0x11U 
-						      >= (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__actualRx))
-						      ? 
-						     vlTOPp->fx68k__DOT__excUnit__DOT__regs68L
-						     [vlTOPp->fx68k__DOT__excUnit__DOT__actualRx]
-						      : 0U)
-						     : 
-						    ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__ryl2Abl)
-						      ? 
-						     ((0x11U 
-						       >= (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__actualRy))
-						       ? 
-						      vlTOPp->fx68k__DOT__excUnit__DOT__regs68L
-						      [vlTOPp->fx68k__DOT__excUnit__DOT__actualRy]
-						       : 0U)
-						      : 
-						     ((1U 
-						       & (IData)(
-								 (vlTOPp->fx68k__DOT__Nanod 
-								  >> 0x2cU)))
-						       ? (IData)(vlTOPp->fx68k__DOT__ftu)
-						       : 
-						      ((1U 
-							& (IData)(
-								  (vlTOPp->fx68k__DOT__Nanod 
-								   >> 4U)))
-						        ? vlTOPp->fx68k__DOT__excUnit__DOT__auReg
-						        : 
-						       ((1U 
-							 & (IData)(
-								   (vlTOPp->fx68k__DOT__Nanod2 
-								    >> 0x1bU)))
-							 ? vlTOPp->fx68k__DOT__excUnit__DOT__aob
-							 : 
-							((1U 
-							  & (IData)(
-								    (vlTOPp->fx68k__DOT__Nanod2 
-								     >> 0x21U)))
-							  ? (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__Atl)
-							  : 0U))))))));
-}
-
-VL_INLINE_OPT void Vfx68k::_sequent__TOP__12(Vfx68k__Syms* __restrict vlSymsp) {
-    VL_DEBUG_IF(VL_DBG_MSGF("+    Vfx68k::_sequent__TOP__12\n"); );
-    Vfx68k* __restrict vlTOPp VL_ATTR_UNUSED = vlSymsp->TOPp;
-    // Body
+    // ALWAYS at fx68k.sv:1720
+    if (vlTOPp->fx68k__DOT__enT3) {
+	vlTOPp->fx68k__DOT__excUnit__DOT__dataIo__DOT__dbinNoLow 
+	    = (1U & (IData)((vlTOPp->fx68k__DOT__Nanod 
+			     >> 0x33U)));
+    }
+    // ALWAYS at fx68k.sv:1720
+    if (vlTOPp->fx68k__DOT__enT3) {
+	vlTOPp->fx68k__DOT__excUnit__DOT__dataIo__DOT__dbinNoHigh 
+	    = (1U & (IData)((vlTOPp->fx68k__DOT__Nanod 
+			     >> 0x32U)));
+    }
+    // ALWAYS at fx68k.sv:1720
+    if (vlTOPp->fx68k__DOT__enT1) {
+	vlTOPp->fx68k__DOT__excUnit__DOT__dataIo__DOT__xToDbin = 0U;
+    } else {
+	if (vlTOPp->fx68k__DOT__enT3) {
+	    vlTOPp->fx68k__DOT__excUnit__DOT__dataIo__DOT__xToDbin 
+		= (1U & (IData)((vlTOPp->fx68k__DOT__Nanod2 
+				 >> 0x29U)));
+	}
+    }
+    // ALWAYS at fx68k.sv:1720
+    if (vlTOPp->fx68k__DOT__enT3) {
+	vlTOPp->fx68k__DOT__excUnit__DOT__dataIo__DOT__byteMux 
+	    = (((IData)((vlTOPp->fx68k__DOT__Nanod 
+			 >> 0x34U)) & (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__dataIo__DOT__isByte_T4)) 
+	       & (~ vlTOPp->fx68k__DOT__excUnit__DOT__aob));
+    }
+    // ALWAYS at fx68k.sv:1878
+    vlTOPp->__Vtableidx5 = (0xfU & ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__abdIsByte)
+				     ? (7U & (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__Abd))
+				     : (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__Abd)));
+    vlTOPp->fx68k__DOT__excUnit__DOT__dcrCode = vlTOPp->__Vtable5_fx68k__DOT__excUnit__DOT__dcrCode
+	[vlTOPp->__Vtableidx5];
     // ALWAYS at fx68k.sv:2125
     vlTOPp->fx68k__DOT__tvn = (0xfU & ((IData)(vlTOPp->fx68k__DOT__sequencer__DOT__rExcRst)
 				        ? 0U : (((IData)(vlTOPp->fx68k__DOT__sequencer__DOT__rExcBusErr) 
@@ -16950,179 +16420,73 @@ VL_INLINE_OPT void Vfx68k::_sequent__TOP__12(Vfx68k__Syms* __restrict vlSymsp) {
 						      ((IData)(vlTOPp->fx68k__DOT__sequencer__DOT__rLineF)
 						        ? 0xbU
 						        : 1U))))))))));
-}
-
-VL_INLINE_OPT void Vfx68k::_multiclk__TOP__13(Vfx68k__Syms* __restrict vlSymsp) {
-    VL_DEBUG_IF(VL_DBG_MSGF("+    Vfx68k::_multiclk__TOP__13\n"); );
-    Vfx68k* __restrict vlTOPp VL_ATTR_UNUSED = vlSymsp->TOPp;
-    // Body
+    // ALWAYS at fx68k.sv:208
+    if ((4U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
+	vlTOPp->fx68k__DOT__BeI = 0U;
+    } else {
+	if ((1U & (~ (IData)(vlTOPp->fx68k__DOT__Clks)))) {
+	    if ((2U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
+		vlTOPp->fx68k__DOT__BeI = vlTOPp->fx68k__DOT__rBerr;
+	    }
+	}
+    }
     vlTOPp->fx68k__DOT__iAddrErr = ((IData)(vlTOPp->fx68k__DOT__rAddrErr) 
 				    & (IData)(vlTOPp->fx68k__DOT__addrOe));
-    vlTOPp->fx68k__DOT__enErrClk = ((IData)(vlTOPp->fx68k__DOT__iAddrErr) 
-				    | (IData)(vlTOPp->fx68k__DOT__iBusErr));
-    vlTOPp->fx68k__DOT__wClk = (1U & (((((IData)(vlTOPp->fx68k__DOT__busControl__DOT__wendReg) 
-					 & (5U != vlTOPp->fx68k__DOT__busControl__DOT__busPhase)) 
-					| (~ (IData)(vlTOPp->fx68k__DOT__BeI))) 
-				       | (IData)(vlTOPp->fx68k__DOT__iAddrErr)) 
-				      | (IData)(vlTOPp->fx68k__DOT__Err6591)));
-}
-
-VL_INLINE_OPT void Vfx68k::_combo__TOP__14(Vfx68k__Syms* __restrict vlSymsp) {
-    VL_DEBUG_IF(VL_DBG_MSGF("+    Vfx68k::_combo__TOP__14\n"); );
-    Vfx68k* __restrict vlTOPp VL_ATTR_UNUSED = vlSymsp->TOPp;
-    // Body
-    vlTOPp->fx68k__DOT__busControl__DOT__bcReset = 
-	(1U & (((IData)(vlTOPp->fx68k__DOT__Clks) >> 3U) 
-	       | (((IData)(vlTOPp->fx68k__DOT__busControl__DOT__addrOeDelay) 
-		   & (~ ((IData)(vlTOPp->fx68k__DOT__BeI) 
-			 | (IData)(vlTOPp->fx68k__DOT__BeiDelay)))) 
-		  & (IData)(vlTOPp->fx68k__DOT__Vpai))));
-    // ALWAYS at fx68kAlu.sv:463
-    vlTOPp->__Vfunc_fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__gt9__4__nib 
-	= (0xfU & ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__htemp) 
-		   >> 4U));
-    vlTOPp->__Vfunc_fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__gt9__4__Vfuncout 
-	= (1U & (((IData)(vlTOPp->__Vfunc_fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__gt9__4__nib) 
-		  >> 3U) & (((IData)(vlTOPp->__Vfunc_fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__gt9__4__nib) 
-			     >> 2U) | ((IData)(vlTOPp->__Vfunc_fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__gt9__4__nib) 
-				       >> 1U))));
-    vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__highC 
-	= (1U & (((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__pswCcr) 
-		  >> 4U) | ((6U != (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__oper)) 
-			    & ((IData)(vlTOPp->__Vfunc_fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__gt9__4__Vfuncout) 
-			       | ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__htemp) 
-				  >> 8U)))));
-    vlTOPp->fx68k__DOT__enT2 = ((IData)(vlTOPp->fx68k__DOT__Clks) 
-				& (1U == vlTOPp->fx68k__DOT__tState));
-    // ALWAYS at fx68kAlu.sv:465
-    if ((6U != (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__oper))) {
-	vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__htemp 
-	    = (0x1ffU & ((0xffU & (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluLatch)) 
-			 + ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__lowC)
-			     ? 6U : 0U)));
-	vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__hNib 
-	    = (0x1fU & (((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__htemp) 
-			 >> 4U) + ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__highC)
-				    ? 6U : 0U)));
-	vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__bcdV 
-	    = (1U & (((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__hNib) 
-		      >> 3U) & (~ ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluLatch) 
-				   >> 7U))));
+    // ALWAYS at fx68k.sv:2424
+    if ((4U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
+	vlTOPp->fx68k__DOT__busControl__DOT__isRmcReg = 0U;
     } else {
-	vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__htemp 
-	    = (0x1ffU & ((0xffU & (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluLatch)) 
-			 - ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__lowC)
-			     ? 6U : 0U)));
-	vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__hNib 
-	    = (0x1fU & (((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__htemp) 
-			 >> 4U) - ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__highC)
-				    ? 6U : 0U)));
-	vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__bcdV 
-	    = (1U & ((~ ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__hNib) 
-			 >> 3U)) & ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluLatch) 
-				    >> 7U)));
+	if ((1U & (~ ((IData)(vlTOPp->fx68k__DOT__Clks) 
+		      & ((5U == vlTOPp->fx68k__DOT__busControl__DOT__busPhase) 
+			 | (IData)(vlTOPp->fx68k__DOT__busControl__DOT__bcReset)))))) {
+	    if (((IData)(vlTOPp->fx68k__DOT__enT1) 
+		 & (IData)((vlTOPp->fx68k__DOT__Nanod 
+			    >> 0x37U)))) {
+		vlTOPp->fx68k__DOT__busControl__DOT__isRmcReg 
+		    = (1U & ((IData)(vlTOPp->fx68k__DOT__Nanod2) 
+			     & (~ (IData)((vlTOPp->fx68k__DOT__Nanod 
+					   >> 0x35U)))));
+	    }
+	}
     }
-}
-
-VL_INLINE_OPT void Vfx68k::_multiclk__TOP__15(Vfx68k__Syms* __restrict vlSymsp) {
-    VL_DEBUG_IF(VL_DBG_MSGF("+    Vfx68k::_multiclk__TOP__15\n"); );
-    Vfx68k* __restrict vlTOPp VL_ATTR_UNUSED = vlSymsp->TOPp;
-    // Body
-    // ALWAYS at fx68k.sv:2176
-    vlTOPp->fx68k__DOT__busArbiter__DOT__next = (((
-						   ((((((0U 
-							 == vlTOPp->fx68k__DOT__busArbiter__DOT__dmaPhase) 
-							| (1U 
-							   == vlTOPp->fx68k__DOT__busArbiter__DOT__dmaPhase)) 
-						       | (4U 
-							  == vlTOPp->fx68k__DOT__busArbiter__DOT__dmaPhase)) 
-						      | (2U 
-							 == vlTOPp->fx68k__DOT__busArbiter__DOT__dmaPhase)) 
-						     | (3U 
-							== vlTOPp->fx68k__DOT__busArbiter__DOT__dmaPhase)) 
-						    | (6U 
-						       == vlTOPp->fx68k__DOT__busArbiter__DOT__dmaPhase)) 
-						   | (5U 
-						      == vlTOPp->fx68k__DOT__busArbiter__DOT__dmaPhase)) 
-						  | (7U 
-						     == vlTOPp->fx68k__DOT__busArbiter__DOT__dmaPhase))
-						  ? 
-						 ((0U 
-						   == vlTOPp->fx68k__DOT__busArbiter__DOT__dmaPhase)
-						   ? 1U
-						   : 
-						  ((1U 
-						    == vlTOPp->fx68k__DOT__busArbiter__DOT__dmaPhase)
-						    ? 
-						   ((IData)(vlTOPp->fx68k__DOT__bgBlock)
-						     ? 1U
-						     : 
-						    ((IData)(vlTOPp->fx68k__DOT__BgackI)
-						      ? 
-						     ((IData)(vlTOPp->fx68k__DOT__BRi)
-						       ? 1U
-						       : 2U)
-						      : 4U))
-						    : 
-						   ((4U 
-						     == vlTOPp->fx68k__DOT__busArbiter__DOT__dmaPhase)
-						     ? 
-						    ((1U 
-						      & ((~ (IData)(vlTOPp->fx68k__DOT__BRi)) 
-							 & (~ (IData)(vlTOPp->fx68k__DOT__bgBlock))))
-						      ? 6U
-						      : 
-						     ((1U 
-						       & ((~ (IData)(vlTOPp->fx68k__DOT__BgackI)) 
-							  & (~ (IData)(vlTOPp->fx68k__DOT__bgBlock))))
-						       ? 4U
-						       : 1U))
-						     : 
-						    ((2U 
-						      == vlTOPp->fx68k__DOT__busArbiter__DOT__dmaPhase)
-						      ? 3U
-						      : 
-						     ((3U 
-						       == vlTOPp->fx68k__DOT__busArbiter__DOT__dmaPhase)
-						       ? 
-						      (((~ (IData)(vlTOPp->fx68k__DOT__BRi)) 
-							& (IData)(vlTOPp->fx68k__DOT__BgackI))
-						        ? 3U
-						        : 4U)
-						       : 
-						      ((6U 
-							== vlTOPp->fx68k__DOT__busArbiter__DOT__dmaPhase)
-						        ? 5U
-						        : 
-						       ((5U 
-							 == vlTOPp->fx68k__DOT__busArbiter__DOT__dmaPhase)
-							 ? 
-							((IData)(vlTOPp->fx68k__DOT__BgackI)
-							  ? 
-							 ((IData)(vlTOPp->fx68k__DOT__BRi)
-							   ? 1U
-							   : 3U)
-							  : 
-							 ((IData)(vlTOPp->fx68k__DOT__BRi)
-							   ? 7U
-							   : 5U))
-							 : 4U)))))))
-						  : 1U);
-}
-
-VL_INLINE_OPT void Vfx68k::_multiclk__TOP__16(Vfx68k__Syms* __restrict vlSymsp) {
-    VL_DEBUG_IF(VL_DBG_MSGF("+    Vfx68k::_multiclk__TOP__16\n"); );
-    Vfx68k* __restrict vlTOPp VL_ATTR_UNUSED = vlSymsp->TOPp;
-    // Body
-    vlTOPp->fx68k__DOT__busAddrErr = (1U & (vlTOPp->fx68k__DOT__excUnit__DOT__aob 
-					    & (~ (IData)(vlTOPp->fx68k__DOT__busControl__DOT__bciByte))));
-}
-
-VL_INLINE_OPT void Vfx68k::_sequent__TOP__17(Vfx68k__Syms* __restrict vlSymsp) {
-    VL_DEBUG_IF(VL_DBG_MSGF("+    Vfx68k::_sequent__TOP__17\n"); );
-    Vfx68k* __restrict vlTOPp VL_ATTR_UNUSED = vlSymsp->TOPp;
-    // Body
-    vlTOPp->fx68k__DOT__ftu = vlTOPp->__Vdly__fx68k__DOT__ftu;
+    vlTOPp->FC2 = (1U & ((IData)(vlTOPp->fx68k__DOT__rFC) 
+			 >> 2U));
+    vlTOPp->FC1 = (1U & ((IData)(vlTOPp->fx68k__DOT__rFC) 
+			 >> 1U));
+    vlTOPp->FC0 = (1U & (IData)(vlTOPp->fx68k__DOT__rFC));
+    // ALWAYS at fx68k.sv:549
+    if ((4U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
+	vlTOPp->fx68k__DOT__pswT = 0U;
+	vlTOPp->fx68k__DOT__pswS = 0U;
+	vlTOPp->fx68k__DOT__pswI = 0U;
+    } else {
+	if ((1U & (~ (IData)(vlTOPp->fx68k__DOT__enT4)))) {
+	    if (vlTOPp->fx68k__DOT__enT3) {
+		if ((1U & ((IData)((vlTOPp->fx68k__DOT__Nanod 
+				    >> 0x28U)) & (~ (IData)(vlTOPp->fx68k__DOT__irdToCcr_t4))))) {
+		    vlTOPp->fx68k__DOT__pswT = (1U 
+						& ((IData)(vlTOPp->fx68k__DOT__ftu) 
+						   >> 0xfU));
+		    vlTOPp->fx68k__DOT__pswS = (1U 
+						& ((IData)(vlTOPp->fx68k__DOT__ftu) 
+						   >> 0xdU));
+		    vlTOPp->fx68k__DOT__pswI = (7U 
+						& ((IData)(vlTOPp->fx68k__DOT__ftu) 
+						   >> 8U));
+		} else {
+		    if ((1U & (IData)((vlTOPp->fx68k__DOT__Nanod 
+				       >> 0x22U)))) {
+			vlTOPp->fx68k__DOT__pswS = 1U;
+			vlTOPp->fx68k__DOT__pswT = 0U;
+		    }
+		    if ((1U & (IData)((vlTOPp->fx68k__DOT__Nanod 
+				       >> 0x29U)))) {
+			vlTOPp->fx68k__DOT__pswI = vlTOPp->fx68k__DOT__inl;
+		    }
+		}
+	    }
+	}
+    }
     // ALWAYS at fx68k.sv:309
     if (vlTOPp->fx68k__DOT__enT1) {
 	if ((1U & (IData)((vlTOPp->fx68k__DOT__Nanod 
@@ -17130,10 +16494,108 @@ VL_INLINE_OPT void Vfx68k::_sequent__TOP__17(Vfx68k__Syms* __restrict vlSymsp) {
 	    vlTOPp->fx68k__DOT__Ird = vlTOPp->fx68k__DOT__Ir;
 	}
     }
+    // ALWAYS at fx68k.sv:1720
+    if (vlTOPp->fx68k__DOT__enT4) {
+	vlTOPp->fx68k__DOT__excUnit__DOT__dataIo__DOT__isByte_T4 
+	    = (1U & (IData)((vlTOPp->fx68k__DOT__Irdecod 
+			     >> 0x20U)));
+    }
+    // ALWAYS at fx68k.sv:1448
+    if (((IData)(vlTOPp->fx68k__DOT__enT1) & ((IData)(
+						      (vlTOPp->fx68k__DOT__Nanod 
+						       >> 0x1eU)) 
+					      | ((IData)(
+							 (vlTOPp->fx68k__DOT__Nanod 
+							  >> 5U)) 
+						 & (IData)(
+							   (vlTOPp->fx68k__DOT__Nanod 
+							    >> 0x20U)))))) {
+	vlTOPp->fx68k__DOT__excUnit__DOT__aob = vlTOPp->fx68k__DOT__excUnit__DOT__auReg;
+    } else {
+	if (vlTOPp->fx68k__DOT__enT2) {
+	    if ((1U & (IData)((vlTOPp->fx68k__DOT__Nanod 
+			       >> 0x20U)))) {
+		vlTOPp->fx68k__DOT__excUnit__DOT__aob 
+		    = (((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__preDbh) 
+			<< 0x10U) | ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__dblIdle)
+				      ? (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__preDbd)
+				      : (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__preDbl)));
+	    } else {
+		if ((1U & (IData)((vlTOPp->fx68k__DOT__Nanod 
+				   >> 0x1fU)))) {
+		    vlTOPp->fx68k__DOT__excUnit__DOT__aob 
+			= (((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__preAbh) 
+			    << 0x10U) | ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__ablIdle)
+					  ? (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__preAbd)
+					  : (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__preAbl)));
+		}
+	    }
+	}
+    }
+    vlTOPp->fx68k__DOT__enErrClk = ((IData)(vlTOPp->fx68k__DOT__iAddrErr) 
+				    | (IData)(vlTOPp->fx68k__DOT__iBusErr));
+    vlTOPp->fx68k__DOT__ftu = __Vdly__fx68k__DOT__ftu;
+    vlTOPp->fx68k__DOT__excUnit__DOT__preAbd = __Vdly__fx68k__DOT__excUnit__DOT__preAbd;
+    // ALWAYS at fx68k.sv:208
+    if ((4U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
+	vlTOPp->fx68k__DOT__rBerr = 0U;
+    } else {
+	if ((1U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
+	    vlTOPp->fx68k__DOT__rBerr = vlTOPp->BERRn;
+	}
+    }
+    // ALWAYS at fx68k.sv:2295
+    if ((8U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
+	vlTOPp->fx68k__DOT__busControl__DOT__busPhase = 0U;
+    } else {
+	if ((2U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
+	    vlTOPp->fx68k__DOT__busControl__DOT__busPhase 
+		= vlTOPp->fx68k__DOT__busControl__DOT__next;
+	}
+    }
+    vlTOPp->fx68k__DOT__psw = (((IData)(vlTOPp->fx68k__DOT__pswT) 
+				<< 0xfU) | (((IData)(vlTOPp->fx68k__DOT__pswS) 
+					     << 0xdU) 
+					    | (((IData)(vlTOPp->fx68k__DOT__pswI) 
+						<< 8U) 
+					       | (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__pswCcr))));
+    // ALWAYS at fx68k.sv:549
+    if ((4U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
+	vlTOPp->fx68k__DOT__irdToCcr_t4 = 0U;
+    } else {
+	if (vlTOPp->fx68k__DOT__enT4) {
+	    vlTOPp->fx68k__DOT__irdToCcr_t4 = (1U & (IData)(
+							    (vlTOPp->fx68k__DOT__Irdecod 
+							     >> 0x26U)));
+	}
+    }
+    // ALWAYS at fx68k.sv:413
+    if ((8U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
+	vlTOPp->fx68k__DOT__inl = 7U;
+    } else {
+	if ((1U & (~ (IData)(vlTOPp->fx68k__DOT__enT4)))) {
+	    if (((IData)(vlTOPp->fx68k__DOT__enT1) 
+		 & (IData)(vlTOPp->fx68k__DOT__updIll))) {
+		vlTOPp->fx68k__DOT__inl = vlTOPp->fx68k__DOT__iIpl;
+	    }
+	}
+    }
     vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__rowDecoder__DOT__size11 
 	= (1U & (((IData)(vlTOPp->fx68k__DOT__Ird) 
 		  >> 7U) & ((IData)(vlTOPp->fx68k__DOT__Ird) 
 			    >> 6U)));
+    vlTOPp->fx68k__DOT__sequencer__DOT__enl = ((2U 
+						& ((IData)(vlTOPp->fx68k__DOT__Ird) 
+						   >> 5U)) 
+					       | (1U 
+						  & (~ (IData)(
+							       (0U 
+								!= (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__prenLatch))))));
+    vlTOPp->fx68k__DOT__sequencer__DOT__ms0 = ((2U 
+						& ((IData)(vlTOPp->fx68k__DOT__Ird) 
+						   >> 7U)) 
+					       | (1U 
+						  & (IData)(vlTOPp->fx68k__DOT__alue)));
     // ALWAYS at fx68k.sv:1878
     vlTOPp->__Vtableidx6 = (0xfU & ((IData)(vlTOPp->fx68k__DOT__Ird) 
 				    >> 0xcU));
@@ -17147,6 +16609,217 @@ VL_INLINE_OPT void Vfx68k::_sequent__TOP__17(Vfx68k__Syms* __restrict vlSymsp) {
 	    if ((1U & vlTOPp->fx68k__DOT__microLatch)) {
 		vlTOPp->fx68k__DOT__Ir = vlTOPp->fx68k__DOT__Irc;
 	    }
+	}
+    }
+    vlTOPp->eab = (0x7fffffU & (vlTOPp->fx68k__DOT__excUnit__DOT__aob 
+				>> 1U));
+    vlTOPp->fx68k__DOT__busAddrErr = (1U & (vlTOPp->fx68k__DOT__excUnit__DOT__aob 
+					    & (~ (IData)(vlTOPp->fx68k__DOT__busControl__DOT__bciByte))));
+    // ALWAYS at fx68k.sv:1388
+    if (vlTOPp->fx68k__DOT__enT1) {
+	vlTOPp->fx68k__DOT__excUnit__DOT__preAbh = vlTOPp->fx68k__DOT__excUnit__DOT__abhMux;
+    }
+    // ALWAYS at fx68k.sv:1388
+    if (vlTOPp->fx68k__DOT__enT1) {
+	vlTOPp->fx68k__DOT__excUnit__DOT__preAbl = vlTOPp->fx68k__DOT__excUnit__DOT__ablMux;
+    }
+    // ALWAYS at fx68k.sv:1495
+    if ((4U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
+	vlTOPp->fx68k__DOT__excUnit__DOT__auReg = 0U;
+    } else {
+	if (((IData)(vlTOPp->fx68k__DOT__enT3) & (IData)(
+							 (vlTOPp->fx68k__DOT__Nanod2 
+							  >> 0x30U)))) {
+	    vlTOPp->fx68k__DOT__excUnit__DOT__auReg 
+		= ((0xffff0000U & ((((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__Dbh) 
+				     + (vlTOPp->fx68k__DOT__excUnit__DOT__auInpMux 
+					>> 0x10U)) 
+				    + (1U & (vlTOPp->fx68k__DOT__excUnit__DOT__aulow 
+					     >> 0x10U))) 
+				   << 0x10U)) | (0xffffU 
+						 & vlTOPp->fx68k__DOT__excUnit__DOT__aulow));
+	}
+    }
+    // ALWAYS at fx68k.sv:2066
+    if (((((((((0U == (0xfU & ((IData)(vlTOPp->fx68k__DOT__Ird) 
+			       >> 8U))) | (1U == (0xfU 
+						  & ((IData)(vlTOPp->fx68k__DOT__Ird) 
+						     >> 8U)))) 
+	      | (2U == (0xfU & ((IData)(vlTOPp->fx68k__DOT__Ird) 
+				>> 8U)))) | (3U == 
+					     (0xfU 
+					      & ((IData)(vlTOPp->fx68k__DOT__Ird) 
+						 >> 8U)))) 
+	    | (4U == (0xfU & ((IData)(vlTOPp->fx68k__DOT__Ird) 
+			      >> 8U)))) | (5U == (0xfU 
+						  & ((IData)(vlTOPp->fx68k__DOT__Ird) 
+						     >> 8U)))) 
+	  | (6U == (0xfU & ((IData)(vlTOPp->fx68k__DOT__Ird) 
+			    >> 8U)))) | (7U == (0xfU 
+						& ((IData)(vlTOPp->fx68k__DOT__Ird) 
+						   >> 8U))))) {
+	vlTOPp->fx68k__DOT__sequencer__DOT__ccTest 
+	    = ((0U == (0xfU & ((IData)(vlTOPp->fx68k__DOT__Ird) 
+			       >> 8U))) | ((1U != (0xfU 
+						   & ((IData)(vlTOPp->fx68k__DOT__Ird) 
+						      >> 8U))) 
+					   & ((2U == 
+					       (0xfU 
+						& ((IData)(vlTOPp->fx68k__DOT__Ird) 
+						   >> 8U)))
+					       ? ((~ (IData)(vlTOPp->fx68k__DOT__psw)) 
+						  & (~ 
+						     ((IData)(vlTOPp->fx68k__DOT__psw) 
+						      >> 2U)))
+					       : ((3U 
+						   == 
+						   (0xfU 
+						    & ((IData)(vlTOPp->fx68k__DOT__Ird) 
+						       >> 8U)))
+						   ? 
+						  ((IData)(vlTOPp->fx68k__DOT__psw) 
+						   | ((IData)(vlTOPp->fx68k__DOT__psw) 
+						      >> 2U))
+						   : 
+						  ((4U 
+						    == 
+						    (0xfU 
+						     & ((IData)(vlTOPp->fx68k__DOT__Ird) 
+							>> 8U)))
+						    ? 
+						   (~ (IData)(vlTOPp->fx68k__DOT__psw))
+						    : 
+						   ((5U 
+						     == 
+						     (0xfU 
+						      & ((IData)(vlTOPp->fx68k__DOT__Ird) 
+							 >> 8U)))
+						     ? (IData)(vlTOPp->fx68k__DOT__psw)
+						     : 
+						    ((6U 
+						      == 
+						      (0xfU 
+						       & ((IData)(vlTOPp->fx68k__DOT__Ird) 
+							  >> 8U)))
+						      ? 
+						     (~ 
+						      ((IData)(vlTOPp->fx68k__DOT__psw) 
+						       >> 2U))
+						      : 
+						     ((IData)(vlTOPp->fx68k__DOT__psw) 
+						      >> 2U))))))));
+    } else {
+	if (((((((((8U == (0xfU & ((IData)(vlTOPp->fx68k__DOT__Ird) 
+				   >> 8U))) | (9U == 
+					       (0xfU 
+						& ((IData)(vlTOPp->fx68k__DOT__Ird) 
+						   >> 8U)))) 
+		  | (0xaU == (0xfU & ((IData)(vlTOPp->fx68k__DOT__Ird) 
+				      >> 8U)))) | (0xbU 
+						   == 
+						   (0xfU 
+						    & ((IData)(vlTOPp->fx68k__DOT__Ird) 
+						       >> 8U)))) 
+		| (0xcU == (0xfU & ((IData)(vlTOPp->fx68k__DOT__Ird) 
+				    >> 8U)))) | (0xdU 
+						 == 
+						 (0xfU 
+						  & ((IData)(vlTOPp->fx68k__DOT__Ird) 
+						     >> 8U)))) 
+	      | (0xeU == (0xfU & ((IData)(vlTOPp->fx68k__DOT__Ird) 
+				  >> 8U)))) | (0xfU 
+					       == (0xfU 
+						   & ((IData)(vlTOPp->fx68k__DOT__Ird) 
+						      >> 8U))))) {
+	    vlTOPp->fx68k__DOT__sequencer__DOT__ccTest 
+		= (1U & ((8U == (0xfU & ((IData)(vlTOPp->fx68k__DOT__Ird) 
+					 >> 8U))) ? 
+			 (~ ((IData)(vlTOPp->fx68k__DOT__psw) 
+			     >> 1U)) : ((9U == (0xfU 
+						& ((IData)(vlTOPp->fx68k__DOT__Ird) 
+						   >> 8U)))
+					 ? ((IData)(vlTOPp->fx68k__DOT__psw) 
+					    >> 1U) : 
+					((0xaU == (0xfU 
+						   & ((IData)(vlTOPp->fx68k__DOT__Ird) 
+						      >> 8U)))
+					  ? (~ ((IData)(vlTOPp->fx68k__DOT__psw) 
+						>> 3U))
+					  : ((0xbU 
+					      == (0xfU 
+						  & ((IData)(vlTOPp->fx68k__DOT__Ird) 
+						     >> 8U)))
+					      ? ((IData)(vlTOPp->fx68k__DOT__psw) 
+						 >> 3U)
+					      : ((0xcU 
+						  == 
+						  (0xfU 
+						   & ((IData)(vlTOPp->fx68k__DOT__Ird) 
+						      >> 8U)))
+						  ? 
+						 ((((IData)(vlTOPp->fx68k__DOT__psw) 
+						    >> 3U) 
+						   & ((IData)(vlTOPp->fx68k__DOT__psw) 
+						      >> 1U)) 
+						  | ((~ 
+						      ((IData)(vlTOPp->fx68k__DOT__psw) 
+						       >> 3U)) 
+						     & (~ 
+							((IData)(vlTOPp->fx68k__DOT__psw) 
+							 >> 1U))))
+						  : 
+						 ((0xdU 
+						   == 
+						   (0xfU 
+						    & ((IData)(vlTOPp->fx68k__DOT__Ird) 
+						       >> 8U)))
+						   ? 
+						  ((((IData)(vlTOPp->fx68k__DOT__psw) 
+						     >> 3U) 
+						    & (~ 
+						       ((IData)(vlTOPp->fx68k__DOT__psw) 
+							>> 1U))) 
+						   | ((~ 
+						       ((IData)(vlTOPp->fx68k__DOT__psw) 
+							>> 3U)) 
+						      & ((IData)(vlTOPp->fx68k__DOT__psw) 
+							 >> 1U)))
+						   : 
+						  ((0xeU 
+						    == 
+						    (0xfU 
+						     & ((IData)(vlTOPp->fx68k__DOT__Ird) 
+							>> 8U)))
+						    ? 
+						   (((((IData)(vlTOPp->fx68k__DOT__psw) 
+						       >> 3U) 
+						      & ((IData)(vlTOPp->fx68k__DOT__psw) 
+							 >> 1U)) 
+						     & (~ 
+							((IData)(vlTOPp->fx68k__DOT__psw) 
+							 >> 2U))) 
+						    | (((~ 
+							 ((IData)(vlTOPp->fx68k__DOT__psw) 
+							  >> 3U)) 
+							& (~ 
+							   ((IData)(vlTOPp->fx68k__DOT__psw) 
+							    >> 1U))) 
+						       & (~ 
+							  ((IData)(vlTOPp->fx68k__DOT__psw) 
+							   >> 2U))))
+						    : 
+						   ((((IData)(vlTOPp->fx68k__DOT__psw) 
+						      >> 2U) 
+						     | (((IData)(vlTOPp->fx68k__DOT__psw) 
+							 >> 3U) 
+							& (~ 
+							   ((IData)(vlTOPp->fx68k__DOT__psw) 
+							    >> 1U)))) 
+						    | ((~ 
+							((IData)(vlTOPp->fx68k__DOT__psw) 
+							 >> 3U)) 
+						       & ((IData)(vlTOPp->fx68k__DOT__psw) 
+							  >> 1U)))))))))));
 	}
     }
     // ALWAYS at fx68kAlu.sv:644
@@ -17478,6 +17151,29 @@ VL_INLINE_OPT void Vfx68k::_sequent__TOP__17(Vfx68k__Syms* __restrict vlSymsp) {
 	= (((IData)(vlTOPp->fx68k__DOT__irdDecode__DOT__lineOnehot) 
 	    >> 0xeU) & (3U != (3U & ((IData)(vlTOPp->fx68k__DOT__Ird) 
 				     >> 6U))));
+    vlTOPp->fx68k__DOT__wClk = (1U & (((((IData)(vlTOPp->fx68k__DOT__busControl__DOT__wendReg) 
+					 & (5U != vlTOPp->fx68k__DOT__busControl__DOT__busPhase)) 
+					| (~ (IData)(vlTOPp->fx68k__DOT__BeI))) 
+				       | (IData)(vlTOPp->fx68k__DOT__iAddrErr)) 
+				      | (IData)(vlTOPp->fx68k__DOT__Err6591)));
+    vlTOPp->fx68k__DOT__bgBlock = (((2U == vlTOPp->fx68k__DOT__busControl__DOT__busPhase) 
+				    & (IData)(vlTOPp->ASn)) 
+				   | (6U == vlTOPp->fx68k__DOT__busControl__DOT__busPhase));
+    // ALWAYS at fx68k.sv:208
+    if ((1U & (~ ((IData)(vlTOPp->fx68k__DOT__Clks) 
+		  >> 2U)))) {
+	if ((1U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
+	    vlTOPp->fx68k__DOT__iIpl = vlTOPp->fx68k__DOT__rIpl;
+	}
+    }
+    // ALWAYS at fx68k.sv:413
+    if ((8U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
+	vlTOPp->fx68k__DOT__updIll = 0U;
+    } else {
+	if (vlTOPp->fx68k__DOT__enT4) {
+	    vlTOPp->fx68k__DOT__updIll = (1U & vlTOPp->fx68k__DOT__microLatch);
+	}
+    }
     // ALWAYS at uaddrPla.sv:83
     vlTOPp->fx68k__DOT__uaddrDecode__DOT__pla_lined__DOT__arIll 
 	= (0xffbfU & (IData)(vlTOPp->fx68k__DOT__uaddrDecode__DOT__pla_lined__DOT__arIll));
@@ -17597,21 +17293,143 @@ VL_INLINE_OPT void Vfx68k::_sequent__TOP__17(Vfx68k__Syms* __restrict vlSymsp) {
 	    : (7U & ((IData)(vlTOPp->__Vfunc_fx68k__DOT__uaddrDecode__DOT__eaDecode__0__eaBits) 
 		     >> 3U)));
     vlTOPp->fx68k__DOT__uaddrDecode__DOT__eaCol = vlTOPp->__Vfunc_fx68k__DOT__uaddrDecode__DOT__eaDecode__0__Vfuncout;
-    // ALWAYS at fx68k.sv:250
-    if ((8U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
-	vlTOPp->fx68k__DOT__microLatch = 0U;
-    } else {
-	if (vlTOPp->fx68k__DOT__rstUrom) {
-	    vlTOPp->fx68k__DOT__microLatch = (0x7fffU 
-					      & vlTOPp->fx68k__DOT__microLatch);
-	    vlTOPp->fx68k__DOT__microLatch = (0x1fffeU 
-					      & vlTOPp->fx68k__DOT__microLatch);
-	} else {
-	    if (vlTOPp->fx68k__DOT__enT3) {
-		vlTOPp->fx68k__DOT__microLatch = vlTOPp->fx68k__DOT__microOutput;
-	    }
-	}
+    // ALWAYS at fx68k.sv:1720
+    if (((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__dataIo__DOT__xToIrc) 
+	 & (IData)(vlTOPp->fx68k__DOT__Clks))) {
+	vlTOPp->fx68k__DOT__Irc = vlTOPp->iEdb;
     }
+    vlTOPp->fx68k__DOT__sequencer__DOT__m01 = ((8U 
+						& ((~ (IData)(
+							      (0U 
+							       != 
+							       (0x3fU 
+								& vlTOPp->fx68k__DOT__excUnit__DOT__auReg)))) 
+						   << 3U)) 
+					       | ((4U 
+						   & ((IData)(vlTOPp->fx68k__DOT__Ird) 
+						      >> 6U)) 
+						  | (3U 
+						     & (IData)(vlTOPp->fx68k__DOT__alue))));
+    // ALWAYS at fx68k.sv:1388
+    if (vlTOPp->fx68k__DOT__enT2) {
+	vlTOPp->fx68k__DOT__excUnit__DOT__Dbh = (0xffffU 
+						 & ((1U 
+						     & (IData)(
+							       (vlTOPp->fx68k__DOT__Nanod2 
+								>> 0x2bU)))
+						     ? 
+						    VL_NEGATE_I((IData)(
+									(1U 
+									 & ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__dblIdle)
+									     ? 
+									    ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__preDbd) 
+									     >> 0xfU)
+									     : 
+									    ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__preDbl) 
+									     >> 0xfU)))))
+						     : 
+						    ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__dbhIdle)
+						      ? 
+						     ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__dblIdle)
+						       ? (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__preDbd)
+						       : (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__preDbl))
+						      : (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__preDbh))));
+	vlTOPp->fx68k__DOT__excUnit__DOT__Dbl = ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__dblIdle)
+						  ? 
+						 ((1U 
+						   & (IData)(
+							     (vlTOPp->fx68k__DOT__Nanod2 
+							      >> 0x24U)))
+						   ? (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__preDbh)
+						   : (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__preDbd))
+						  : (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__preDbl));
+	vlTOPp->fx68k__DOT__excUnit__DOT__Dbd = ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__dbdIdle)
+						  ? 
+						 ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__dblIdle)
+						   ? (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__preDbh)
+						   : (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__preDbl))
+						  : (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__preDbd));
+    }
+    // ALWAYS at fx68k.sv:2176
+    vlTOPp->fx68k__DOT__busArbiter__DOT__next = (((
+						   ((((((0U 
+							 == vlTOPp->fx68k__DOT__busArbiter__DOT__dmaPhase) 
+							| (1U 
+							   == vlTOPp->fx68k__DOT__busArbiter__DOT__dmaPhase)) 
+						       | (4U 
+							  == vlTOPp->fx68k__DOT__busArbiter__DOT__dmaPhase)) 
+						      | (2U 
+							 == vlTOPp->fx68k__DOT__busArbiter__DOT__dmaPhase)) 
+						     | (3U 
+							== vlTOPp->fx68k__DOT__busArbiter__DOT__dmaPhase)) 
+						    | (6U 
+						       == vlTOPp->fx68k__DOT__busArbiter__DOT__dmaPhase)) 
+						   | (5U 
+						      == vlTOPp->fx68k__DOT__busArbiter__DOT__dmaPhase)) 
+						  | (7U 
+						     == vlTOPp->fx68k__DOT__busArbiter__DOT__dmaPhase))
+						  ? 
+						 ((0U 
+						   == vlTOPp->fx68k__DOT__busArbiter__DOT__dmaPhase)
+						   ? 1U
+						   : 
+						  ((1U 
+						    == vlTOPp->fx68k__DOT__busArbiter__DOT__dmaPhase)
+						    ? 
+						   ((IData)(vlTOPp->fx68k__DOT__bgBlock)
+						     ? 1U
+						     : 
+						    ((IData)(vlTOPp->fx68k__DOT__BgackI)
+						      ? 
+						     ((IData)(vlTOPp->fx68k__DOT__BRi)
+						       ? 1U
+						       : 2U)
+						      : 4U))
+						    : 
+						   ((4U 
+						     == vlTOPp->fx68k__DOT__busArbiter__DOT__dmaPhase)
+						     ? 
+						    ((1U 
+						      & ((~ (IData)(vlTOPp->fx68k__DOT__BRi)) 
+							 & (~ (IData)(vlTOPp->fx68k__DOT__bgBlock))))
+						      ? 6U
+						      : 
+						     ((1U 
+						       & ((~ (IData)(vlTOPp->fx68k__DOT__BgackI)) 
+							  & (~ (IData)(vlTOPp->fx68k__DOT__bgBlock))))
+						       ? 4U
+						       : 1U))
+						     : 
+						    ((2U 
+						      == vlTOPp->fx68k__DOT__busArbiter__DOT__dmaPhase)
+						      ? 3U
+						      : 
+						     ((3U 
+						       == vlTOPp->fx68k__DOT__busArbiter__DOT__dmaPhase)
+						       ? 
+						      (((~ (IData)(vlTOPp->fx68k__DOT__BRi)) 
+							& (IData)(vlTOPp->fx68k__DOT__BgackI))
+						        ? 3U
+						        : 4U)
+						       : 
+						      ((6U 
+							== vlTOPp->fx68k__DOT__busArbiter__DOT__dmaPhase)
+						        ? 5U
+						        : 
+						       ((5U 
+							 == vlTOPp->fx68k__DOT__busArbiter__DOT__dmaPhase)
+							 ? 
+							((IData)(vlTOPp->fx68k__DOT__BgackI)
+							  ? 
+							 ((IData)(vlTOPp->fx68k__DOT__BRi)
+							   ? 1U
+							   : 3U)
+							  : 
+							 ((IData)(vlTOPp->fx68k__DOT__BRi)
+							   ? 7U
+							   : 5U))
+							 : 4U)))))))
+						  : 1U);
     // ALWAYS at uaddrPla.sv:107
     vlTOPp->fx68k__DOT__uaddrDecode__DOT__pla_lined__DOT__arIll 
 	= ((0xbfffU & (IData)(vlTOPp->fx68k__DOT__uaddrDecode__DOT__pla_lined__DOT__arIll)) 
@@ -28839,288 +28657,33 @@ VL_INLINE_OPT void Vfx68k::_sequent__TOP__17(Vfx68k__Syms* __restrict vlSymsp) {
 					 ((0xbU == (IData)(vlTOPp->fx68k__DOT__uaddrDecode__DOT__eaCol))
 					   ? 0x1c1U
 					   : 0U))))))));
-    vlTOPp->fx68k__DOT__sequencer__DOT__grp1LatchEn 
-	= (1U & (vlTOPp->fx68k__DOT__microLatch & (
-						   (vlTOPp->fx68k__DOT__microLatch 
-						    >> 1U) 
-						   | (~ 
-						      (vlTOPp->fx68k__DOT__microLatch 
-						       >> 4U)))));
-    vlTOPp->fx68k__DOT__sequencer__DOT__grp0LatchEn 
-	= (1U & ((vlTOPp->fx68k__DOT__microLatch >> 4U) 
-		 & (~ (vlTOPp->fx68k__DOT__microLatch 
-		       >> 1U))));
-}
-
-VL_INLINE_OPT void Vfx68k::_multiclk__TOP__18(Vfx68k__Syms* __restrict vlSymsp) {
-    VL_DEBUG_IF(VL_DBG_MSGF("+    Vfx68k::_multiclk__TOP__18\n"); );
-    Vfx68k* __restrict vlTOPp VL_ATTR_UNUSED = vlSymsp->TOPp;
-    // Body
-    vlTOPp->fx68k__DOT__psw = (((IData)(vlTOPp->fx68k__DOT__pswT) 
-				<< 0xfU) | (((IData)(vlTOPp->fx68k__DOT__pswS) 
-					     << 0xdU) 
-					    | (((IData)(vlTOPp->fx68k__DOT__pswI) 
-						<< 8U) 
-					       | (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__pswCcr))));
-    vlTOPp->fx68k__DOT__sequencer__DOT__enl = ((2U 
-						& ((IData)(vlTOPp->fx68k__DOT__Ird) 
-						   >> 5U)) 
-					       | (1U 
-						  & (~ (IData)(
-							       (0U 
-								!= (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__prenLatch))))));
-    vlTOPp->fx68k__DOT__sequencer__DOT__ms0 = ((2U 
-						& ((IData)(vlTOPp->fx68k__DOT__Ird) 
-						   >> 7U)) 
-					       | (1U 
-						  & (IData)(vlTOPp->fx68k__DOT__alue)));
-    vlTOPp->fx68k__DOT__sequencer__DOT__m01 = ((8U 
-						& ((~ (IData)(
-							      (0U 
-							       != 
-							       (0x3fU 
-								& vlTOPp->fx68k__DOT__excUnit__DOT__auReg)))) 
-						   << 3U)) 
-					       | ((4U 
-						   & ((IData)(vlTOPp->fx68k__DOT__Ird) 
-						      >> 6U)) 
-						  | (3U 
-						     & (IData)(vlTOPp->fx68k__DOT__alue))));
-    // ALWAYS at fx68k.sv:2066
-    if (((((((((0U == (0xfU & ((IData)(vlTOPp->fx68k__DOT__Ird) 
-			       >> 8U))) | (1U == (0xfU 
-						  & ((IData)(vlTOPp->fx68k__DOT__Ird) 
-						     >> 8U)))) 
-	      | (2U == (0xfU & ((IData)(vlTOPp->fx68k__DOT__Ird) 
-				>> 8U)))) | (3U == 
-					     (0xfU 
-					      & ((IData)(vlTOPp->fx68k__DOT__Ird) 
-						 >> 8U)))) 
-	    | (4U == (0xfU & ((IData)(vlTOPp->fx68k__DOT__Ird) 
-			      >> 8U)))) | (5U == (0xfU 
-						  & ((IData)(vlTOPp->fx68k__DOT__Ird) 
-						     >> 8U)))) 
-	  | (6U == (0xfU & ((IData)(vlTOPp->fx68k__DOT__Ird) 
-			    >> 8U)))) | (7U == (0xfU 
-						& ((IData)(vlTOPp->fx68k__DOT__Ird) 
-						   >> 8U))))) {
-	vlTOPp->fx68k__DOT__sequencer__DOT__ccTest 
-	    = ((0U == (0xfU & ((IData)(vlTOPp->fx68k__DOT__Ird) 
-			       >> 8U))) | ((1U != (0xfU 
-						   & ((IData)(vlTOPp->fx68k__DOT__Ird) 
-						      >> 8U))) 
-					   & ((2U == 
-					       (0xfU 
-						& ((IData)(vlTOPp->fx68k__DOT__Ird) 
-						   >> 8U)))
-					       ? ((~ (IData)(vlTOPp->fx68k__DOT__psw)) 
-						  & (~ 
-						     ((IData)(vlTOPp->fx68k__DOT__psw) 
-						      >> 2U)))
-					       : ((3U 
-						   == 
-						   (0xfU 
-						    & ((IData)(vlTOPp->fx68k__DOT__Ird) 
-						       >> 8U)))
-						   ? 
-						  ((IData)(vlTOPp->fx68k__DOT__psw) 
-						   | ((IData)(vlTOPp->fx68k__DOT__psw) 
-						      >> 2U))
-						   : 
-						  ((4U 
-						    == 
-						    (0xfU 
-						     & ((IData)(vlTOPp->fx68k__DOT__Ird) 
-							>> 8U)))
-						    ? 
-						   (~ (IData)(vlTOPp->fx68k__DOT__psw))
-						    : 
-						   ((5U 
-						     == 
-						     (0xfU 
-						      & ((IData)(vlTOPp->fx68k__DOT__Ird) 
-							 >> 8U)))
-						     ? (IData)(vlTOPp->fx68k__DOT__psw)
-						     : 
-						    ((6U 
-						      == 
-						      (0xfU 
-						       & ((IData)(vlTOPp->fx68k__DOT__Ird) 
-							  >> 8U)))
-						      ? 
-						     (~ 
-						      ((IData)(vlTOPp->fx68k__DOT__psw) 
-						       >> 2U))
-						      : 
-						     ((IData)(vlTOPp->fx68k__DOT__psw) 
-						      >> 2U))))))));
+    vlTOPp->fx68k__DOT__excUnit__DOT__preDbd = __Vdly__fx68k__DOT__excUnit__DOT__preDbd;
+    vlTOPp->fx68k__DOT__iplComp = ((IData)(vlTOPp->fx68k__DOT__iIpl) 
+				   > (IData)(vlTOPp->fx68k__DOT__pswI));
+    // ALWAYS at fx68k.sv:208
+    if ((1U & (~ ((IData)(vlTOPp->fx68k__DOT__Clks) 
+		  >> 2U)))) {
+	if ((1U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
+	    vlTOPp->fx68k__DOT__rIpl = (7U & (~ (((IData)(vlTOPp->IPL2n) 
+						  << 2U) 
+						 | (((IData)(vlTOPp->IPL1n) 
+						     << 1U) 
+						    | (IData)(vlTOPp->IPL0n)))));
+	}
+    }
+    // ALWAYS at fx68k.sv:250
+    if ((8U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
+	vlTOPp->fx68k__DOT__microLatch = 0U;
     } else {
-	if (((((((((8U == (0xfU & ((IData)(vlTOPp->fx68k__DOT__Ird) 
-				   >> 8U))) | (9U == 
-					       (0xfU 
-						& ((IData)(vlTOPp->fx68k__DOT__Ird) 
-						   >> 8U)))) 
-		  | (0xaU == (0xfU & ((IData)(vlTOPp->fx68k__DOT__Ird) 
-				      >> 8U)))) | (0xbU 
-						   == 
-						   (0xfU 
-						    & ((IData)(vlTOPp->fx68k__DOT__Ird) 
-						       >> 8U)))) 
-		| (0xcU == (0xfU & ((IData)(vlTOPp->fx68k__DOT__Ird) 
-				    >> 8U)))) | (0xdU 
-						 == 
-						 (0xfU 
-						  & ((IData)(vlTOPp->fx68k__DOT__Ird) 
-						     >> 8U)))) 
-	      | (0xeU == (0xfU & ((IData)(vlTOPp->fx68k__DOT__Ird) 
-				  >> 8U)))) | (0xfU 
-					       == (0xfU 
-						   & ((IData)(vlTOPp->fx68k__DOT__Ird) 
-						      >> 8U))))) {
-	    vlTOPp->fx68k__DOT__sequencer__DOT__ccTest 
-		= (1U & ((8U == (0xfU & ((IData)(vlTOPp->fx68k__DOT__Ird) 
-					 >> 8U))) ? 
-			 (~ ((IData)(vlTOPp->fx68k__DOT__psw) 
-			     >> 1U)) : ((9U == (0xfU 
-						& ((IData)(vlTOPp->fx68k__DOT__Ird) 
-						   >> 8U)))
-					 ? ((IData)(vlTOPp->fx68k__DOT__psw) 
-					    >> 1U) : 
-					((0xaU == (0xfU 
-						   & ((IData)(vlTOPp->fx68k__DOT__Ird) 
-						      >> 8U)))
-					  ? (~ ((IData)(vlTOPp->fx68k__DOT__psw) 
-						>> 3U))
-					  : ((0xbU 
-					      == (0xfU 
-						  & ((IData)(vlTOPp->fx68k__DOT__Ird) 
-						     >> 8U)))
-					      ? ((IData)(vlTOPp->fx68k__DOT__psw) 
-						 >> 3U)
-					      : ((0xcU 
-						  == 
-						  (0xfU 
-						   & ((IData)(vlTOPp->fx68k__DOT__Ird) 
-						      >> 8U)))
-						  ? 
-						 ((((IData)(vlTOPp->fx68k__DOT__psw) 
-						    >> 3U) 
-						   & ((IData)(vlTOPp->fx68k__DOT__psw) 
-						      >> 1U)) 
-						  | ((~ 
-						      ((IData)(vlTOPp->fx68k__DOT__psw) 
-						       >> 3U)) 
-						     & (~ 
-							((IData)(vlTOPp->fx68k__DOT__psw) 
-							 >> 1U))))
-						  : 
-						 ((0xdU 
-						   == 
-						   (0xfU 
-						    & ((IData)(vlTOPp->fx68k__DOT__Ird) 
-						       >> 8U)))
-						   ? 
-						  ((((IData)(vlTOPp->fx68k__DOT__psw) 
-						     >> 3U) 
-						    & (~ 
-						       ((IData)(vlTOPp->fx68k__DOT__psw) 
-							>> 1U))) 
-						   | ((~ 
-						       ((IData)(vlTOPp->fx68k__DOT__psw) 
-							>> 3U)) 
-						      & ((IData)(vlTOPp->fx68k__DOT__psw) 
-							 >> 1U)))
-						   : 
-						  ((0xeU 
-						    == 
-						    (0xfU 
-						     & ((IData)(vlTOPp->fx68k__DOT__Ird) 
-							>> 8U)))
-						    ? 
-						   (((((IData)(vlTOPp->fx68k__DOT__psw) 
-						       >> 3U) 
-						      & ((IData)(vlTOPp->fx68k__DOT__psw) 
-							 >> 1U)) 
-						     & (~ 
-							((IData)(vlTOPp->fx68k__DOT__psw) 
-							 >> 2U))) 
-						    | (((~ 
-							 ((IData)(vlTOPp->fx68k__DOT__psw) 
-							  >> 3U)) 
-							& (~ 
-							   ((IData)(vlTOPp->fx68k__DOT__psw) 
-							    >> 1U))) 
-						       & (~ 
-							  ((IData)(vlTOPp->fx68k__DOT__psw) 
-							   >> 2U))))
-						    : 
-						   ((((IData)(vlTOPp->fx68k__DOT__psw) 
-						      >> 2U) 
-						     | (((IData)(vlTOPp->fx68k__DOT__psw) 
-							 >> 3U) 
-							& (~ 
-							   ((IData)(vlTOPp->fx68k__DOT__psw) 
-							    >> 1U)))) 
-						    | ((~ 
-							((IData)(vlTOPp->fx68k__DOT__psw) 
-							 >> 3U)) 
-						       & ((IData)(vlTOPp->fx68k__DOT__psw) 
-							  >> 1U)))))))))));
-	}
-    }
-}
-
-VL_INLINE_OPT void Vfx68k::_sequent__TOP__19(Vfx68k__Syms* __restrict vlSymsp) {
-    VL_DEBUG_IF(VL_DBG_MSGF("+    Vfx68k::_sequent__TOP__19\n"); );
-    Vfx68k* __restrict vlTOPp VL_ATTR_UNUSED = vlSymsp->TOPp;
-    // Body
-    // ALWAYS at fx68k.sv:1720
-    if (((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__dataIo__DOT__xToDbin) 
-	 & (IData)(vlTOPp->fx68k__DOT__Clks))) {
-	if ((1U & (~ (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__dataIo__DOT__dbinNoLow)))) {
-	    vlTOPp->fx68k__DOT__excUnit__DOT__dbin 
-		= ((0xff00U & (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__dbin)) 
-		   | (0xffU & ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__dataIo__DOT__byteMux)
-			        ? ((IData)(vlTOPp->iEdb) 
-				   >> 8U) : (IData)(vlTOPp->iEdb))));
-	}
-	if ((1U & (~ (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__dataIo__DOT__dbinNoHigh)))) {
-	    vlTOPp->fx68k__DOT__excUnit__DOT__dbin 
-		= ((0xffU & (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__dbin)) 
-		   | (0xff00U & ((((~ (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__dataIo__DOT__byteMux)) 
-				   & (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__dataIo__DOT__dbinNoLow))
-				   ? (IData)(vlTOPp->iEdb)
-				   : ((IData)(vlTOPp->iEdb) 
-				      >> 8U)) << 8U)));
-	}
-    }
-    // ALWAYS at fx68k.sv:1720
-    if (((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__dataIo__DOT__xToIrc) 
-	 & (IData)(vlTOPp->fx68k__DOT__Clks))) {
-	vlTOPp->fx68k__DOT__Irc = vlTOPp->iEdb;
-    }
-    vlTOPp->fx68k__DOT__excUnit__DOT__dataIo__DOT__byteMux 
-	= vlTOPp->__Vdly__fx68k__DOT__excUnit__DOT__dataIo__DOT__byteMux;
-    // ALWAYS at fx68k.sv:1720
-    if (vlTOPp->fx68k__DOT__enT3) {
-	vlTOPp->fx68k__DOT__excUnit__DOT__dataIo__DOT__dbinNoLow 
-	    = (1U & (IData)((vlTOPp->fx68k__DOT__Nanod 
-			     >> 0x33U)));
-    }
-    // ALWAYS at fx68k.sv:1720
-    if (vlTOPp->fx68k__DOT__enT3) {
-	vlTOPp->fx68k__DOT__excUnit__DOT__dataIo__DOT__dbinNoHigh 
-	    = (1U & (IData)((vlTOPp->fx68k__DOT__Nanod 
-			     >> 0x32U)));
-    }
-    // ALWAYS at fx68k.sv:1720
-    if (vlTOPp->fx68k__DOT__enT1) {
-	vlTOPp->fx68k__DOT__excUnit__DOT__dataIo__DOT__xToDbin = 0U;
-    } else {
-	if (vlTOPp->fx68k__DOT__enT3) {
-	    vlTOPp->fx68k__DOT__excUnit__DOT__dataIo__DOT__xToDbin 
-		= (1U & (IData)((vlTOPp->fx68k__DOT__Nanod2 
-				 >> 0x29U)));
+	if (vlTOPp->fx68k__DOT__rstUrom) {
+	    vlTOPp->fx68k__DOT__microLatch = (0x7fffU 
+					      & vlTOPp->fx68k__DOT__microLatch);
+	    vlTOPp->fx68k__DOT__microLatch = (0x1fffeU 
+					      & vlTOPp->fx68k__DOT__microLatch);
+	} else {
+	    if (vlTOPp->fx68k__DOT__enT3) {
+		vlTOPp->fx68k__DOT__microLatch = vlTOPp->fx68k__DOT__microOutput;
+	    }
 	}
     }
     // ALWAYS at fx68k.sv:1720
@@ -29133,12 +28696,27 @@ VL_INLINE_OPT void Vfx68k::_sequent__TOP__19(Vfx68k__Syms* __restrict vlSymsp) {
 				 >> 0x28U)));
 	}
     }
-}
-
-VL_INLINE_OPT void Vfx68k::_multiclk__TOP__20(Vfx68k__Syms* __restrict vlSymsp) {
-    VL_DEBUG_IF(VL_DBG_MSGF("+    Vfx68k::_multiclk__TOP__20\n"); );
-    Vfx68k* __restrict vlTOPp VL_ATTR_UNUSED = vlSymsp->TOPp;
-    // Body
+    // ALWAYS at fx68k.sv:1388
+    if (vlTOPp->fx68k__DOT__enT1) {
+	vlTOPp->fx68k__DOT__excUnit__DOT__preDbh = vlTOPp->fx68k__DOT__excUnit__DOT__dbhMux;
+    }
+    // ALWAYS at fx68k.sv:1388
+    if (vlTOPp->fx68k__DOT__enT1) {
+	vlTOPp->fx68k__DOT__excUnit__DOT__preDbl = vlTOPp->fx68k__DOT__excUnit__DOT__dblMux;
+    }
+    vlTOPp->fx68k__DOT__iplStable = ((IData)(vlTOPp->fx68k__DOT__iIpl) 
+				     == (IData)(vlTOPp->fx68k__DOT__rIpl));
+    vlTOPp->fx68k__DOT__sequencer__DOT__grp1LatchEn 
+	= (1U & (vlTOPp->fx68k__DOT__microLatch & (
+						   (vlTOPp->fx68k__DOT__microLatch 
+						    >> 1U) 
+						   | (~ 
+						      (vlTOPp->fx68k__DOT__microLatch 
+						       >> 4U)))));
+    vlTOPp->fx68k__DOT__sequencer__DOT__grp0LatchEn 
+	= (1U & ((vlTOPp->fx68k__DOT__microLatch >> 4U) 
+		 & (~ (vlTOPp->fx68k__DOT__microLatch 
+		       >> 1U))));
     // ALWAYS at fx68k.sv:1994
     if (((((((((0U == (0x1fU & (vlTOPp->fx68k__DOT__microLatch 
 				>> 2U))) | (1U == (0x1fU 
@@ -29377,21 +28955,6 @@ VL_INLINE_OPT void Vfx68k::_multiclk__TOP__20(Vfx68k__Syms* __restrict vlSymsp) 
 					    : 0U))));
 	}
     }
-}
-
-VL_INLINE_OPT void Vfx68k::_combo__TOP__21(Vfx68k__Syms* __restrict vlSymsp) {
-    VL_DEBUG_IF(VL_DBG_MSGF("+    Vfx68k::_combo__TOP__21\n"); );
-    Vfx68k* __restrict vlTOPp VL_ATTR_UNUSED = vlSymsp->TOPp;
-    // Body
-    vlTOPp->fx68k__DOT__enT1 = ((((IData)(vlTOPp->fx68k__DOT__Clks) 
-				  >> 1U) & (4U == vlTOPp->fx68k__DOT__tState)) 
-				& (~ (IData)(vlTOPp->fx68k__DOT__wClk)));
-}
-
-VL_INLINE_OPT void Vfx68k::_sequent__TOP__22(Vfx68k__Syms* __restrict vlSymsp) {
-    VL_DEBUG_IF(VL_DBG_MSGF("+    Vfx68k::_sequent__TOP__22\n"); );
-    Vfx68k* __restrict vlTOPp VL_ATTR_UNUSED = vlSymsp->TOPp;
-    // Body
     // ALWAYS at fx68k.sv:724
     if (vlTOPp->fx68k__DOT__enT4) {
 	vlTOPp->fx68k__DOT__Nanod2 = ((VL_ULL(0xffffffffffff) 
@@ -29888,89 +29451,6 @@ VL_INLINE_OPT void Vfx68k::_sequent__TOP__22(Vfx68k__Syms* __restrict vlSymsp) {
 							    & (vlTOPp->fx68k__DOT__nanoLatch[1U] 
 							       >> 0xaU))))));
     }
-    vlTOPp->fx68k__DOT__Nanod = ((VL_ULL(0xfc0fffffffffff) 
-				  & vlTOPp->fx68k__DOT__Nanod) 
-				 | ((QData)((IData)(
-						    (((1U 
-						       == (IData)(vlTOPp->fx68k__DOT__nDecoder__DOT__ftuCtrl)) 
-						      << 5U) 
-						     | (((0xeU 
-							  == (IData)(vlTOPp->fx68k__DOT__nDecoder__DOT__ftuCtrl)) 
-							 << 4U) 
-							| (((0xdU 
-							     == (IData)(vlTOPp->fx68k__DOT__nDecoder__DOT__ftuCtrl)) 
-							    << 3U) 
-							   | (((1U 
-								== (IData)(vlTOPp->fx68k__DOT__nDecoder__DOT__ftuCtrl)) 
-							       << 2U) 
-							      | ((((4U 
-								    == (IData)(vlTOPp->fx68k__DOT__nDecoder__DOT__ftuCtrl)) 
-								   | (6U 
-								      == (IData)(vlTOPp->fx68k__DOT__nDecoder__DOT__ftuCtrl))) 
-								  << 1U) 
-								 | (8U 
-								    == (IData)(vlTOPp->fx68k__DOT__nDecoder__DOT__ftuCtrl))))))))) 
-				    << 0x2cU));
-    vlTOPp->fx68k__DOT__Nanod = ((VL_ULL(0xfffdffffffffff) 
-				  & vlTOPp->fx68k__DOT__Nanod) 
-				 | ((QData)((IData)(
-						    (6U 
-						     == (IData)(vlTOPp->fx68k__DOT__nDecoder__DOT__ftuCtrl)))) 
-				    << 0x29U));
-    vlTOPp->fx68k__DOT__Nanod = ((VL_ULL(0xffffdfffffffff) 
-				  & vlTOPp->fx68k__DOT__Nanod) 
-				 | ((QData)((IData)(
-						    (5U 
-						     == (IData)(vlTOPp->fx68k__DOT__nDecoder__DOT__ftuCtrl)))) 
-				    << 0x25U));
-    vlTOPp->fx68k__DOT__Nanod = ((VL_ULL(0xfffe7fffffffff) 
-				  & vlTOPp->fx68k__DOT__Nanod) 
-				 | ((QData)((IData)(
-						    (((2U 
-						       == (IData)(vlTOPp->fx68k__DOT__nDecoder__DOT__ftuCtrl)) 
-						      << 1U) 
-						     | (7U 
-							== (IData)(vlTOPp->fx68k__DOT__nDecoder__DOT__ftuCtrl))))) 
-				    << 0x27U));
-    vlTOPp->fx68k__DOT__Nanod = ((VL_ULL(0xffffe3ffffffff) 
-				  & vlTOPp->fx68k__DOT__Nanod) 
-				 | ((QData)((IData)(
-						    (((9U 
-						       == (IData)(vlTOPp->fx68k__DOT__nDecoder__DOT__ftuCtrl)) 
-						      << 2U) 
-						     | (((0xbU 
-							  == (IData)(vlTOPp->fx68k__DOT__nDecoder__DOT__ftuCtrl)) 
-							 << 1U) 
-							| (((6U 
-							     == (IData)(vlTOPp->fx68k__DOT__nDecoder__DOT__ftuCtrl)) 
-							    | (0xeU 
-							       == (IData)(vlTOPp->fx68k__DOT__nDecoder__DOT__ftuCtrl))) 
-							   | (0xfU 
-							      == (IData)(vlTOPp->fx68k__DOT__nDecoder__DOT__ftuCtrl))))))) 
-				    << 0x22U));
-    vlTOPp->fx68k__DOT__Nanod = ((VL_ULL(0xfff3ffffffffff) 
-				  & vlTOPp->fx68k__DOT__Nanod) 
-				 | ((QData)((IData)(
-						    (((0xcU 
-						       == (IData)(vlTOPp->fx68k__DOT__nDecoder__DOT__ftuCtrl)) 
-						      << 1U) 
-						     | (0xaU 
-							== (IData)(vlTOPp->fx68k__DOT__nDecoder__DOT__ftuCtrl))))) 
-				    << 0x2aU));
-    vlTOPp->fx68k__DOT__Nanod = ((VL_ULL(0xffffffdfffffff) 
-				  & vlTOPp->fx68k__DOT__Nanod) 
-				 | ((QData)((IData)(
-						    (1U 
-						     & (IData)(
-							       (vlTOPp->fx68k__DOT__Nanod2 
-								>> 0x1bU))))) 
-				    << 0x1dU));
-}
-
-VL_INLINE_OPT void Vfx68k::_multiclk__TOP__23(Vfx68k__Syms* __restrict vlSymsp) {
-    VL_DEBUG_IF(VL_DBG_MSGF("+    Vfx68k::_multiclk__TOP__23\n"); );
-    Vfx68k* __restrict vlTOPp VL_ATTR_UNUSED = vlSymsp->TOPp;
-    // Body
     // ALWAYS at fx68k.sv:1970
     if ((2U & vlTOPp->fx68k__DOT__microLatch)) {
 	vlTOPp->fx68k__DOT__sequencer__DOT__uNma = 
@@ -30030,35 +29510,6 @@ VL_INLINE_OPT void Vfx68k::_multiclk__TOP__23(Vfx68k__Syms* __restrict vlSymsp) 
 	    }
 	}
     }
-    // ALWAYS at fx68k.sv:1957
-    vlTOPp->fx68k__DOT__nma = ((IData)(vlTOPp->fx68k__DOT__A0Err)
-			        ? ((IData)(vlTOPp->fx68k__DOT__sequencer__DOT__a0Rst)
-				    ? 2U : ((((IData)(vlTOPp->fx68k__DOT__sequencer__DOT__rExcRst) 
-					      | (IData)(vlTOPp->fx68k__DOT__sequencer__DOT__rExcBusErr)) 
-					     | (IData)(vlTOPp->fx68k__DOT__sequencer__DOT__rExcAdrErr))
-					     ? 1U : 3U))
-			        : (IData)(vlTOPp->fx68k__DOT__sequencer__DOT__uNma));
-    // ALWAYS at fx68k.sv:2490
-    vlTOPp->__Vtableidx1 = (0xffU & ((IData)(vlTOPp->fx68k__DOT__nma) 
-				     >> 2U));
-    vlTOPp->fx68k__DOT__microToNanoAddr__DOT__orgBase 
-	= vlTOPp->__Vtable1_fx68k__DOT__microToNanoAddr__DOT__orgBase
-	[vlTOPp->__Vtableidx1];
-}
-
-VL_INLINE_OPT void Vfx68k::_combo__TOP__24(Vfx68k__Syms* __restrict vlSymsp) {
-    VL_DEBUG_IF(VL_DBG_MSGF("+    Vfx68k::_combo__TOP__24\n"); );
-    Vfx68k* __restrict vlTOPp VL_ATTR_UNUSED = vlSymsp->TOPp;
-    // Body
-    vlTOPp->fx68k__DOT__enT4 = ((IData)(vlTOPp->fx68k__DOT__Clks) 
-				& ((0U == vlTOPp->fx68k__DOT__tState) 
-				   | (3U == vlTOPp->fx68k__DOT__tState)));
-}
-
-VL_INLINE_OPT void Vfx68k::_sequent__TOP__25(Vfx68k__Syms* __restrict vlSymsp) {
-    VL_DEBUG_IF(VL_DBG_MSGF("+    Vfx68k::_sequent__TOP__25\n"); );
-    Vfx68k* __restrict vlTOPp VL_ATTR_UNUSED = vlSymsp->TOPp;
-    // Body
     vlTOPp->fx68k__DOT__Irdecod = ((VL_ULL(0x3ff81ffffff) 
 				    & vlTOPp->fx68k__DOT__Irdecod) 
 				   | ((QData)((IData)(
@@ -30313,6 +29764,240 @@ VL_INLINE_OPT void Vfx68k::_sequent__TOP__25(Vfx68k__Syms* __restrict vlSymsp) {
 							      (~ (IData)(vlTOPp->fx68k__DOT__irdDecode__DOT__isRegShift))
 							       : (IData)(vlTOPp->fx68k__DOT__irdDecode__DOT__unnamedblk1__DOT__eaIsAreg))))))) 
 				      << 0x17U));
+    vlTOPp->fx68k__DOT__Nanod = ((VL_ULL(0xfc0fffffffffff) 
+				  & vlTOPp->fx68k__DOT__Nanod) 
+				 | ((QData)((IData)(
+						    (((1U 
+						       == (IData)(vlTOPp->fx68k__DOT__nDecoder__DOT__ftuCtrl)) 
+						      << 5U) 
+						     | (((0xeU 
+							  == (IData)(vlTOPp->fx68k__DOT__nDecoder__DOT__ftuCtrl)) 
+							 << 4U) 
+							| (((0xdU 
+							     == (IData)(vlTOPp->fx68k__DOT__nDecoder__DOT__ftuCtrl)) 
+							    << 3U) 
+							   | (((1U 
+								== (IData)(vlTOPp->fx68k__DOT__nDecoder__DOT__ftuCtrl)) 
+							       << 2U) 
+							      | ((((4U 
+								    == (IData)(vlTOPp->fx68k__DOT__nDecoder__DOT__ftuCtrl)) 
+								   | (6U 
+								      == (IData)(vlTOPp->fx68k__DOT__nDecoder__DOT__ftuCtrl))) 
+								  << 1U) 
+								 | (8U 
+								    == (IData)(vlTOPp->fx68k__DOT__nDecoder__DOT__ftuCtrl))))))))) 
+				    << 0x2cU));
+    vlTOPp->fx68k__DOT__Nanod = ((VL_ULL(0xfffdffffffffff) 
+				  & vlTOPp->fx68k__DOT__Nanod) 
+				 | ((QData)((IData)(
+						    (6U 
+						     == (IData)(vlTOPp->fx68k__DOT__nDecoder__DOT__ftuCtrl)))) 
+				    << 0x29U));
+    vlTOPp->fx68k__DOT__Nanod = ((VL_ULL(0xffffdfffffffff) 
+				  & vlTOPp->fx68k__DOT__Nanod) 
+				 | ((QData)((IData)(
+						    (5U 
+						     == (IData)(vlTOPp->fx68k__DOT__nDecoder__DOT__ftuCtrl)))) 
+				    << 0x25U));
+    vlTOPp->fx68k__DOT__Nanod = ((VL_ULL(0xfffe7fffffffff) 
+				  & vlTOPp->fx68k__DOT__Nanod) 
+				 | ((QData)((IData)(
+						    (((2U 
+						       == (IData)(vlTOPp->fx68k__DOT__nDecoder__DOT__ftuCtrl)) 
+						      << 1U) 
+						     | (7U 
+							== (IData)(vlTOPp->fx68k__DOT__nDecoder__DOT__ftuCtrl))))) 
+				    << 0x27U));
+    vlTOPp->fx68k__DOT__Nanod = ((VL_ULL(0xffffe3ffffffff) 
+				  & vlTOPp->fx68k__DOT__Nanod) 
+				 | ((QData)((IData)(
+						    (((9U 
+						       == (IData)(vlTOPp->fx68k__DOT__nDecoder__DOT__ftuCtrl)) 
+						      << 2U) 
+						     | (((0xbU 
+							  == (IData)(vlTOPp->fx68k__DOT__nDecoder__DOT__ftuCtrl)) 
+							 << 1U) 
+							| (((6U 
+							     == (IData)(vlTOPp->fx68k__DOT__nDecoder__DOT__ftuCtrl)) 
+							    | (0xeU 
+							       == (IData)(vlTOPp->fx68k__DOT__nDecoder__DOT__ftuCtrl))) 
+							   | (0xfU 
+							      == (IData)(vlTOPp->fx68k__DOT__nDecoder__DOT__ftuCtrl))))))) 
+				    << 0x22U));
+    vlTOPp->fx68k__DOT__Nanod = ((VL_ULL(0xfff3ffffffffff) 
+				  & vlTOPp->fx68k__DOT__Nanod) 
+				 | ((QData)((IData)(
+						    (((0xcU 
+						       == (IData)(vlTOPp->fx68k__DOT__nDecoder__DOT__ftuCtrl)) 
+						      << 1U) 
+						     | (0xaU 
+							== (IData)(vlTOPp->fx68k__DOT__nDecoder__DOT__ftuCtrl))))) 
+				    << 0x2aU));
+    // ALWAYS at fx68k.sv:1957
+    vlTOPp->fx68k__DOT__nma = ((IData)(vlTOPp->fx68k__DOT__A0Err)
+			        ? ((IData)(vlTOPp->fx68k__DOT__sequencer__DOT__a0Rst)
+				    ? 2U : ((((IData)(vlTOPp->fx68k__DOT__sequencer__DOT__rExcRst) 
+					      | (IData)(vlTOPp->fx68k__DOT__sequencer__DOT__rExcBusErr)) 
+					     | (IData)(vlTOPp->fx68k__DOT__sequencer__DOT__rExcAdrErr))
+					     ? 1U : 3U))
+			        : (IData)(vlTOPp->fx68k__DOT__sequencer__DOT__uNma));
+    // ALWAYS at fx68k.sv:1658
+    vlTOPp->fx68k__DOT__excUnit__DOT__dobInput = ((2U 
+						   == 
+						   (3U 
+						    & (IData)(
+							      (vlTOPp->fx68k__DOT__Nanod2 
+							       >> 0x11U))))
+						   ? (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__Abd)
+						   : 
+						  ((1U 
+						    == 
+						    (3U 
+						     & (IData)(
+							       (vlTOPp->fx68k__DOT__Nanod2 
+								>> 0x11U))))
+						    ? (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__Dbd)
+						    : 
+						   ((3U 
+						     == 
+						     (3U 
+						      & (IData)(
+								(vlTOPp->fx68k__DOT__Nanod2 
+								 >> 0x11U))))
+						     ? (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluLatch)
+						     : 0U)));
+    // ALWAYS at fx68k.sv:1471
+    vlTOPp->fx68k__DOT__excUnit__DOT__auInpMux = ((1U 
+						   & (IData)(
+							     (vlTOPp->fx68k__DOT__Nanod2 
+							      >> 0x2eU)))
+						   ? 
+						  ((1U 
+						    & (IData)(
+							      (vlTOPp->fx68k__DOT__Nanod2 
+							       >> 0x2dU)))
+						    ? 
+						   ((1U 
+						     & (IData)(
+							       (vlTOPp->fx68k__DOT__Nanod2 
+								>> 0x2cU)))
+						     ? 
+						    ((1U 
+						      & ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__byteNotSpAlign) 
+							 | (IData)(
+								   (vlTOPp->fx68k__DOT__Nanod2 
+								    >> 0x2fU))))
+						      ? 0xffffffffU
+						      : 0xfffffffeU)
+						     : 0xfffffffeU)
+						    : 
+						   ((1U 
+						     & (IData)(
+							       (vlTOPp->fx68k__DOT__Nanod2 
+								>> 0x2cU)))
+						     ? 4U
+						     : 2U))
+						   : 
+						  ((1U 
+						    & (IData)(
+							      (vlTOPp->fx68k__DOT__Nanod2 
+							       >> 0x2dU)))
+						    ? 
+						   ((1U 
+						     & (IData)(
+							       (vlTOPp->fx68k__DOT__Nanod2 
+								>> 0x2cU)))
+						     ? 
+						    (((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__Abh) 
+						      << 0x10U) 
+						     | (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__Abl))
+						     : 0xfffffffcU)
+						    : 
+						   ((1U 
+						     & (IData)(
+							       (vlTOPp->fx68k__DOT__Nanod2 
+								>> 0x2cU)))
+						     ? 
+						    ((1U 
+						      & ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__byteNotSpAlign) 
+							 | (IData)(
+								   (vlTOPp->fx68k__DOT__Nanod2 
+								    >> 0x2fU))))
+						      ? 1U
+						      : 2U)
+						     : 0U)));
+    vlTOPp->fx68k__DOT__excUnit__DOT__ryl2Abd = (1U 
+						 & ((IData)(
+							    (vlTOPp->fx68k__DOT__Nanod2 
+							     >> 3U)) 
+						    & ((~ (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__ryIsAreg)) 
+						       | (IData)(
+								 (vlTOPp->fx68k__DOT__Nanod2 
+								  >> 0x27U)))));
+    vlTOPp->fx68k__DOT__excUnit__DOT__ryl2Dbd = (1U 
+						 & ((IData)(
+							    (vlTOPp->fx68k__DOT__Nanod2 
+							     >> 4U)) 
+						    & ((~ (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__ryIsAreg)) 
+						       | (IData)(
+								 (vlTOPp->fx68k__DOT__Nanod2 
+								  >> 0x25U)))));
+    vlTOPp->fx68k__DOT__excUnit__DOT__rxl2Abd = (1U 
+						 & ((IData)(
+							    (vlTOPp->fx68k__DOT__Nanod2 
+							     >> 0xfU)) 
+						    & ((~ (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__rxIsAreg)) 
+						       | (IData)(
+								 (vlTOPp->fx68k__DOT__Nanod2 
+								  >> 0x27U)))));
+    vlTOPp->fx68k__DOT__excUnit__DOT__rxl2Dbd = (1U 
+						 & ((IData)(
+							    (vlTOPp->fx68k__DOT__Nanod2 
+							     >> 0x10U)) 
+						    & ((~ (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__rxIsAreg)) 
+						       | (IData)(
+								 (vlTOPp->fx68k__DOT__Nanod2 
+								  >> 0x25U)))));
+    vlTOPp->fx68k__DOT__excUnit__DOT__ryl2Dbl = (1U 
+						 & ((IData)(
+							    (vlTOPp->fx68k__DOT__Nanod2 
+							     >> 4U)) 
+						    & ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__ryIsAreg) 
+						       | (IData)(
+								 (vlTOPp->fx68k__DOT__Nanod2 
+								  >> 0x25U)))));
+    vlTOPp->fx68k__DOT__excUnit__DOT__rxl2Dbl = (1U 
+						 & ((IData)(
+							    (vlTOPp->fx68k__DOT__Nanod2 
+							     >> 0x10U)) 
+						    & ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__rxIsAreg) 
+						       | (IData)(
+								 (vlTOPp->fx68k__DOT__Nanod2 
+								  >> 0x25U)))));
+    vlTOPp->fx68k__DOT__excUnit__DOT__ryl2Abl = (1U 
+						 & ((IData)(
+							    (vlTOPp->fx68k__DOT__Nanod2 
+							     >> 3U)) 
+						    & ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__ryIsAreg) 
+						       | (IData)(
+								 (vlTOPp->fx68k__DOT__Nanod2 
+								  >> 0x27U)))));
+    vlTOPp->fx68k__DOT__excUnit__DOT__rxl2Abl = (1U 
+						 & ((IData)(
+							    (vlTOPp->fx68k__DOT__Nanod2 
+							     >> 0xfU)) 
+						    & ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__rxIsAreg) 
+						       | (IData)(
+								 (vlTOPp->fx68k__DOT__Nanod2 
+								  >> 0x27U)))));
+    vlTOPp->fx68k__DOT__Nanod = ((VL_ULL(0xffffffdfffffff) 
+				  & vlTOPp->fx68k__DOT__Nanod) 
+				 | ((QData)((IData)(
+						    (1U 
+						     & (IData)(
+							       (vlTOPp->fx68k__DOT__Nanod2 
+								>> 0x1bU))))) 
+				    << 0x1dU));
     // ALWAYS at fx68k.sv:250
     if ((8U & (IData)(vlTOPp->fx68k__DOT__Clks))) {
 	vlTOPp->fx68k__DOT__nanoLatch[0U] = 0U;
@@ -30334,6 +30019,17 @@ VL_INLINE_OPT void Vfx68k::_sequent__TOP__25(Vfx68k__Syms* __restrict vlSymsp) {
 	    }
 	}
     }
+    // ALWAYS at fx68k.sv:2490
+    vlTOPp->__Vtableidx1 = (0xffU & ((IData)(vlTOPp->fx68k__DOT__nma) 
+				     >> 2U));
+    vlTOPp->fx68k__DOT__microToNanoAddr__DOT__orgBase 
+	= vlTOPp->__Vtable1_fx68k__DOT__microToNanoAddr__DOT__orgBase
+	[vlTOPp->__Vtableidx1];
+    vlTOPp->fx68k__DOT__excUnit__DOT__aulow = (0x1ffffU 
+					       & ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__Dbl) 
+						  + 
+						  (0xffffU 
+						   & vlTOPp->fx68k__DOT__excUnit__DOT__auInpMux)));
     vlTOPp->fx68k__DOT__Nanod = ((VL_ULL(0xfffffdffffffff) 
 				  & vlTOPp->fx68k__DOT__Nanod) 
 				 | ((QData)((IData)(
@@ -30568,174 +30264,72 @@ VL_INLINE_OPT void Vfx68k::_sequent__TOP__25(Vfx68k__Syms* __restrict vlSymsp) {
 				    << 0x35U));
 }
 
-VL_INLINE_OPT void Vfx68k::_multiclk__TOP__26(Vfx68k__Syms* __restrict vlSymsp) {
-    VL_DEBUG_IF(VL_DBG_MSGF("+    Vfx68k::_multiclk__TOP__26\n"); );
+void Vfx68k::_initial__TOP__3(Vfx68k__Syms* __restrict vlSymsp) {
+    VL_DEBUG_IF(VL_DBG_MSGF("+    Vfx68k::_initial__TOP__3\n"); );
     Vfx68k* __restrict vlTOPp VL_ATTR_UNUSED = vlSymsp->TOPp;
     // Body
-    // ALWAYS at fx68k.sv:1658
-    vlTOPp->fx68k__DOT__excUnit__DOT__dobInput = ((2U 
-						   == 
-						   (3U 
-						    & (IData)(
-							      (vlTOPp->fx68k__DOT__Nanod2 
-							       >> 0x11U))))
-						   ? (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__Abd)
-						   : 
-						  ((1U 
-						    == 
-						    (3U 
-						     & (IData)(
-							       (vlTOPp->fx68k__DOT__Nanod2 
-								>> 0x11U))))
-						    ? (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__Dbd)
-						    : 
-						   ((3U 
-						     == 
-						     (3U 
-						      & (IData)(
-								(vlTOPp->fx68k__DOT__Nanod2 
-								 >> 0x11U))))
-						     ? (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluLatch)
-						     : 0U)));
-    // ALWAYS at fx68k.sv:1471
-    vlTOPp->fx68k__DOT__excUnit__DOT__auInpMux = ((1U 
-						   & (IData)(
-							     (vlTOPp->fx68k__DOT__Nanod2 
-							      >> 0x2eU)))
-						   ? 
-						  ((1U 
-						    & (IData)(
-							      (vlTOPp->fx68k__DOT__Nanod2 
-							       >> 0x2dU)))
-						    ? 
-						   ((1U 
-						     & (IData)(
-							       (vlTOPp->fx68k__DOT__Nanod2 
-								>> 0x2cU)))
-						     ? 
-						    ((1U 
-						      & ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__byteNotSpAlign) 
-							 | (IData)(
-								   (vlTOPp->fx68k__DOT__Nanod2 
-								    >> 0x2fU))))
-						      ? 0xffffffffU
-						      : 0xfffffffeU)
-						     : 0xfffffffeU)
-						    : 
-						   ((1U 
-						     & (IData)(
-							       (vlTOPp->fx68k__DOT__Nanod2 
-								>> 0x2cU)))
-						     ? 4U
-						     : 2U))
-						   : 
-						  ((1U 
-						    & (IData)(
-							      (vlTOPp->fx68k__DOT__Nanod2 
-							       >> 0x2dU)))
-						    ? 
-						   ((1U 
-						     & (IData)(
-							       (vlTOPp->fx68k__DOT__Nanod2 
-								>> 0x2cU)))
-						     ? 
-						    (((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__Abh) 
-						      << 0x10U) 
-						     | (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__Abl))
-						     : 0xfffffffcU)
-						    : 
-						   ((1U 
-						     & (IData)(
-							       (vlTOPp->fx68k__DOT__Nanod2 
-								>> 0x2cU)))
-						     ? 
-						    ((1U 
-						      & ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__byteNotSpAlign) 
-							 | (IData)(
-								   (vlTOPp->fx68k__DOT__Nanod2 
-								    >> 0x2fU))))
-						      ? 1U
-						      : 2U)
-						     : 0U)));
-    vlTOPp->fx68k__DOT__excUnit__DOT__ryl2Abd = (1U 
-						 & ((IData)(
-							    (vlTOPp->fx68k__DOT__Nanod2 
-							     >> 3U)) 
-						    & ((~ (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__ryIsAreg)) 
-						       | (IData)(
-								 (vlTOPp->fx68k__DOT__Nanod2 
-								  >> 0x27U)))));
-    vlTOPp->fx68k__DOT__excUnit__DOT__ryl2Dbd = (1U 
-						 & ((IData)(
-							    (vlTOPp->fx68k__DOT__Nanod2 
-							     >> 4U)) 
-						    & ((~ (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__ryIsAreg)) 
-						       | (IData)(
-								 (vlTOPp->fx68k__DOT__Nanod2 
-								  >> 0x25U)))));
-    vlTOPp->fx68k__DOT__excUnit__DOT__rxl2Abd = (1U 
-						 & ((IData)(
-							    (vlTOPp->fx68k__DOT__Nanod2 
-							     >> 0xfU)) 
-						    & ((~ (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__rxIsAreg)) 
-						       | (IData)(
-								 (vlTOPp->fx68k__DOT__Nanod2 
-								  >> 0x27U)))));
-    vlTOPp->fx68k__DOT__excUnit__DOT__rxl2Dbd = (1U 
-						 & ((IData)(
-							    (vlTOPp->fx68k__DOT__Nanod2 
-							     >> 0x10U)) 
-						    & ((~ (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__rxIsAreg)) 
-						       | (IData)(
-								 (vlTOPp->fx68k__DOT__Nanod2 
-								  >> 0x25U)))));
-    vlTOPp->fx68k__DOT__excUnit__DOT__ryl2Dbl = (1U 
-						 & ((IData)(
-							    (vlTOPp->fx68k__DOT__Nanod2 
-							     >> 4U)) 
-						    & ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__ryIsAreg) 
-						       | (IData)(
-								 (vlTOPp->fx68k__DOT__Nanod2 
-								  >> 0x25U)))));
-    vlTOPp->fx68k__DOT__excUnit__DOT__rxl2Dbl = (1U 
-						 & ((IData)(
-							    (vlTOPp->fx68k__DOT__Nanod2 
-							     >> 0x10U)) 
-						    & ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__rxIsAreg) 
-						       | (IData)(
-								 (vlTOPp->fx68k__DOT__Nanod2 
-								  >> 0x25U)))));
-    vlTOPp->fx68k__DOT__excUnit__DOT__ryl2Abl = (1U 
-						 & ((IData)(
-							    (vlTOPp->fx68k__DOT__Nanod2 
-							     >> 3U)) 
-						    & ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__ryIsAreg) 
-						       | (IData)(
-								 (vlTOPp->fx68k__DOT__Nanod2 
-								  >> 0x27U)))));
-    vlTOPp->fx68k__DOT__excUnit__DOT__rxl2Abl = (1U 
-						 & ((IData)(
-							    (vlTOPp->fx68k__DOT__Nanod2 
-							     >> 0xfU)) 
-						    & ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__rxIsAreg) 
-						       | (IData)(
-								 (vlTOPp->fx68k__DOT__Nanod2 
-								  >> 0x27U)))));
-    vlTOPp->fx68k__DOT__excUnit__DOT__aulow = (0x1ffffU 
-					       & ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__Dbl) 
-						  + 
-						  (0xffffU 
-						   & vlTOPp->fx68k__DOT__excUnit__DOT__auInpMux)));
+    // INITIAL at fx68k.sv:1175
+    vlTOPp->fx68k__DOT__excUnit__DOT__regs68L[0U] = 0U;
+    vlTOPp->fx68k__DOT__excUnit__DOT__regs68H[0U] = 0U;
+    vlTOPp->fx68k__DOT__excUnit__DOT__regs68L[1U] = 0U;
+    vlTOPp->fx68k__DOT__excUnit__DOT__regs68H[1U] = 0U;
+    vlTOPp->fx68k__DOT__excUnit__DOT__regs68L[2U] = 0U;
+    vlTOPp->fx68k__DOT__excUnit__DOT__regs68H[2U] = 0U;
+    vlTOPp->fx68k__DOT__excUnit__DOT__regs68L[3U] = 0U;
+    vlTOPp->fx68k__DOT__excUnit__DOT__regs68H[3U] = 0U;
+    vlTOPp->fx68k__DOT__excUnit__DOT__regs68L[4U] = 0U;
+    vlTOPp->fx68k__DOT__excUnit__DOT__regs68H[4U] = 0U;
+    vlTOPp->fx68k__DOT__excUnit__DOT__regs68L[5U] = 0U;
+    vlTOPp->fx68k__DOT__excUnit__DOT__regs68H[5U] = 0U;
+    vlTOPp->fx68k__DOT__excUnit__DOT__regs68L[6U] = 0U;
+    vlTOPp->fx68k__DOT__excUnit__DOT__regs68H[6U] = 0U;
+    vlTOPp->fx68k__DOT__excUnit__DOT__regs68L[7U] = 0U;
+    vlTOPp->fx68k__DOT__excUnit__DOT__regs68H[7U] = 0U;
+    vlTOPp->fx68k__DOT__excUnit__DOT__regs68L[8U] = 0U;
+    vlTOPp->fx68k__DOT__excUnit__DOT__regs68H[8U] = 0U;
+    vlTOPp->fx68k__DOT__excUnit__DOT__regs68L[9U] = 0U;
+    vlTOPp->fx68k__DOT__excUnit__DOT__regs68H[9U] = 0U;
+    vlTOPp->fx68k__DOT__excUnit__DOT__regs68L[0xaU] = 0U;
+    vlTOPp->fx68k__DOT__excUnit__DOT__regs68H[0xaU] = 0U;
+    vlTOPp->fx68k__DOT__excUnit__DOT__regs68L[0xbU] = 0U;
+    vlTOPp->fx68k__DOT__excUnit__DOT__regs68H[0xbU] = 0U;
+    vlTOPp->fx68k__DOT__excUnit__DOT__regs68L[0xcU] = 0U;
+    vlTOPp->fx68k__DOT__excUnit__DOT__regs68H[0xcU] = 0U;
+    vlTOPp->fx68k__DOT__excUnit__DOT__regs68L[0xdU] = 0U;
+    vlTOPp->fx68k__DOT__excUnit__DOT__regs68H[0xdU] = 0U;
+    vlTOPp->fx68k__DOT__excUnit__DOT__regs68L[0xeU] = 0U;
+    vlTOPp->fx68k__DOT__excUnit__DOT__regs68H[0xeU] = 0U;
+    vlTOPp->fx68k__DOT__excUnit__DOT__regs68L[0xfU] = 0U;
+    vlTOPp->fx68k__DOT__excUnit__DOT__regs68H[0xfU] = 0U;
+    vlTOPp->fx68k__DOT__excUnit__DOT__regs68L[0x10U] = 0U;
+    vlTOPp->fx68k__DOT__excUnit__DOT__regs68H[0x10U] = 0U;
+    vlTOPp->fx68k__DOT__excUnit__DOT__regs68L[0x11U] = 0U;
+    vlTOPp->fx68k__DOT__excUnit__DOT__regs68H[0x11U] = 0U;
 }
 
-VL_INLINE_OPT void Vfx68k::_combo__TOP__27(Vfx68k__Syms* __restrict vlSymsp) {
-    VL_DEBUG_IF(VL_DBG_MSGF("+    Vfx68k::_combo__TOP__27\n"); );
+VL_INLINE_OPT void Vfx68k::_combo__TOP__4(Vfx68k__Syms* __restrict vlSymsp) {
+    VL_DEBUG_IF(VL_DBG_MSGF("+    Vfx68k::_combo__TOP__4\n"); );
     Vfx68k* __restrict vlTOPp VL_ATTR_UNUSED = vlSymsp->TOPp;
     // Variables
     // Begin mtask footprint  all: 
     VL_SIG8(__Vtemp8,31,0);
     VL_SIG8(__Vtemp10,31,0);
     // Body
+    // ALWAYS at fx68kAlu.sv:463
+    vlTOPp->__Vfunc_fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__gt9__4__nib 
+	= (0xfU & ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__htemp) 
+		   >> 4U));
+    vlTOPp->__Vfunc_fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__gt9__4__Vfuncout 
+	= (1U & (((IData)(vlTOPp->__Vfunc_fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__gt9__4__nib) 
+		  >> 3U) & (((IData)(vlTOPp->__Vfunc_fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__gt9__4__nib) 
+			     >> 2U) | ((IData)(vlTOPp->__Vfunc_fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__gt9__4__nib) 
+				       >> 1U))));
+    vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__highC 
+	= (1U & (((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__pswCcr) 
+		  >> 4U) | ((6U != (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__oper)) 
+			    & ((IData)(vlTOPp->__Vfunc_fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__gt9__4__Vfuncout) 
+			       | ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__htemp) 
+				  >> 8U)))));
     vlTOPp->fx68k__DOT__Irdecod = ((VL_ULL(0x3fdffffffff) 
 				    & vlTOPp->fx68k__DOT__Irdecod) 
 				   | ((QData)((IData)(
@@ -30879,10 +30473,6 @@ VL_INLINE_OPT void Vfx68k::_combo__TOP__27(Vfx68k__Syms* __restrict vlSymsp) {
 				    & vlTOPp->fx68k__DOT__Irdecod) 
 				   | ((QData)((IData)(__Vtemp10)) 
 				      << 0x20U));
-    vlTOPp->fx68k__DOT__rstUrom = (((IData)(vlTOPp->fx68k__DOT__Clks) 
-				    >> 1U) & (IData)(vlTOPp->fx68k__DOT__enErrClk));
-    vlTOPp->fx68k__DOT__enT3 = (((IData)(vlTOPp->fx68k__DOT__Clks) 
-				 >> 1U) & (2U == vlTOPp->fx68k__DOT__tState));
     vlTOPp->fx68k__DOT__Clks = (((IData)(vlTOPp->clk) 
 				 << 4U) | (((IData)(vlTOPp->extReset) 
 					    << 3U) 
@@ -30934,6 +30524,52 @@ VL_INLINE_OPT void Vfx68k::_combo__TOP__27(Vfx68k__Syms* __restrict vlSymsp) {
 							   & (vlTOPp->fx68k__DOT__nanoLatch[0U] 
 							      >> 0x16U)))))) 
 				    << 0x10U));
+    // ALWAYS at fx68kAlu.sv:465
+    if ((6U != (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__oper))) {
+	vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__htemp 
+	    = (0x1ffU & ((0xffU & (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluLatch)) 
+			 + ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__lowC)
+			     ? 6U : 0U)));
+	vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__hNib 
+	    = (0x1fU & (((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__htemp) 
+			 >> 4U) + ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__highC)
+				    ? 6U : 0U)));
+	vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__bcdV 
+	    = (1U & (((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__hNib) 
+		      >> 3U) & (~ ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluLatch) 
+				   >> 7U))));
+    } else {
+	vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__htemp 
+	    = (0x1ffU & ((0xffU & (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluLatch)) 
+			 - ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__lowC)
+			     ? 6U : 0U)));
+	vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__hNib 
+	    = (0x1fU & (((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__htemp) 
+			 >> 4U) - ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__highC)
+				    ? 6U : 0U)));
+	vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__bcdV 
+	    = (1U & ((~ ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__hNib) 
+			 >> 3U)) & ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluLatch) 
+				    >> 7U)));
+    }
+    vlTOPp->fx68k__DOT__enT1 = ((((IData)(vlTOPp->fx68k__DOT__Clks) 
+				  >> 1U) & (4U == vlTOPp->fx68k__DOT__tState)) 
+				& (~ (IData)(vlTOPp->fx68k__DOT__wClk)));
+    vlTOPp->fx68k__DOT__enT2 = ((IData)(vlTOPp->fx68k__DOT__Clks) 
+				& (1U == vlTOPp->fx68k__DOT__tState));
+    vlTOPp->fx68k__DOT__enT3 = (((IData)(vlTOPp->fx68k__DOT__Clks) 
+				 >> 1U) & (2U == vlTOPp->fx68k__DOT__tState));
+    vlTOPp->fx68k__DOT__enT4 = ((IData)(vlTOPp->fx68k__DOT__Clks) 
+				& ((0U == vlTOPp->fx68k__DOT__tState) 
+				   | (3U == vlTOPp->fx68k__DOT__tState)));
+    vlTOPp->fx68k__DOT__rstUrom = (((IData)(vlTOPp->fx68k__DOT__Clks) 
+				    >> 1U) & (IData)(vlTOPp->fx68k__DOT__enErrClk));
+    vlTOPp->fx68k__DOT__busControl__DOT__bcReset = 
+	(1U & (((IData)(vlTOPp->fx68k__DOT__Clks) >> 3U) 
+	       | (((IData)(vlTOPp->fx68k__DOT__busControl__DOT__addrOeDelay) 
+		   & (~ ((IData)(vlTOPp->fx68k__DOT__BeI) 
+			 | (IData)(vlTOPp->fx68k__DOT__BeiDelay)))) 
+		  & (IData)(vlTOPp->fx68k__DOT__Vpai))));
     vlTOPp->fx68k__DOT__Nanod = ((VL_ULL(0xbfffffffffffff) 
 				  & vlTOPp->fx68k__DOT__Nanod) 
 				 | ((QData)((IData)(
@@ -31702,14 +31338,6 @@ VL_INLINE_OPT void Vfx68k::_combo__TOP__27(Vfx68k__Syms* __restrict vlSymsp) {
 								     >> 0x21U)))
 							  ? (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__Atl)
 							  : 0U))))))));
-    vlTOPp->fx68k__DOT__busControl__DOT__canStart = 
-	((((((IData)(vlTOPp->fx68k__DOT__BRi) & (IData)(vlTOPp->fx68k__DOT__BgackI)) 
-	    & (~ (IData)(vlTOPp->fx68k__DOT__busArbiter__DOT__rGranted))) 
-	   | (((1U == vlTOPp->fx68k__DOT__busControl__DOT__busPhase) 
-	       & (~ (IData)(vlTOPp->ASn))) & (IData)(vlTOPp->fx68k__DOT__busControl__DOT__isRmcReg))) 
-	  & ((IData)(vlTOPp->fx68k__DOT__busControl__DOT__bcPend) 
-	     | (IData)((vlTOPp->fx68k__DOT__Nanod >> 0x37U)))) 
-	 & (~ (IData)(vlTOPp->fx68k__DOT__busControl__DOT__bcReset)));
     // ALWAYS at fx68kAlu.sv:143
     vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__dOperand 
 	= ((1U & (IData)((vlTOPp->fx68k__DOT__Nanod 
@@ -31724,6 +31352,21 @@ VL_INLINE_OPT void Vfx68k::_combo__TOP__27(Vfx68k__Syms* __restrict vlSymsp) {
 	= ((1U & (IData)((vlTOPp->fx68k__DOT__Nanod 
 			  >> 8U))) ? (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alub)
 	    : (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__Abd));
+    vlTOPp->fx68k__DOT__busControl__DOT__canStart = 
+	((((((IData)(vlTOPp->fx68k__DOT__BRi) & (IData)(vlTOPp->fx68k__DOT__BgackI)) 
+	    & (~ (IData)(vlTOPp->fx68k__DOT__busArbiter__DOT__rGranted))) 
+	   | (((1U == vlTOPp->fx68k__DOT__busControl__DOT__busPhase) 
+	       & (~ (IData)(vlTOPp->ASn))) & (IData)(vlTOPp->fx68k__DOT__busControl__DOT__isRmcReg))) 
+	  & ((IData)(vlTOPp->fx68k__DOT__busControl__DOT__bcPend) 
+	     | (IData)((vlTOPp->fx68k__DOT__Nanod >> 0x37U)))) 
+	 & (~ (IData)(vlTOPp->fx68k__DOT__busControl__DOT__bcReset)));
+    vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__shftMsb 
+	= (1U & ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__isLong)
+		  ? ((IData)(vlTOPp->fx68k__DOT__alue) 
+		     >> 0xfU) : ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__isByte)
+				  ? ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aOperand) 
+				     >> 7U) : ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aOperand) 
+					       >> 0xfU))));
     // ALWAYS at fx68k.sv:2302
     vlTOPp->fx68k__DOT__busControl__DOT__next = ((0U 
 						  == vlTOPp->fx68k__DOT__busControl__DOT__busPhase)
@@ -31770,16 +31413,6 @@ VL_INLINE_OPT void Vfx68k::_combo__TOP__27(Vfx68k__Syms* __restrict vlSymsp) {
 							 ? 2U
 							 : 1U)
 						        : 1U)))))));
-    vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__shftMsb 
-	= (1U & ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__isLong)
-		  ? ((IData)(vlTOPp->fx68k__DOT__alue) 
-		     >> 0xfU) : ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__isByte)
-				  ? ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aOperand) 
-				     >> 7U) : ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aOperand) 
-					       >> 0xfU))));
-    vlTOPp->fx68k__DOT__busControl__DOT__busEnding 
-	= ((1U == vlTOPp->fx68k__DOT__busControl__DOT__next) 
-	   | (2U == vlTOPp->fx68k__DOT__busControl__DOT__next));
     // ALWAYS at fx68kAlu.sv:198
     vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__shftCin 
 	= (1U & ((~ (((0x10U == (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__oper)) 
@@ -31804,6 +31437,9 @@ VL_INLINE_OPT void Vfx68k::_combo__TOP__27(Vfx68k__Syms* __restrict vlSymsp) {
 					       & (IData)(
 							 (vlTOPp->fx68k__DOT__Nanod 
 							  >> 0xcU))))))));
+    vlTOPp->fx68k__DOT__busControl__DOT__busEnding 
+	= ((1U == vlTOPp->fx68k__DOT__busControl__DOT__next) 
+	   | (2U == vlTOPp->fx68k__DOT__busControl__DOT__next));
     // ALWAYS at fx68kAlu.sv:500
     vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__shifter__DOT__tdata 
 	= (((IData)(vlTOPp->fx68k__DOT__alue) << 0x10U) 
@@ -32201,149 +31837,212 @@ VL_INLINE_OPT void Vfx68k::_combo__TOP__27(Vfx68k__Syms* __restrict vlSymsp) {
     }
 }
 
+void Vfx68k::_settle__TOP__5(Vfx68k__Syms* __restrict vlSymsp) {
+    VL_DEBUG_IF(VL_DBG_MSGF("+    Vfx68k::_settle__TOP__5\n"); );
+    Vfx68k* __restrict vlTOPp VL_ATTR_UNUSED = vlSymsp->TOPp;
+    // Body
+    // ALWAYS at fx68k.sv:1317
+    vlTOPp->fx68k__DOT__excUnit__DOT__dbhMux = (0xffffU 
+						& ((1U 
+						    & (IData)(
+							      (vlTOPp->fx68k__DOT__Nanod2 
+							       >> 0xaU)))
+						    ? 
+						   ((0x11U 
+						     >= (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__actualRx))
+						     ? 
+						    vlTOPp->fx68k__DOT__excUnit__DOT__regs68H
+						    [vlTOPp->fx68k__DOT__excUnit__DOT__actualRx]
+						     : 0U)
+						    : 
+						   ((1U 
+						     & (IData)(
+							       (vlTOPp->fx68k__DOT__Nanod2 
+								>> 2U)))
+						     ? 
+						    ((0x11U 
+						      >= (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__actualRy))
+						      ? 
+						     vlTOPp->fx68k__DOT__excUnit__DOT__regs68H
+						     [vlTOPp->fx68k__DOT__excUnit__DOT__actualRy]
+						      : 0U)
+						     : 
+						    ((1U 
+						      & (IData)(
+								(vlTOPp->fx68k__DOT__Nanod 
+								 >> 5U)))
+						      ? 
+						     (vlTOPp->fx68k__DOT__excUnit__DOT__auReg 
+						      >> 0x10U)
+						      : 
+						     ((1U 
+						       & (IData)(
+								 (vlTOPp->fx68k__DOT__Nanod2 
+								  >> 0x1dU)))
+						       ? (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__Ath)
+						       : 
+						      ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__Pch2Dbh)
+						        ? (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__PcH)
+						        : 0U))))));
+    // ALWAYS at fx68k.sv:1317
+    vlTOPp->fx68k__DOT__excUnit__DOT__abhMux = (0xffffU 
+						& ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__Pch2Abh)
+						    ? (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__PcH)
+						    : 
+						   ((1U 
+						     & (IData)(
+							       (vlTOPp->fx68k__DOT__Nanod2 
+								>> 9U)))
+						     ? 
+						    ((0x11U 
+						      >= (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__actualRx))
+						      ? 
+						     vlTOPp->fx68k__DOT__excUnit__DOT__regs68H
+						     [vlTOPp->fx68k__DOT__excUnit__DOT__actualRx]
+						      : 0U)
+						     : 
+						    ((1U 
+						      & (IData)(
+								(vlTOPp->fx68k__DOT__Nanod2 
+								 >> 1U)))
+						      ? 
+						     ((0x11U 
+						       >= (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__actualRy))
+						       ? 
+						      vlTOPp->fx68k__DOT__excUnit__DOT__regs68H
+						      [vlTOPp->fx68k__DOT__excUnit__DOT__actualRy]
+						       : 0U)
+						      : 
+						     ((1U 
+						       & (IData)(
+								 (vlTOPp->fx68k__DOT__Nanod 
+								  >> 4U)))
+						       ? 
+						      (vlTOPp->fx68k__DOT__excUnit__DOT__auReg 
+						       >> 0x10U)
+						       : 
+						      ((1U 
+							& (IData)(
+								  (vlTOPp->fx68k__DOT__Nanod2 
+								   >> 0x1bU)))
+						        ? 
+						       (vlTOPp->fx68k__DOT__excUnit__DOT__aob 
+							>> 0x10U)
+						        : 
+						       ((1U 
+							 & (IData)(
+								   (vlTOPp->fx68k__DOT__Nanod2 
+								    >> 0x1cU)))
+							 ? (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__Ath)
+							 : 0U)))))));
+    // ALWAYS at fx68k.sv:1317
+    vlTOPp->fx68k__DOT__excUnit__DOT__dblMux = (0xffffU 
+						& ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__rxl2Dbl)
+						    ? 
+						   ((0x11U 
+						     >= (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__actualRx))
+						     ? 
+						    vlTOPp->fx68k__DOT__excUnit__DOT__regs68L
+						    [vlTOPp->fx68k__DOT__excUnit__DOT__actualRx]
+						     : 0U)
+						    : 
+						   ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__ryl2Dbl)
+						     ? 
+						    ((0x11U 
+						      >= (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__actualRy))
+						      ? 
+						     vlTOPp->fx68k__DOT__excUnit__DOT__regs68L
+						     [vlTOPp->fx68k__DOT__excUnit__DOT__actualRy]
+						      : 0U)
+						     : 
+						    ((1U 
+						      & (IData)(
+								(vlTOPp->fx68k__DOT__Nanod 
+								 >> 0x2dU)))
+						      ? (IData)(vlTOPp->fx68k__DOT__ftu)
+						      : 
+						     ((1U 
+						       & (IData)(
+								 (vlTOPp->fx68k__DOT__Nanod 
+								  >> 5U)))
+						       ? vlTOPp->fx68k__DOT__excUnit__DOT__auReg
+						       : 
+						      ((1U 
+							& (IData)(
+								  (vlTOPp->fx68k__DOT__Nanod2 
+								   >> 0x20U)))
+						        ? (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__Atl)
+						        : 
+						       ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__Pcl2Dbl)
+							 ? (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__PcL)
+							 : 0U)))))));
+    // ALWAYS at fx68k.sv:1317
+    vlTOPp->fx68k__DOT__excUnit__DOT__ablMux = (0xffffU 
+						& ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__Pcl2Abl)
+						    ? (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__PcL)
+						    : 
+						   ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__rxl2Abl)
+						     ? 
+						    ((0x11U 
+						      >= (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__actualRx))
+						      ? 
+						     vlTOPp->fx68k__DOT__excUnit__DOT__regs68L
+						     [vlTOPp->fx68k__DOT__excUnit__DOT__actualRx]
+						      : 0U)
+						     : 
+						    ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__ryl2Abl)
+						      ? 
+						     ((0x11U 
+						       >= (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__actualRy))
+						       ? 
+						      vlTOPp->fx68k__DOT__excUnit__DOT__regs68L
+						      [vlTOPp->fx68k__DOT__excUnit__DOT__actualRy]
+						       : 0U)
+						      : 
+						     ((1U 
+						       & (IData)(
+								 (vlTOPp->fx68k__DOT__Nanod 
+								  >> 0x2cU)))
+						       ? (IData)(vlTOPp->fx68k__DOT__ftu)
+						       : 
+						      ((1U 
+							& (IData)(
+								  (vlTOPp->fx68k__DOT__Nanod 
+								   >> 4U)))
+						        ? vlTOPp->fx68k__DOT__excUnit__DOT__auReg
+						        : 
+						       ((1U 
+							 & (IData)(
+								   (vlTOPp->fx68k__DOT__Nanod2 
+								    >> 0x1bU)))
+							 ? vlTOPp->fx68k__DOT__excUnit__DOT__aob
+							 : 
+							((1U 
+							  & (IData)(
+								    (vlTOPp->fx68k__DOT__Nanod2 
+								     >> 0x21U)))
+							  ? (IData)(vlTOPp->fx68k__DOT__excUnit__DOT__Atl)
+							  : 0U))))))));
+}
+
 void Vfx68k::_eval(Vfx68k__Syms* __restrict vlSymsp) {
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vfx68k::_eval\n"); );
     Vfx68k* __restrict vlTOPp VL_ATTR_UNUSED = vlSymsp->TOPp;
     // Body
-    vlTOPp->_combo__TOP__2(vlSymsp);
-    if (((IData)(vlTOPp->fx68k__DOT__busArbiter__DOT____Vsenitemexpr1) 
-	 & (~ (IData)(vlTOPp->__Vclklast__TOP__fx68k__DOT__busArbiter__DOT____Vsenitemexpr1)))) {
-	vlTOPp->_sequent__TOP__4(vlSymsp);
+    if (((IData)(vlTOPp->clk) & (~ (IData)(vlTOPp->__Vclklast__TOP__clk)))) {
+	vlTOPp->_sequent__TOP__2(vlSymsp);
     }
-    if (((IData)(vlTOPp->fx68k__DOT__nDecoder__DOT____Vsenitemexpr1) 
-	 & (~ (IData)(vlTOPp->__Vclklast__TOP__fx68k__DOT__nDecoder__DOT____Vsenitemexpr1)))) {
-	vlTOPp->_sequent__TOP__5(vlSymsp);
-    }
-    if (((IData)(vlTOPp->fx68k__DOT__sequencer__DOT____Vsenitemexpr1) 
-	 & (~ (IData)(vlTOPp->__Vclklast__TOP__fx68k__DOT__sequencer__DOT____Vsenitemexpr1)))) {
-	vlTOPp->_sequent__TOP__6(vlSymsp);
-    }
-    if (((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__dataIo__DOT____Vsenitemexpr1) 
-	 & (~ (IData)(vlTOPp->__Vclklast__TOP__fx68k__DOT__excUnit__DOT__dataIo__DOT____Vsenitemexpr1)))) {
-	vlTOPp->_sequent__TOP__7(vlSymsp);
-    }
-    if (((IData)(vlTOPp->fx68k__DOT____Vcellinp__nanoRom__clk) 
-	 & (~ (IData)(vlTOPp->__Vclklast__TOP__fx68k__DOT____Vcellinp__nanoRom__clk)))) {
-	vlTOPp->_sequent__TOP__8(vlSymsp);
-    }
-    if (((IData)(vlTOPp->fx68k__DOT__busControl__DOT____Vsenitemexpr1) 
-	 & (~ (IData)(vlTOPp->__Vclklast__TOP__fx68k__DOT__busControl__DOT____Vsenitemexpr1)))) {
-	vlTOPp->_sequent__TOP__9(vlSymsp);
-    }
-    if (((IData)(vlTOPp->fx68k__DOT__excUnit__DOT____Vcellinp__alu__clk) 
-	 & (~ (IData)(vlTOPp->__Vclklast__TOP__fx68k__DOT__excUnit__DOT____Vcellinp__alu__clk)))) {
-	vlTOPp->_sequent__TOP__10(vlSymsp);
-    }
-    if (((IData)(vlTOPp->fx68k__DOT__sequencer__DOT____Vsenitemexpr1) 
-	 & (~ (IData)(vlTOPp->__Vclklast__TOP__fx68k__DOT__sequencer__DOT____Vsenitemexpr1)))) {
-	vlTOPp->_sequent__TOP__12(vlSymsp);
-    }
-    if ((((IData)(vlTOPp->fx68k__DOT____Vcellinp__nanoRom__clk) 
-	  & (~ (IData)(vlTOPp->__Vclklast__TOP__fx68k__DOT____Vcellinp__nanoRom__clk))) 
-	 | ((IData)(vlTOPp->fx68k__DOT__busControl__DOT____Vsenitemexpr1) 
-	    & (~ (IData)(vlTOPp->__Vclklast__TOP__fx68k__DOT__busControl__DOT____Vsenitemexpr1))))) {
-	vlTOPp->_multiclk__TOP__13(vlSymsp);
-    }
-    vlTOPp->_combo__TOP__14(vlSymsp);
-    if (((((IData)(vlTOPp->fx68k__DOT____Vcellinp__nanoRom__clk) 
-	   & (~ (IData)(vlTOPp->__Vclklast__TOP__fx68k__DOT____Vcellinp__nanoRom__clk))) 
-	  | ((IData)(vlTOPp->fx68k__DOT__busArbiter__DOT____Vsenitemexpr1) 
-	     & (~ (IData)(vlTOPp->__Vclklast__TOP__fx68k__DOT__busArbiter__DOT____Vsenitemexpr1)))) 
-	 | ((IData)(vlTOPp->fx68k__DOT__busControl__DOT____Vsenitemexpr1) 
-	    & (~ (IData)(vlTOPp->__Vclklast__TOP__fx68k__DOT__busControl__DOT____Vsenitemexpr1))))) {
-	vlTOPp->_multiclk__TOP__15(vlSymsp);
-    }
-    if ((((IData)(vlTOPp->fx68k__DOT__busControl__DOT____Vsenitemexpr1) 
-	  & (~ (IData)(vlTOPp->__Vclklast__TOP__fx68k__DOT__busControl__DOT____Vsenitemexpr1))) 
-	 | ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT____Vcellinp__alu__clk) 
-	    & (~ (IData)(vlTOPp->__Vclklast__TOP__fx68k__DOT__excUnit__DOT____Vcellinp__alu__clk))))) {
-	vlTOPp->_multiclk__TOP__16(vlSymsp);
-    }
-    if (((IData)(vlTOPp->fx68k__DOT____Vcellinp__nanoRom__clk) 
-	 & (~ (IData)(vlTOPp->__Vclklast__TOP__fx68k__DOT____Vcellinp__nanoRom__clk)))) {
-	vlTOPp->_sequent__TOP__17(vlSymsp);
-    }
-    if ((((IData)(vlTOPp->fx68k__DOT____Vcellinp__nanoRom__clk) 
-	  & (~ (IData)(vlTOPp->__Vclklast__TOP__fx68k__DOT____Vcellinp__nanoRom__clk))) 
-	 | ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT____Vcellinp__alu__clk) 
-	    & (~ (IData)(vlTOPp->__Vclklast__TOP__fx68k__DOT__excUnit__DOT____Vcellinp__alu__clk))))) {
-	vlTOPp->_multiclk__TOP__18(vlSymsp);
-    }
-    if (((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__dataIo__DOT____Vsenitemexpr1) 
-	 & (~ (IData)(vlTOPp->__Vclklast__TOP__fx68k__DOT__excUnit__DOT__dataIo__DOT____Vsenitemexpr1)))) {
-	vlTOPp->_sequent__TOP__19(vlSymsp);
-    }
-    if (((((IData)(vlTOPp->fx68k__DOT____Vcellinp__nanoRom__clk) 
-	   & (~ (IData)(vlTOPp->__Vclklast__TOP__fx68k__DOT____Vcellinp__nanoRom__clk))) 
-	  | ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT____Vcellinp__alu__clk) 
-	     & (~ (IData)(vlTOPp->__Vclklast__TOP__fx68k__DOT__excUnit__DOT____Vcellinp__alu__clk)))) 
-	 | ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__dataIo__DOT____Vsenitemexpr1) 
-	    & (~ (IData)(vlTOPp->__Vclklast__TOP__fx68k__DOT__excUnit__DOT__dataIo__DOT____Vsenitemexpr1))))) {
-	vlTOPp->_multiclk__TOP__20(vlSymsp);
-    }
-    vlTOPp->_combo__TOP__21(vlSymsp);
-    if (((IData)(vlTOPp->fx68k__DOT__nDecoder__DOT____Vsenitemexpr1) 
-	 & (~ (IData)(vlTOPp->__Vclklast__TOP__fx68k__DOT__nDecoder__DOT____Vsenitemexpr1)))) {
-	vlTOPp->_sequent__TOP__22(vlSymsp);
-    }
-    if ((((((IData)(vlTOPp->fx68k__DOT____Vcellinp__nanoRom__clk) 
-	    & (~ (IData)(vlTOPp->__Vclklast__TOP__fx68k__DOT____Vcellinp__nanoRom__clk))) 
-	   | ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT____Vcellinp__alu__clk) 
-	      & (~ (IData)(vlTOPp->__Vclklast__TOP__fx68k__DOT__excUnit__DOT____Vcellinp__alu__clk)))) 
-	  | ((IData)(vlTOPp->fx68k__DOT__excUnit__DOT__dataIo__DOT____Vsenitemexpr1) 
-	     & (~ (IData)(vlTOPp->__Vclklast__TOP__fx68k__DOT__excUnit__DOT__dataIo__DOT____Vsenitemexpr1)))) 
-	 | ((IData)(vlTOPp->fx68k__DOT__sequencer__DOT____Vsenitemexpr1) 
-	    & (~ (IData)(vlTOPp->__Vclklast__TOP__fx68k__DOT__sequencer__DOT____Vsenitemexpr1))))) {
-	vlTOPp->_multiclk__TOP__23(vlSymsp);
-    }
-    vlTOPp->_combo__TOP__24(vlSymsp);
-    if (((IData)(vlTOPp->fx68k__DOT____Vcellinp__nanoRom__clk) 
-	 & (~ (IData)(vlTOPp->__Vclklast__TOP__fx68k__DOT____Vcellinp__nanoRom__clk)))) {
-	vlTOPp->_sequent__TOP__25(vlSymsp);
-    }
-    if ((((IData)(vlTOPp->fx68k__DOT__excUnit__DOT____Vcellinp__alu__clk) 
-	  & (~ (IData)(vlTOPp->__Vclklast__TOP__fx68k__DOT__excUnit__DOT____Vcellinp__alu__clk))) 
-	 | ((IData)(vlTOPp->fx68k__DOT__nDecoder__DOT____Vsenitemexpr1) 
-	    & (~ (IData)(vlTOPp->__Vclklast__TOP__fx68k__DOT__nDecoder__DOT____Vsenitemexpr1))))) {
-	vlTOPp->_multiclk__TOP__26(vlSymsp);
-    }
-    vlTOPp->_combo__TOP__27(vlSymsp);
+    vlTOPp->_combo__TOP__4(vlSymsp);
     // Final
-    vlTOPp->__Vclklast__TOP__fx68k__DOT__busArbiter__DOT____Vsenitemexpr1 
-	= vlTOPp->fx68k__DOT__busArbiter__DOT____Vsenitemexpr1;
-    vlTOPp->__Vclklast__TOP__fx68k__DOT__nDecoder__DOT____Vsenitemexpr1 
-	= vlTOPp->fx68k__DOT__nDecoder__DOT____Vsenitemexpr1;
-    vlTOPp->__Vclklast__TOP__fx68k__DOT__sequencer__DOT____Vsenitemexpr1 
-	= vlTOPp->fx68k__DOT__sequencer__DOT____Vsenitemexpr1;
-    vlTOPp->__Vclklast__TOP__fx68k__DOT__excUnit__DOT__dataIo__DOT____Vsenitemexpr1 
-	= vlTOPp->fx68k__DOT__excUnit__DOT__dataIo__DOT____Vsenitemexpr1;
-    vlTOPp->__Vclklast__TOP__fx68k__DOT____Vcellinp__nanoRom__clk 
-	= vlTOPp->fx68k__DOT____Vcellinp__nanoRom__clk;
-    vlTOPp->__Vclklast__TOP__fx68k__DOT__busControl__DOT____Vsenitemexpr1 
-	= vlTOPp->fx68k__DOT__busControl__DOT____Vsenitemexpr1;
-    vlTOPp->__Vclklast__TOP__fx68k__DOT__excUnit__DOT____Vcellinp__alu__clk 
-	= vlTOPp->fx68k__DOT__excUnit__DOT____Vcellinp__alu__clk;
+    vlTOPp->__Vclklast__TOP__clk = vlTOPp->clk;
 }
 
 void Vfx68k::_eval_initial(Vfx68k__Syms* __restrict vlSymsp) {
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vfx68k::_eval_initial\n"); );
     Vfx68k* __restrict vlTOPp VL_ATTR_UNUSED = vlSymsp->TOPp;
     // Body
+    vlTOPp->__Vclklast__TOP__clk = vlTOPp->clk;
     vlTOPp->_initial__TOP__3(vlSymsp);
-    vlTOPp->__Vclklast__TOP__fx68k__DOT__busArbiter__DOT____Vsenitemexpr1 
-	= vlTOPp->fx68k__DOT__busArbiter__DOT____Vsenitemexpr1;
-    vlTOPp->__Vclklast__TOP__fx68k__DOT__nDecoder__DOT____Vsenitemexpr1 
-	= vlTOPp->fx68k__DOT__nDecoder__DOT____Vsenitemexpr1;
-    vlTOPp->__Vclklast__TOP__fx68k__DOT__sequencer__DOT____Vsenitemexpr1 
-	= vlTOPp->fx68k__DOT__sequencer__DOT____Vsenitemexpr1;
-    vlTOPp->__Vclklast__TOP__fx68k__DOT__excUnit__DOT__dataIo__DOT____Vsenitemexpr1 
-	= vlTOPp->fx68k__DOT__excUnit__DOT__dataIo__DOT____Vsenitemexpr1;
-    vlTOPp->__Vclklast__TOP__fx68k__DOT____Vcellinp__nanoRom__clk 
-	= vlTOPp->fx68k__DOT____Vcellinp__nanoRom__clk;
-    vlTOPp->__Vclklast__TOP__fx68k__DOT__busControl__DOT____Vsenitemexpr1 
-	= vlTOPp->fx68k__DOT__busControl__DOT____Vsenitemexpr1;
-    vlTOPp->__Vclklast__TOP__fx68k__DOT__excUnit__DOT____Vcellinp__alu__clk 
-	= vlTOPp->fx68k__DOT__excUnit__DOT____Vcellinp__alu__clk;
 }
 
 void Vfx68k::final() {
@@ -32358,7 +32057,7 @@ void Vfx68k::_eval_settle(Vfx68k__Syms* __restrict vlSymsp) {
     Vfx68k* __restrict vlTOPp VL_ATTR_UNUSED = vlSymsp->TOPp;
     // Body
     vlTOPp->_settle__TOP__1(vlSymsp);
-    vlTOPp->_settle__TOP__11(vlSymsp);
+    vlTOPp->_settle__TOP__5(vlSymsp);
 }
 
 VL_INLINE_OPT QData Vfx68k::_change_request(Vfx68k__Syms* __restrict vlSymsp) {
@@ -32367,18 +32066,15 @@ VL_INLINE_OPT QData Vfx68k::_change_request(Vfx68k__Syms* __restrict vlSymsp) {
     // Body
     // Change detection
     QData __req = false;  // Logically a bool
-    __req |= ((vlTOPp->fx68k__DOT__Clks ^ vlTOPp->__Vchglast__TOP__fx68k__DOT__Clks)
-	 | (vlTOPp->fx68k__DOT__Nanod ^ vlTOPp->__Vchglast__TOP__fx68k__DOT__Nanod)
+    __req |= ((vlTOPp->fx68k__DOT__Nanod ^ vlTOPp->__Vchglast__TOP__fx68k__DOT__Nanod)
 	 | (vlTOPp->fx68k__DOT__Irdecod ^ vlTOPp->__Vchglast__TOP__fx68k__DOT__Irdecod)
 	 | (vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__htemp ^ vlTOPp->__Vchglast__TOP__fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__htemp)
 	 | (vlTOPp->fx68k__DOT__nDecoder__DOT__isPcRel ^ vlTOPp->__Vchglast__TOP__fx68k__DOT__nDecoder__DOT__isPcRel));
-    VL_DEBUG_IF( if(__req && ((vlTOPp->fx68k__DOT__Clks ^ vlTOPp->__Vchglast__TOP__fx68k__DOT__Clks))) VL_DBG_MSGF("        CHANGE: fx68k.sv:160: fx68k.Clks\n"); );
     VL_DEBUG_IF( if(__req && ((vlTOPp->fx68k__DOT__Nanod ^ vlTOPp->__Vchglast__TOP__fx68k__DOT__Nanod))) VL_DBG_MSGF("        CHANGE: fx68k.sv:283: fx68k.Nanod\n"); );
     VL_DEBUG_IF( if(__req && ((vlTOPp->fx68k__DOT__Irdecod ^ vlTOPp->__Vchglast__TOP__fx68k__DOT__Irdecod))) VL_DBG_MSGF("        CHANGE: fx68k.sv:286: fx68k.Irdecod\n"); );
     VL_DEBUG_IF( if(__req && ((vlTOPp->fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__htemp ^ vlTOPp->__Vchglast__TOP__fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__htemp))) VL_DBG_MSGF("        CHANGE: fx68kAlu.sv:459: fx68k.excUnit.alu.aluCorf.htemp\n"); );
     VL_DEBUG_IF( if(__req && ((vlTOPp->fx68k__DOT__nDecoder__DOT__isPcRel ^ vlTOPp->__Vchglast__TOP__fx68k__DOT__nDecoder__DOT__isPcRel))) VL_DBG_MSGF("        CHANGE: fx68k.sv:867: fx68k.nDecoder.isPcRel\n"); );
     // Final
-    vlTOPp->__Vchglast__TOP__fx68k__DOT__Clks = vlTOPp->fx68k__DOT__Clks;
     vlTOPp->__Vchglast__TOP__fx68k__DOT__Nanod = vlTOPp->fx68k__DOT__Nanod;
     vlTOPp->__Vchglast__TOP__fx68k__DOT__Irdecod = vlTOPp->fx68k__DOT__Irdecod;
     vlTOPp->__Vchglast__TOP__fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__htemp 
@@ -32476,7 +32172,6 @@ void Vfx68k::_ctor_var_reset() {
     fx68k__DOT__nma = VL_RAND_RESET_I(10);
     fx68k__DOT__nanoAddr = VL_RAND_RESET_I(9);
     fx68k__DOT__rstUrom = VL_RAND_RESET_I(1);
-    fx68k__DOT____Vcellinp__nanoRom__clk = VL_RAND_RESET_I(1);
     fx68k__DOT__Nanod = 0;
     fx68k__DOT__Nanod2 = 0;
     fx68k__DOT__Irdecod = 0;
@@ -32556,7 +32251,6 @@ void Vfx68k::_ctor_var_reset() {
     fx68k__DOT__sequencer__DOT__rAutovec = VL_RAND_RESET_I(1);
     fx68k__DOT__sequencer__DOT__grp1LatchEn = VL_RAND_RESET_I(1);
     fx68k__DOT__sequencer__DOT__grp0LatchEn = VL_RAND_RESET_I(1);
-    fx68k__DOT__sequencer__DOT____Vsenitemexpr1 = VL_RAND_RESET_I(1);
     { int __Vi0=0; for (; __Vi0<18; ++__Vi0) {
 	    fx68k__DOT__excUnit__DOT__regs68L[__Vi0] = VL_RAND_RESET_I(16);
     }}
@@ -32629,7 +32323,6 @@ void Vfx68k::_ctor_var_reset() {
     fx68k__DOT__excUnit__DOT__dcrCode = VL_RAND_RESET_I(16);
     fx68k__DOT__excUnit__DOT__alub = VL_RAND_RESET_I(16);
     fx68k__DOT__excUnit__DOT__dobInput = VL_RAND_RESET_I(16);
-    fx68k__DOT__excUnit__DOT____Vcellinp__alu__clk = VL_RAND_RESET_I(1);
     fx68k__DOT__excUnit__DOT____Vlvbound3 = VL_RAND_RESET_I(16);
     fx68k__DOT__excUnit__DOT____Vlvbound4 = VL_RAND_RESET_I(16);
     fx68k__DOT__excUnit__DOT____Vlvbound5 = VL_RAND_RESET_I(8);
@@ -32648,7 +32341,6 @@ void Vfx68k::_ctor_var_reset() {
     fx68k__DOT__excUnit__DOT__dataIo__DOT__byteMux = VL_RAND_RESET_I(1);
     fx68k__DOT__excUnit__DOT__dataIo__DOT__isByte_T4 = VL_RAND_RESET_I(1);
     fx68k__DOT__excUnit__DOT__dataIo__DOT__byteCycle = VL_RAND_RESET_I(1);
-    fx68k__DOT__excUnit__DOT__dataIo__DOT____Vsenitemexpr1 = VL_RAND_RESET_I(1);
     fx68k__DOT__excUnit__DOT__alu__DOT__aluLatch = VL_RAND_RESET_I(16);
     fx68k__DOT__excUnit__DOT__alu__DOT__pswCcr = VL_RAND_RESET_I(5);
     fx68k__DOT__excUnit__DOT__alu__DOT__ccrCore = VL_RAND_RESET_I(5);
@@ -32693,7 +32385,6 @@ void Vfx68k::_ctor_var_reset() {
     fx68k__DOT__nDecoder__DOT__ftuCtrl = VL_RAND_RESET_I(4);
     fx68k__DOT__nDecoder__DOT__dobCtrl = VL_RAND_RESET_I(2);
     fx68k__DOT__nDecoder__DOT__isPcRel = VL_RAND_RESET_I(1);
-    fx68k__DOT__nDecoder__DOT____Vsenitemexpr1 = VL_RAND_RESET_I(1);
     fx68k__DOT__irdDecode__DOT__lineOnehot = VL_RAND_RESET_I(16);
     fx68k__DOT__irdDecode__DOT__isRegShift = VL_RAND_RESET_I(1);
     fx68k__DOT__irdDecode__DOT__unnamedblk1__DOT__eaIsAreg = VL_RAND_RESET_I(1);
@@ -32713,11 +32404,9 @@ void Vfx68k::_ctor_var_reset() {
     fx68k__DOT__busControl__DOT__busPhase = 0;
     fx68k__DOT__busControl__DOT__next = 0;
     fx68k__DOT__busControl__DOT__busEnding = VL_RAND_RESET_I(1);
-    fx68k__DOT__busControl__DOT____Vsenitemexpr1 = VL_RAND_RESET_I(1);
     fx68k__DOT__busArbiter__DOT__dmaPhase = 0;
     fx68k__DOT__busArbiter__DOT__next = 0;
     fx68k__DOT__busArbiter__DOT__rGranted = VL_RAND_RESET_I(1);
-    fx68k__DOT__busArbiter__DOT____Vsenitemexpr1 = VL_RAND_RESET_I(1);
     __Vfunc_fx68k__DOT__uaddrDecode__DOT__eaDecode__0__Vfuncout = VL_RAND_RESET_I(4);
     __Vfunc_fx68k__DOT__uaddrDecode__DOT__eaDecode__0__eaBits = VL_RAND_RESET_I(6);
     __Vfunc_fx68k__DOT__uaddrDecode__DOT__eaDecode__1__Vfuncout = VL_RAND_RESET_I(4);
@@ -35095,9 +34784,6 @@ void Vfx68k::_ctor_var_reset() {
     __Vtable6_fx68k__DOT__irdDecode__DOT__lineOnehot[13] = 0x2000U;
     __Vtable6_fx68k__DOT__irdDecode__DOT__lineOnehot[14] = 0x4000U;
     __Vtable6_fx68k__DOT__irdDecode__DOT__lineOnehot[15] = 0x8000U;
-    __Vdly__fx68k__DOT__ftu = VL_RAND_RESET_I(16);
-    __Vdly__fx68k__DOT__excUnit__DOT__dataIo__DOT__byteMux = VL_RAND_RESET_I(1);
-    __Vchglast__TOP__fx68k__DOT__Clks = 0;
     __Vchglast__TOP__fx68k__DOT__Nanod = 0;
     __Vchglast__TOP__fx68k__DOT__Irdecod = 0;
     __Vchglast__TOP__fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__htemp = VL_RAND_RESET_I(9);

@@ -306,13 +306,6 @@ VL_MODULE(Vfx68k) {
     // LOCAL VARIABLES
     // Internals; generally not touched by application code
     // Begin mtask footprint  all: 
-    VL_SIG8(fx68k__DOT____Vcellinp__nanoRom__clk,0,0);
-    VL_SIG8(fx68k__DOT__sequencer__DOT____Vsenitemexpr1,0,0);
-    VL_SIG8(fx68k__DOT__excUnit__DOT____Vcellinp__alu__clk,0,0);
-    VL_SIG8(fx68k__DOT__excUnit__DOT__dataIo__DOT____Vsenitemexpr1,0,0);
-    VL_SIG8(fx68k__DOT__nDecoder__DOT____Vsenitemexpr1,0,0);
-    VL_SIG8(fx68k__DOT__busControl__DOT____Vsenitemexpr1,0,0);
-    VL_SIG8(fx68k__DOT__busArbiter__DOT____Vsenitemexpr1,0,0);
     VL_SIG8(fx68k__DOT__excUnit__DOT____Vlvbound5,7,0);
     VL_SIG8(fx68k__DOT__excUnit__DOT____Vlvbound9,7,0);
     VL_SIG8(fx68k__DOT__excUnit__DOT__alu__DOT____Vcellinp__shifter__swapWords,0,0);
@@ -337,15 +330,7 @@ VL_MODULE(Vfx68k) {
     VL_SIG8(__Vtableidx4,3,0);
     VL_SIG8(__Vtableidx5,3,0);
     VL_SIG8(__Vtableidx6,3,0);
-    VL_SIG8(__Vdly__fx68k__DOT__excUnit__DOT__dataIo__DOT__byteMux,0,0);
-    VL_SIG8(__Vclklast__TOP__fx68k__DOT__busArbiter__DOT____Vsenitemexpr1,0,0);
-    VL_SIG8(__Vclklast__TOP__fx68k__DOT__nDecoder__DOT____Vsenitemexpr1,0,0);
-    VL_SIG8(__Vclklast__TOP__fx68k__DOT__sequencer__DOT____Vsenitemexpr1,0,0);
-    VL_SIG8(__Vclklast__TOP__fx68k__DOT__excUnit__DOT__dataIo__DOT____Vsenitemexpr1,0,0);
-    VL_SIG8(__Vclklast__TOP__fx68k__DOT____Vcellinp__nanoRom__clk,0,0);
-    VL_SIG8(__Vclklast__TOP__fx68k__DOT__busControl__DOT____Vsenitemexpr1,0,0);
-    VL_SIG8(__Vclklast__TOP__fx68k__DOT__excUnit__DOT____Vcellinp__alu__clk,0,0);
-    VL_SIG8(__Vchglast__TOP__fx68k__DOT__Clks,4,0);
+    VL_SIG8(__Vclklast__TOP__clk,0,0);
     VL_SIG8(__Vchglast__TOP__fx68k__DOT__nDecoder__DOT__isPcRel,0,0);
     VL_SIG16(fx68k__DOT__excUnit__DOT____Vlvbound3,15,0);
     VL_SIG16(fx68k__DOT__excUnit__DOT____Vlvbound4,15,0);
@@ -358,7 +343,6 @@ VL_MODULE(Vfx68k) {
     VL_SIG16(__Vtask_fx68k__DOT__excUnit__DOT__alu__DOT__mySubber__2__inpa,15,0);
     VL_SIG16(__Vtask_fx68k__DOT__excUnit__DOT__alu__DOT__mySubber__2__inpb,15,0);
     VL_SIG16(__Vtask_fx68k__DOT__excUnit__DOT__alu__DOT__mySubber__2__result,15,0);
-    VL_SIG16(__Vdly__fx68k__DOT__ftu,15,0);
     VL_SIG16(__Vchglast__TOP__fx68k__DOT__excUnit__DOT__alu__DOT__aluCorf__DOT__htemp,8,0);
     VL_SIG(__Vtask_fx68k__DOT__excUnit__DOT__alu__DOT__mySubber__2__rtemp,16,0);
     VL_SIG64(__Vchglast__TOP__fx68k__DOT__Nanod,55,0);
@@ -403,11 +387,7 @@ VL_MODULE(Vfx68k) {
   private:
     static QData _change_request(Vfx68k__Syms* __restrict vlSymsp);
   public:
-    static void _combo__TOP__14(Vfx68k__Syms* __restrict vlSymsp);
-    static void _combo__TOP__2(Vfx68k__Syms* __restrict vlSymsp);
-    static void _combo__TOP__21(Vfx68k__Syms* __restrict vlSymsp);
-    static void _combo__TOP__24(Vfx68k__Syms* __restrict vlSymsp);
-    static void _combo__TOP__27(Vfx68k__Syms* __restrict vlSymsp);
+    static void _combo__TOP__4(Vfx68k__Syms* __restrict vlSymsp);
   private:
     void _ctor_var_reset();
   public:
@@ -420,27 +400,9 @@ VL_MODULE(Vfx68k) {
     static void _eval_initial(Vfx68k__Syms* __restrict vlSymsp);
     static void _eval_settle(Vfx68k__Syms* __restrict vlSymsp);
     static void _initial__TOP__3(Vfx68k__Syms* __restrict vlSymsp);
-    static void _multiclk__TOP__13(Vfx68k__Syms* __restrict vlSymsp);
-    static void _multiclk__TOP__15(Vfx68k__Syms* __restrict vlSymsp);
-    static void _multiclk__TOP__16(Vfx68k__Syms* __restrict vlSymsp);
-    static void _multiclk__TOP__18(Vfx68k__Syms* __restrict vlSymsp);
-    static void _multiclk__TOP__20(Vfx68k__Syms* __restrict vlSymsp);
-    static void _multiclk__TOP__23(Vfx68k__Syms* __restrict vlSymsp);
-    static void _multiclk__TOP__26(Vfx68k__Syms* __restrict vlSymsp);
-    static void _sequent__TOP__10(Vfx68k__Syms* __restrict vlSymsp);
-    static void _sequent__TOP__12(Vfx68k__Syms* __restrict vlSymsp);
-    static void _sequent__TOP__17(Vfx68k__Syms* __restrict vlSymsp);
-    static void _sequent__TOP__19(Vfx68k__Syms* __restrict vlSymsp);
-    static void _sequent__TOP__22(Vfx68k__Syms* __restrict vlSymsp);
-    static void _sequent__TOP__25(Vfx68k__Syms* __restrict vlSymsp);
-    static void _sequent__TOP__4(Vfx68k__Syms* __restrict vlSymsp);
-    static void _sequent__TOP__5(Vfx68k__Syms* __restrict vlSymsp);
-    static void _sequent__TOP__6(Vfx68k__Syms* __restrict vlSymsp);
-    static void _sequent__TOP__7(Vfx68k__Syms* __restrict vlSymsp);
-    static void _sequent__TOP__8(Vfx68k__Syms* __restrict vlSymsp);
-    static void _sequent__TOP__9(Vfx68k__Syms* __restrict vlSymsp);
+    static void _sequent__TOP__2(Vfx68k__Syms* __restrict vlSymsp);
     static void _settle__TOP__1(Vfx68k__Syms* __restrict vlSymsp);
-    static void _settle__TOP__11(Vfx68k__Syms* __restrict vlSymsp);
+    static void _settle__TOP__5(Vfx68k__Syms* __restrict vlSymsp);
 } VL_ATTR_ALIGNED(128);
 
 #endif // guard
