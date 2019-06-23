@@ -4,5 +4,6 @@ script:
   - cargo test --verbose --all
 rust:
   - stable
+
 matrix:
   fast_finish: true
