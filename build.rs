@@ -9,7 +9,7 @@ fn main() {
         .define("VM_TRACE", "0")
         .define("VL_PRINTF", "printf")
         // .flag("-faligned-new")
-        .pic(false)
+        //.pic(false)
         // .include("/usr/local/share/verilator/include")
         // .include("/usr/local/share/verilator/include/vltstd")
         .include("fx68k/verilator_inc")
