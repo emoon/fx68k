@@ -3,9 +3,8 @@ name = "fx68k"
 version = "0.1.0"
 authors = ["Daniel Collin <daniel@collin.com>"]
 edition = "2018"
-licence = "GPL"
-
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+license = "GPL"
+categories = ["emulators"]
 
 [build-dependencies]
 cc = "1.0"
