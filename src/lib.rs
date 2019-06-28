@@ -1,3 +1,5 @@
+#![allow(clippy::borrowed_box, clippy::transmute_ptr_to_ref)]
+
 use std::ffi::c_void;
 
 /// Holds all the CPU state data such as registers, flags, etc
@@ -36,37 +38,47 @@ pub trait MemoryInterface {
 }
 
 #[no_mangle]
-pub extern "C" fn fx68k_mem_read_u8(context: *mut Box<dyn MemoryInterface>, cycle: u32, address: u32) -> u8 {
+pub unsafe extern "C" fn fx68k_mem_read_u8(
+    context: *mut Box<dyn MemoryInterface>,
+    cycle: u32,
+    address: u32,
+) -> u8 {
     println!("reading fx68k_mem_read_u8");
-    unsafe {
-        let cb: &mut Box<dyn MemoryInterface> = std::mem::transmute(context);
-        cb.read_u8(cycle, address).unwrap()
-    }
+    let cb: &mut Box<dyn MemoryInterface> = std::mem::transmute(context);
+    cb.read_u8(cycle, address).unwrap()
 }
 
 #[no_mangle]
-pub extern "C" fn fx68k_mem_read_u16(context: *mut Box<dyn MemoryInterface>, cycle: u32, address: u32) -> u16 {
+pub unsafe extern "C" fn fx68k_mem_read_u16(
+    context: *mut Box<dyn MemoryInterface>,
+    cycle: u32,
+    address: u32,
+) -> u16 {
     println!("reading fx68k_mem_read_u16 {} {}", cycle, address);
-    unsafe {
-        let cb: &mut Box<dyn MemoryInterface> = std::mem::transmute(context);
-        cb.read_u16(cycle, address).unwrap()
-    }
+    let cb: &mut Box<dyn MemoryInterface> = std::mem::transmute(context);
+    cb.read_u16(cycle, address).unwrap()
 }
 
 #[no_mangle]
-pub extern "C" fn fx68k_mem_write_u8(context: *mut Box<dyn MemoryInterface>, cycle: u32, address: u32, value: u8) {
-    unsafe {
-        let cb: &mut Box<dyn MemoryInterface> = std::mem::transmute(context);
-        cb.write_u8(cycle, address, value).unwrap()
-    }
+pub unsafe extern "C" fn fx68k_mem_write_u8(
+    context: *mut Box<dyn MemoryInterface>,
+    cycle: u32,
+    address: u32,
+    value: u8,
+) {
+    let cb: &mut Box<dyn MemoryInterface> = std::mem::transmute(context);
+    cb.write_u8(cycle, address, value).unwrap()
 }
 
 #[no_mangle]
-pub extern "C" fn fx68k_mem_write_u16(context: *mut Box<dyn MemoryInterface>, cycle: u32, address: u32, value: u16) {
-    unsafe {
-        let cb: &mut Box<dyn MemoryInterface> = std::mem::transmute(context);
-        cb.write_u16(cycle, address, value).unwrap()
-    }
+pub unsafe extern "C" fn fx68k_mem_write_u16(
+    context: *mut Box<dyn MemoryInterface>,
+    cycle: u32,
+    address: u32,
+    value: u16,
+) {
+    let cb: &mut Box<dyn MemoryInterface> = std::mem::transmute(context);
+    cb.write_u16(cycle, address, value).unwrap()
 }
 
 impl Fx68k {
@@ -92,9 +104,7 @@ impl Fx68k {
 
     /// Get the current state of the CPU (registers, pc, flags, etc)
     pub fn cpu_state(&self) -> CpuState {
-        unsafe {
-            fx68k_ver_cpu_state(self.ffi_instance)
-        }
+        unsafe { fx68k_ver_cpu_state(self.ffi_instance) }
     }
 }
 
@@ -104,9 +114,7 @@ pub struct Fx68kVecMemoryInterface {
 
 impl Fx68kVecMemoryInterface {
     pub fn new(data: Vec<u8>) -> Fx68kVecMemoryInterface {
-        Fx68kVecMemoryInterface {
-            data: data.clone(),
-        }
+        Fx68kVecMemoryInterface { data: data.clone() }
     }
 }
 
@@ -116,8 +124,8 @@ impl MemoryInterface for Fx68kVecMemoryInterface {
     }
 
     fn read_u16(&mut self, _cycle: u32, address: u32) -> Option<u16> {
-        let v0 = self.data[address as usize + 0] as u16;
-        let v1 = self.data[address as usize + 1] as u16;
+        let v0 = u16::from(self.data[address as usize]);
+        let v1 = u16::from(self.data[address as usize + 1]);
         Some((v0 << 8) | v1)
     }
 
@@ -127,7 +135,7 @@ impl MemoryInterface for Fx68kVecMemoryInterface {
     }
 
     fn write_u16(&mut self, _cycle: u32, address: u32, value: u16) -> Option<()> {
-        self.data[address as usize + 0] = (value >> 8) as u8;
+        self.data[address as usize] = (value >> 8) as u8;
         self.data[address as usize + 1] = (value & 0xff) as u8;
         Some(())
     }
@@ -139,7 +147,7 @@ mod tests {
 
     #[test]
     fn test_read_init() {
-        let data = vec![0,0,0,8, 0,0,0,0, 0,0,0,0, 0,0,0,0, 0,0,0,0];
+        let data = vec![0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
         let mut core = Fx68k::new(Fx68kVecMemoryInterface::new(data));
 
         // step the CPU until it reaches address 4
@@ -156,4 +164,3 @@ mod tests {
         panic!("fail to step");
     }
 }
-
