@@ -1,7 +1,7 @@
 #![allow(clippy::borrowed_box, clippy::transmute_ptr_to_ref)]
 
-use std::ffi::c_void;
 use byteorder::{BigEndian, WriteBytesExt};
+use std::ffi::c_void;
 
 /// Holds all the CPU state data such as registers, flags, etc
 #[repr(C)]
@@ -93,7 +93,6 @@ pub unsafe extern "C" fn fx68k_mem_write_u16(
     cb.write_u16(cycle, address, value).unwrap()
 }
 
-
 impl Fx68k {
     /// Create a new instance with a memory interface. Using this the CPU will boot up and read
     /// from address 0 and 4 to fetch the stack pointer and where to start code execution so it's
@@ -152,7 +151,12 @@ impl Fx68k {
     /// Updated memory the memory for a core
     pub fn update_memory(&mut self, address: u32, data: &[u8]) {
         unsafe {
-            fx68k_update_memory(self.ffi_instance, address, data.as_ptr() as *const c_void, data.len() as u32);
+            fx68k_update_memory(
+                self.ffi_instance,
+                address,
+                data.as_ptr() as *const c_void,
+                data.len() as u32,
+            );
         }
     }
 
