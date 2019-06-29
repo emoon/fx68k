@@ -1,6 +1,7 @@
 #![allow(clippy::borrowed_box, clippy::transmute_ptr_to_ref)]
 
 use std::ffi::c_void;
+use byteorder::{BigEndian, WriteBytesExt};
 
 /// Holds all the CPU state data such as registers, flags, etc
 #[repr(C)]
@@ -13,12 +14,23 @@ pub struct CpuState {
     pc: u32,
     /// status flags
     flags: u32,
+    /// last read address
+    last_read_address: u32,
+    /// last written address
+    last_written_address: u32,
 }
+
+#[derive(Copy, Clone)]
+pub struct CodeAdress(u32);
+
+#[derive(Copy, Clone)]
+pub struct StackAddress(u32);
 
 extern "C" {
     fn fx68k_ver_new_instance(memory_interface: *mut c_void) -> *mut c_void;
     fn fx68k_ver_step_cycle(context: *mut c_void);
     fn fx68k_ver_cpu_state(context: *mut c_void) -> CpuState;
+    fn fx68k_update_memory(context: *mut c_void, address: u32, data: *const c_void, length: u32);
 }
 
 pub struct Fx68k {
@@ -43,7 +55,7 @@ pub unsafe extern "C" fn fx68k_mem_read_u8(
     cycle: u32,
     address: u32,
 ) -> u8 {
-    println!("reading fx68k_mem_read_u8");
+    //println!("reading fx68k_mem_read_u8");
     let cb: &mut Box<dyn MemoryInterface> = std::mem::transmute(context);
     cb.read_u8(cycle, address).unwrap()
 }
@@ -54,7 +66,7 @@ pub unsafe extern "C" fn fx68k_mem_read_u16(
     cycle: u32,
     address: u32,
 ) -> u16 {
-    println!("reading fx68k_mem_read_u16 {} {}", cycle, address);
+    //println!("reading fx68k_mem_read_u16 {} {}", cycle, address);
     let cb: &mut Box<dyn MemoryInterface> = std::mem::transmute(context);
     cb.read_u16(cycle, address).unwrap()
 }
@@ -81,8 +93,12 @@ pub unsafe extern "C" fn fx68k_mem_write_u16(
     cb.write_u16(cycle, address, value).unwrap()
 }
 
+
 impl Fx68k {
-    pub fn new<T: MemoryInterface>(memory_interface: T) -> Fx68k {
+    /// Create a new instance with a memory interface. Using this the CPU will boot up and read
+    /// from address 0 and 4 to fetch the stack pointer and where to start code execution so it's
+    /// up to the memory implementation to have this data correct.
+    pub fn new_with_memory_interface<T: MemoryInterface>(memory_interface: T) -> Fx68k {
         unsafe {
             let f: Box<Box<dyn MemoryInterface>> = Box::new(Box::new(memory_interface));
             let memory_interface = Box::into_raw(f) as *mut _;
@@ -93,6 +109,53 @@ impl Fx68k {
         }
     }
 
+    /// Create a new instance with some m68k code. Memory will be allocated to the size of
+    /// memory_size, the CPU will boot up using this memory with code_address an stack_address set
+    /// with the start_address and stack_address being setup. After the boot up is complete the
+    /// data in code will be copied to the location of code_start_address in the memory.
+    pub fn new_with_code(
+        code: &[u8],
+        code_address: CodeAdress,
+        stack_address: StackAddress,
+        memory_size: usize,
+    ) -> Fx68k {
+        let mut data = vec![0; memory_size];
+
+        // Write the initial startup data
+        data.write_u32::<BigEndian>(code_address.0).unwrap();
+        data.write_u32::<BigEndian>(stack_address.0).unwrap();
+
+        // setup the core
+        let mut core = Fx68k::new_with_memory_interface(Fx68kVecMemoryInterface::new(data));
+
+        // this will boot the core, setup the new PC and stack pointer
+        core.boot();
+
+        // write the code to the ram memory
+        core.update_memory(code_address.0, code);
+        core.step_instruction();
+
+        // and finished
+        core
+    }
+
+    /// Boot up the core. Run for n number of cycles and expect pc being 0, 4 and then something
+    /// else (depending on the data in memory) if this ends up not being true the boot of the core
+    /// has failed and this function will return false otherwise true.
+    pub fn boot(&mut self) {
+        // this is a kinda ugly hard coded value, but will do for now
+        for _ in 0..242 {
+            self.step();
+        }
+    }
+
+    /// Updated memory the memory for a core
+    pub fn update_memory(&mut self, address: u32, data: &[u8]) {
+        unsafe {
+            fx68k_update_memory(self.ffi_instance, address, data.as_ptr() as *const c_void, data.len() as u32);
+        }
+    }
+
     /// step the CPU one cycle (notice that this doesn't step one CPU cycle but a cycle with the
     /// timer that the 68k CPU requires (see the user manual for more info) and step_cpu_cycle to
     /// step with the CPU timing clock
@@ -100,6 +163,23 @@ impl Fx68k {
         unsafe {
             fx68k_ver_step_cycle(self.ffi_instance);
         }
+    }
+
+    /// step one CPU instruction. In this context it means stepping the CPU until the PC has
+    /// changed. Return value is number of cycles that was needed for the PC to change. If PC
+    /// wasn't able to change in 10000 steps None will be returned
+    pub fn step_instruction(&mut self) -> Option<usize> {
+        let prev_pc = self.cpu_state().pc;
+
+        for i in 0..10000 {
+            self.step();
+
+            if self.cpu_state().pc != prev_pc {
+                return Some(i);
+            }
+        }
+
+        None
     }
 
     /// Get the current state of the CPU (registers, pc, flags, etc)
@@ -146,21 +226,35 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_read_init() {
-        let data = vec![0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-        let mut core = Fx68k::new(Fx68kVecMemoryInterface::new(data));
+    fn test_read_boot_ok() {
+        let mut data = vec![];
+        // Write the initial startup data
+        data.write_u32::<BigEndian>(0).unwrap();
+        data.write_u32::<BigEndian>(8).unwrap();
 
-        // step the CPU until it reaches address 4
-        for _ in 0..1000 {
-            core.step();
-            let state = core.cpu_state();
+        let mut core = Fx68k::new_with_memory_interface(Fx68kVecMemoryInterface::new(data));
+        core.boot();
 
-            if state.pc == 4 {
-                return;
-            }
-        }
+        let state = core.cpu_state();
 
-        // fail the test if we didn't get to the correct address above
-        panic!("fail to step");
+        // make sure last address read was
+        assert_eq!(state.last_read_address, 6);
+    }
+
+    #[test]
+    fn test_new_code() {
+        // create a core with a nop instruction and step it
+        let mut _core = Fx68k::new_with_code(&[0x4e, 0x71], CodeAdress(0), StackAddress(0), 16);
+    }
+
+    #[test]
+    fn test_moveq() {
+        // create a core and run moveq #100,d0
+        let mut core = Fx68k::new_with_code(&[0x70, 0x64], CodeAdress(0), StackAddress(0), 16);
+        let _cycles = core.step_instruction();
+        let state = core.cpu_state();
+
+        // Make sure d0 was written correct
+        assert_eq!(100, state.d_registers[0]);
     }
 }
