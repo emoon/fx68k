@@ -178,3 +178,13 @@ extern "C" CpuState fx68k_ver_cpu_state(void* instance) {
     return state;
 }
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+extern "C" void fx68k_update_register(void* instance, uint32_t reg, uint32_t value) {
+    Fx68kState* inst = (Fx68kState*)instance;
+    Vfx68k* top = inst->top;
+
+    top->fx68k__DOT__excUnit__DOT__regs68H[reg] = value >> 16;
+    top->fx68k__DOT__excUnit__DOT__regs68L[reg] = value & 0xffff;
+}
+

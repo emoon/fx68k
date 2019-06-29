@@ -26,11 +26,18 @@ pub struct CodeAdress(u32);
 #[derive(Copy, Clone)]
 pub struct StackAddress(u32);
 
+#[derive(Copy, Clone, PartialEq)]
+pub enum Register {
+    Data(u8),
+    Address(u8),
+}
+
 extern "C" {
     fn fx68k_ver_new_instance(memory_interface: *mut c_void) -> *mut c_void;
     fn fx68k_ver_step_cycle(context: *mut c_void);
     fn fx68k_ver_cpu_state(context: *mut c_void) -> CpuState;
     fn fx68k_update_memory(context: *mut c_void, address: u32, data: *const c_void, length: u32);
+    fn fx68k_update_register(context: *mut c_void, register: u32, value: u32);
 }
 
 pub struct Fx68k {
@@ -132,7 +139,6 @@ impl Fx68k {
 
         // write the code to the ram memory
         core.update_memory(code_address.0, code);
-        core.step_instruction();
 
         // and finished
         core
@@ -186,9 +192,34 @@ impl Fx68k {
         None
     }
 
+    /// Run until reached a certain PC and returns number of cycles it took
+    pub fn run_until(&mut self, pc: u32) -> usize {
+        let mut total_cycle = 0;
+
+        loop {
+            total_cycle += self.step_instruction().unwrap();
+
+            if self.cpu_state().pc == pc {
+                return total_cycle;
+            }
+        }
+    }
+
     /// Get the current state of the CPU (registers, pc, flags, etc)
     pub fn cpu_state(&self) -> CpuState {
         unsafe { fx68k_ver_cpu_state(self.ffi_instance) }
+    }
+
+    /// Update a register for the CPU
+    pub fn set_register(&mut self, register: Register, data: u32) {
+        unsafe {
+            match register {
+                Register::Data(reg) => fx68k_update_register(self.ffi_instance, u32::from(reg), data),
+                Register::Address(reg) => {
+                    fx68k_update_register(self.ffi_instance, u32::from(reg + 8), data)
+                }
+            }
+        }
     }
 }
 
@@ -256,9 +287,59 @@ mod tests {
         // create a core and run moveq #100,d0
         let mut core = Fx68k::new_with_code(&[0x70, 0x64], CodeAdress(0), StackAddress(0), 16);
         let _cycles = core.step_instruction();
+        let _cycles = core.step_instruction();
         let state = core.cpu_state();
 
         // Make sure d0 was written correct
         assert_eq!(100, state.d_registers[0]);
+    }
+
+    #[test]
+    fn test_two_instructions() {
+        // create a core and run moveq #100,d0
+        let mut core = Fx68k::new_with_code(
+            &[0x70, 0x64, 0x70, 0x65, 0x4e, 0x71],
+            CodeAdress(0),
+            StackAddress(0),
+            16,
+        );
+        // Make sure d0 was written correct
+        core.run_until(4);
+        assert_eq!(100, core.cpu_state().d_registers[0]);
+
+        // Make sure d0 was written correct
+        core.run_until(6);
+        assert_eq!(101, core.cpu_state().d_registers[0]);
+    }
+
+    #[test]
+    fn test_two_nop_instructions() {
+        // create a core and run moveq #100,d0
+        let mut core = Fx68k::new_with_code(
+            &[0x4e, 0x71, 0x4e, 0x71],
+            CodeAdress(0),
+            StackAddress(0),
+            16,
+        );
+        core.step_instruction();
+        core.step_instruction();
+    }
+
+    #[test]
+    fn test_divs_instructions() {
+        // create a core and two divs #2,d0 instructions and update the d0 register before running
+        let mut core = Fx68k::new_with_code(
+            &[0x81, 0xfc, 0x00, 0x02, 0x81, 0xfc, 0x00, 0x02, 0x4e, 0x71],
+            CodeAdress(0),
+            StackAddress(0),
+            16,
+        );
+        core.set_register(Register::Data(0), 8);
+
+        core.run_until(8);
+        assert_eq!(4, core.cpu_state().d_registers[0]);
+
+        core.run_until(12);
+        assert_eq!(2, core.cpu_state().d_registers[0]);
     }
 }
