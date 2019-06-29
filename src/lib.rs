@@ -214,7 +214,9 @@ impl Fx68k {
     pub fn set_register(&mut self, register: Register, data: u32) {
         unsafe {
             match register {
-                Register::Data(reg) => fx68k_update_register(self.ffi_instance, u32::from(reg), data),
+                Register::Data(reg) => {
+                    fx68k_update_register(self.ffi_instance, u32::from(reg), data)
+                }
                 Register::Address(reg) => {
                     fx68k_update_register(self.ffi_instance, u32::from(reg + 8), data)
                 }
