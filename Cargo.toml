@@ -10,4 +10,4 @@ categories = ["emulators"]
 cc = "1.0"
 
 [dependencies]
-
+byteorder = "1"

@@ -16,6 +16,8 @@ struct CpuState {
     uint32_t a_registers[8];
     uint32_t pc;
     uint32_t flags;
+    uint32_t last_read_address;
+    uint32_t last_written_address;
 };
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -24,6 +26,8 @@ struct Fx68kState {
     Vfx68k* top;
     void* memory_interface;
     int cycle;
+    uint32_t last_read_address;
+    uint32_t last_written_address;
 };
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -79,6 +83,17 @@ extern "C" {
     void fx68k_mem_write_u16(void* context, uint32_t cycle, uint32_t address, uint16_t value);
 }
 
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+extern "C" void fx68k_update_memory(void* context, uint32_t address, uint8_t* data, int length) {
+    Fx68kState* state = (Fx68kState*)context;
+
+    for (int i = 0; i < length; ++i) {
+        fx68k_mem_write_u8(state->memory_interface, 0, address++, *data++);
+    }
+}
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 extern "C" void fx68k_ver_step_cycle(void* instance) {
@@ -99,11 +114,14 @@ extern "C" void fx68k_ver_step_cycle(void* instance) {
         uint32_t address = top->eab * 2;
 
         if (top->eRWn) {
+            state->last_read_address = address;
+
             if (top->LDSn) {
                 uint16_t v0 = fx68k_mem_read_u8(state->memory_interface, state->cycle, address);
                 top->iEdb = (v0 << 8);
             }
             else if (top->UDSn) {
+                state->last_read_address += 1;
                 uint16_t v0 = fx68k_mem_read_u8(state->memory_interface, state->cycle, address + 1);
                 top->iEdb = v0;
             }
@@ -113,11 +131,14 @@ extern "C" void fx68k_ver_step_cycle(void* instance) {
 
             top->DTACKn = 0;
         } else if (top->LDSn == 0 || top->UDSn == 0) {
+            state->last_written_address = address;
+
             if (top->LDSn) {
                 fx68k_mem_write_u8(state->memory_interface, state->cycle, address, top->oEdb >> 8);
             }
             else if (top->UDSn) {
                 fx68k_mem_write_u8(state->memory_interface, state->cycle, address + 1, top->oEdb & 0xff);
+                state->last_written_address++;
             } else {
                 fx68k_mem_write_u16(state->memory_interface, state->cycle, address, top->oEdb);
             }
@@ -151,7 +172,19 @@ extern "C" CpuState fx68k_ver_cpu_state(void* instance) {
 
     state.pc = (uint32_t(top->fx68k__DOT__excUnit__DOT__PcH) << 16) | top->fx68k__DOT__excUnit__DOT__PcL;
     state.flags = top->fx68k__DOT__excUnit__DOT__alu__DOT__ccrCore;
+    state.last_written_address = inst->last_written_address;
+    state.last_read_address = inst->last_read_address;
 
     return state;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+extern "C" void fx68k_update_register(void* instance, uint32_t reg, uint32_t value) {
+    Fx68kState* inst = (Fx68kState*)instance;
+    Vfx68k* top = inst->top;
+
+    top->fx68k__DOT__excUnit__DOT__regs68H[reg] = value >> 16;
+    top->fx68k__DOT__excUnit__DOT__regs68L[reg] = value & 0xffff;
 }
 
